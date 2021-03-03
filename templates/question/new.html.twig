@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Question{% endblock %}
+
+{% block main %}
+    <h1>Create new Question</h1>
+
+    {{ include('question/_form.html.twig') }}
+
+    <div style="width: 100%; display:flex; justify-content: flex-end">
+        <a class="btn btn-primary" href="{{ path('question_index') }}">Save</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{{ form_start(form) }}
+    {{ form_widget(form.title,{'attr': {'class': 'form-control w-100 mt-2 mb-2', 'placeholder': 'Project title'}})}}
+    {{form_widget(form.description,{'attr': {'class': 'form-control w-100 mt-2 mb-2', 'placeholder': 'Project description'}})}}
+    {{ form_label(form.date, "Date") }}
+    <div class="row m-2">
+        {{form_widget(form.date.day,{'attr': {'class': 'form-control w-25 m-2'}})}}
+        {{form_widget(form.date.month,{'attr': {'class': 'form-control w-25 m-2'}})}}
+        {{form_widget(form.date.year,{'attr': {'class': 'form-control w-25 m-2'}})}}
+    </div>
+<button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

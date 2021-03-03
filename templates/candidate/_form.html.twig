@@ -1,0 +1,26 @@
+{{ form_start(form) }}
+    {{form_row(form.firstName,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Title'}})}}
+    {{form_row(form.lastName,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
+    {{form_row(form.email,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
+    {{form_row(form.password,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
+
+    {{ form_label(form.birthday, "Birthday") }}
+    <div class="row m-2">
+        {{form_widget(form.birthday.day,{'attr': {'class': 'form-control w-25 m-2'}})}}
+        {{form_widget(form.birthday.month,{'attr': {'class': 'form-control w-25 m-2'}})}}
+        {{form_widget(form.birthday.year,{'attr': {'class': 'form-control w-25 m-2'}})}}
+    </div>
+
+    {{form_row(form.gender,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
+    {{form_row(form.nationality,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
+    {{form_row(form.phoneNumber,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
+    {{form_row(form.address,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
+    {{form_row(form.image,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
+    {{form_row(form.LOE,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
+    {{form_row(form.experience,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
+    {{form_row(form.nationalities,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
+    {{form_row(form.events,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
+    {{form_row(form.projects,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
+
+<button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

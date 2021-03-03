@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Freelance{% endblock %}
+
+{% block page_title %} Create a new freelance job offer {% endblock %}
+
+{% block main %}
+
+    {{ include('freelance/_form.html.twig') }}
+
+    <a href="{{ path('freelance_index') }}">back to list</a>
+{% endblock %}

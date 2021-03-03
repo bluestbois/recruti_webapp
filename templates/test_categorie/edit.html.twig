@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit TestCategorie{% endblock %}
+
+{% block page_title %}
+    Edit a test categorie
+{% endblock %}
+
+{% block main %}
+
+    {{ include('test_categorie/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('test_categorie/_delete_form.html.twig') }}
+
+    <a href="{{ path('test_categorie_index') }}">back to list</a>
+{% endblock %}

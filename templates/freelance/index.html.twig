@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Freelance {% endblock %}
+
+{% block page_title %} Freelance job offers {% endblock %}
+
+{% block main %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Salary</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for freelance in freelances %}
+            <tr>
+                <td>{{ freelance.id }}</td>
+                <td>{{ freelance.title }}</td>
+                <td>{{ freelance.description }}</td>
+                <td>{{ freelance.salary }} per hour</td>
+                <td>
+                    <a href="{{ path('freelance_show', {'id': freelance.id}) }}">show</a>
+                    <a href="{{ path('freelance_edit', {'id': freelance.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('freelance_new') }}">Create new</a>
+{% endblock %}

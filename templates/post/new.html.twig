@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Post{% endblock %}
+
+{% block page_title %}
+    Create new Post
+{% endblock %}
+
+{% block main %}
+
+    {{ include('post/_form.html.twig') }}
+
+    <a href="{{ path('post_index') }}">back to list</a>
+{% endblock %}

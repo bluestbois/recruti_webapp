@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TestCategorie index{% endblock %}
+
+{% block page_title %} Test categories {% endblock %}
+
+{% block main %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for test_categorie in test_categories %}
+            <tr>
+                <td>{{ test_categorie.id }}</td>
+                <td>{{ test_categorie.name }}</td>
+                <td>
+                    <a href="{{ path('test_categorie_show', {'id': test_categorie.id}) }}">show</a>
+                    <a href="{{ path('test_categorie_edit', {'id': test_categorie.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div style="width: 100%; display:flex; justify-content: flex-end">
+        <a href="{{ path('test_categorie_new') }}">Create new</a>
+    </div>
+{% endblock %}

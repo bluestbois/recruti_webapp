@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recruiter index{% endblock %}
+
+{% block main %}
+    <h1>Recruiter List</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Address</th>
+                <th>Description</th>
+                <th>PhoneNumber</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for recruiter in recruiters %}
+            <tr>
+                <td>{{ recruiter.id }}</td>
+                <td>{{ recruiter.name }}</td>
+                <td>{{ recruiter.email }}</td>
+                <td>{{ recruiter.password }}</td>
+                <td>{{ recruiter.address }}</td>
+                <td>{{ recruiter.description }}</td>
+                <td>{{ recruiter.phoneNumber }}</td>
+                <td>{{ recruiter.image }}</td>
+                <td>
+                    <a href="{{ path('recruiter_show', {'id': recruiter.id}) }}"<button type="button" class="btn btn-primary mt-2 mb-2">show</button></a>
+                    <a href="{{ path('recruiter_edit', {'id': recruiter.id}) }}"><button type="button" class="btn btn-primary mt-2 mb-2">edit</button></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('recruiter_new') }}"><button type="button" class="btn btn-primary mt-2 mb-2">Create New</button></a>
+{% endblock %}

@@ -1,0 +1,17 @@
+{{ form_start(form) }}
+    {{ form_widget(form.title, { 'attr': {
+        'class': 'form-control w-100 mt-2 mb-2',
+        'placeholder': 'Test title'
+    } }) }}
+    {{ form_widget(form.description, { 'attr': {
+        'class': 'form-control w-100 mt-2 mb-2',
+        'placeholder': 'Test description'
+    } }) }}
+    {{ form_widget(form.categorie, { 'attr': {
+        'class': 'form-control w-100 mt-2 mb-2',
+        'placeholder': 'Test description'
+    } }) }}
+    <div style="width: 100%; display:flex; justify-content: flex-end">
+        <button class="btn btn-primary mt-2 mb-2">{{ button_label|default('Save') }}</button>
+    </div>
+{{ form_end(form) }}

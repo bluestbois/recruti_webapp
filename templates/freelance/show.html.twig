@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Freelance{% endblock %}
+
+{% block page_title %} Freelance job offer {% endblock %}
+
+{% block main %}
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ freelance.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ freelance.title }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ freelance.description }}</td>
+            </tr>
+            <tr>
+                <th>Salary</th>
+                <td>{{ freelance.salary }} per hour</td>
+            </tr>
+            <tr>
+                <th>Project</th>
+                <td><a href="{{ path("freelance_show",{"id": freelance.project.id }) }}">{{ freelance.project }}</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('freelance_index') }}">back to list</a>
+
+    <a href="{{ path('freelance_edit', {'id': freelance.id}) }}">edit</a>
+
+    {{ include('freelance/_delete_form.html.twig') }}
+{% endblock %}

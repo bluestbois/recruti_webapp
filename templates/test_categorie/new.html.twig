@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New TestCategorie{% endblock %}
+
+{% block page_title %}
+        Create a new test categorie
+{% endblock %}
+
+{% block main %}
+    {{ include('test_categorie/_form.html.twig') }}
+    <div style="width: 100%; display:flex; justify-content: flex-end">
+        <a href="{{ path('test_categorie_index') }}">back to list</a>
+    </div>
+{% endblock %}

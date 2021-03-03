@@ -1,0 +1,32 @@
+{{ form_start(form) }}
+    {{ form_widget(form.statement, { 'attr': {
+        'class': 'form-control w-100 mt-2 mb-2',
+        'placeholder': 'statement'
+    } }) }}
+    {{ form_widget(form.answerA, { 'attr': {
+        'class': 'form-control w-100 mt-2 mb-2',
+        'placeholder': 'First answer'
+    } }) }}
+    {{ form_widget(form.answerB, { 'attr': {
+        'class': 'form-control w-100 mt-2 mb-2',
+        'placeholder': 'Second answer'
+    } }) }}
+    {{ form_widget(form.answerC, { 'attr': {
+        'class': 'form-control w-100 mt-2 mb-2',
+        'placeholder': 'Third answer'
+    } }) }}
+    {{ form_widget(form.rightAnswer, { 'attr': {
+        'class': 'form-control w-100 mt-2 mb-2',
+        'placeholder': 'Right answer'
+    } }) }}
+    {{ form_widget(form.points, { 'attr': {
+        'class': 'form-control w-100 mt-2 mb-2',
+        'placeholder': 'Points'
+    } }) }}
+    {{ form_widget(form.Test, { 'attr': {
+        'class': 'form-control w-100 mt-2 mb-2'
+    } }) }}
+    <div style="width: 100%; display:flex; justify-content: flex-end">
+        <button class="btn btn-primary mt-2 mb-2">{{ button_label|default('Save') }}</button>
+    </div>
+{{ form_end(form) }}

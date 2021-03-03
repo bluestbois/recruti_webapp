@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Question{% endblock %}
+
+{% block page_title %} Edit a Question {% endblock %}
+
+{% block main %}
+
+    {{ include('question/_form.html.twig', {'button_label': 'Update'}) }}
+
+
+    <div style="width: 100%; display:flex; justify-content: flex-end">
+        <a href="{{ path('question_index') }}">back to list</a>
+    </div>
+    {{ include('question/_delete_form.html.twig') }}
+{% endblock %}
