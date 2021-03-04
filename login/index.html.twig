@@ -1,0 +1,357 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>WorkWise Html Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/line-awesome.css">
+    <link rel="stylesheet" type="text/css" href="css/line-awesome-font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="lib/slick/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/responsive.css">
+</head>
+
+
+<body class="sign-in">
+
+
+<div class="wrapper">
+
+
+    <div class="sign-in-page">
+        <div class="signin-popup">
+            <div class="signin-pop">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="cmp-info">
+                            <div class="cm-logo">
+                                <img src="images/cm-logo.png" alt="">
+                                <p>Workwise,  is a global freelancing platform and social networking where businesses and independent professionals connect and collaborate remotely</p>
+                            </div><!--cm-logo end-->
+                            <img src="images/cm-main-img.png" alt="">
+                        </div><!--cmp-info end-->
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="login-sec">
+                            <ul class="sign-control">
+                                <li data-tab="tab-1" class="current"><a href="#" title="">Sign in</a></li>
+                                <li data-tab="tab-2"><a href="#" title="">Sign up</a></li>
+                            </ul>
+                            <div class="sign_in_sec current" id="tab-1">
+
+                                <h3>Sign in</h3>
+                                <form>
+                                    <div class="row">
+                                        <div class="col-lg-12 no-pdd">
+                                            <div class="sn-field">
+                                                <input type="text" name="username" placeholder="Username">
+                                                <i class="la la-user"></i>
+                                            </div><!--sn-field end-->
+                                        </div>
+                                        <div class="col-lg-12 no-pdd">
+                                            <div class="sn-field">
+                                                <input type="password" name="password" placeholder="Password">
+                                                <i class="la la-lock"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 no-pdd">
+                                            <div class="checky-sec">
+                                                <div class="fgt-sec">
+                                                    <input type="checkbox" name="cc" id="c1">
+                                                    <label for="c1">
+                                                        <span></span>
+                                                    </label>
+                                                    <small>Remember me</small>
+                                                </div><!--fgt-sec end-->
+                                                <a href="#" title="">Forgot Password?</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 no-pdd">
+                                            <button type="submit" value="submit">Sign in</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="login-resources">
+                                    <h4>Login Via Social Account</h4>
+                                    <ul>
+                                        <li><a href="#" title="" class="fb"><i class="fa fa-facebook"></i>Login Via Facebook</a></li>
+                                        <li><a href="#" title="" class="tw"><i class="fa fa-twitter"></i>Login Via Twitter</a></li>
+                                    </ul>
+                                </div><!--login-resources end-->
+                            </div><!--sign_in_sec end-->
+                            <div class="sign_in_sec" id="tab-2">
+                                <div class="signup-tab">
+                                    <i class="fa fa-long-arrow-left"></i>
+                                    <h2>johndoe@example.com</h2>
+                                    <ul>
+                                        <li data-tab="tab-3" class="current"><a href="#" title="">User</a></li>
+                                        <li data-tab="tab-4"><a href="#" title="">Company</a></li>
+                                    </ul>
+                                </div><!--signup-tab end-->
+                                <style>
+                                    * {
+                                        box-sizing: border-box;
+                                    }
+
+                                    body {
+                                        background-color: #f1f1f1;
+                                    }
+
+                                    #regForm {
+                                        background-color: #ffffff;
+                                        margin: 100px auto;
+                                        font-family: Raleway;
+                                        padding: 40px;
+                                        width: 70%;
+                                        min-width: 300px;
+                                    }
+
+                                    h1 {
+                                        text-align: center;
+                                    }
+
+                                    input {
+                                        padding: 10px;
+                                        width: 100%;
+                                        font-size: 17px;
+                                        font-family: Raleway;
+                                        border: 1px solid #aaaaaa;
+                                    }
+
+                                    /* Mark input boxes that gets an error on validation: */
+                                    input.invalid {
+                                        background-color: #ffdddd;
+                                    }
+
+                                    /* Hide all steps by default: */
+                                    .tab {
+                                        display: none;
+                                    }
+
+                                    button {
+                                        background-color: #4CAF50;
+                                        color: #ffffff;
+                                        border: none;
+                                        padding: 10px 20px;
+                                        font-size: 17px;
+                                        font-family: Raleway;
+                                        cursor: pointer;
+                                    }
+
+                                    button:hover {
+                                        opacity: 0.8;
+                                    }
+
+                                    #prevBtn {
+                                        background-color: #bbbbbb;
+                                    }
+
+                                    /* Make circles that indicate the steps of the form: */
+                                    .step {
+                                        height: 15px;
+                                        width: 15px;
+                                        margin: 0 2px;
+                                        background-color: #bbbbbb;
+                                        border: none;
+                                        border-radius: 50%;
+                                        display: inline-block;
+                                        opacity: 0.5;
+                                    }
+
+                                    .step.active {
+                                        opacity: 1;
+                                    }
+
+                                    /* Mark the steps that are finished and valid: */
+                                    .step.finish {
+                                        background-color: #4CAF50;
+                                    }
+                                </style>
+                                <div class="dff-tab current" id="tab-3">
+                                    <form id="regForm" action="/index.html.twig">
+
+                                        <!-- One "tab" for each step in the form: -->
+                                        <div class="tab"><h1>Personal</h1>
+                                            <p></p>
+                                            <p><input placeholder="First name..." oninput="this.className = ''" name="fname"></p>
+                                            <p><input placeholder="Last name..." oninput="this.className = ''" name="lname"></p>
+                                            <p><input placeholder="Gender..." oninput="this.className = ''" name="gender"></p>
+                                            <p><input placeholder="Birthday..." oninput="this.className = ''" name="birthday"></p>
+                                        </div>
+                                        <div class="tab"><h1>country</h1>
+                                            <p><input placeholder="Nationality..." oninput="this.className = ''" name="nationality"></p>
+                                            <p><input placeholder="Adress..." oninput="this.className = ''" name="adress"></p>
+                                            <p><input placeholder="Phone..." oninput="this.className = ''" name="phone_number"></p>
+                                        </div>
+                                        <div class="tab" style="margin: 20px;"><h1>professional</h1>
+                                            <p><input placeholder="loe" oninput="this.className = ''" name="loe"></p>
+                                            <p><input placeholder="Experience" oninput="this.className = ''" name="experience"></p>
+
+                                        </div>
+                                        <div class="tab"><h1>login info</h1>
+                                            <p><input placeholder="E-mail..." oninput="this.className = ''" name="E-mail"></p>
+                                            <p><input placeholder="Password..." oninput="this.className = ''" name="pword" type="password"></p>
+                                        </div>
+                                        <div style="overflow:auto;">
+                                            <div style="float:right;">
+                                                <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                                                <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                                            </div>
+                                        </div>
+                                        <!-- Circles which indicates the steps of the form: -->
+                                        <div style="text-align:center;margin-top:40px;">
+                                            <span class="step"></span>
+                                            <span class="step"></span>
+                                            <span class="step"></span>
+                                            <span class="step"></span>
+                                        </div>
+                                    </form>
+
+                                    <script>
+                                        var currentTab = 0; // Current tab is set to be the first tab (0)
+                                        showTab(currentTab); // Display the current tab
+
+                                        function showTab(n) {
+                                            // This function will display the specified tab of the form...
+                                            var x = document.getElementsByClassName("tab");
+                                            x[n].style.display = "block";
+                                            //... and fix the Previous/Next buttons:
+                                            if (n == 0) {
+                                                document.getElementById("prevBtn").style.display = "none";
+                                            } else {
+                                                document.getElementById("prevBtn").style.display = "inline";
+                                            }
+                                            if (n == (x.length - 1)) {
+                                                document.getElementById("nextBtn").innerHTML = "Submit";
+                                            } else {
+                                                document.getElementById("nextBtn").innerHTML = "Next";
+                                            }
+                                            //... and run a function that will display the correct step indicator:
+                                            fixStepIndicator(n)
+                                        }
+
+                                        function nextPrev(n) {
+                                            // This function will figure out which tab to display
+                                            var x = document.getElementsByClassName("tab");
+                                            // Exit the function if any field in the current tab is invalid:
+                                            if (n == 1 && !validateForm()) return false;
+                                            // Hide the current tab:
+                                            x[currentTab].style.display = "none";
+                                            // Increase or decrease the current tab by 1:
+                                            currentTab = currentTab + n;
+                                            // if you have reached the end of the form...
+                                            if (currentTab >= x.length) {
+                                                // ... the form gets submitted:
+                                                document.getElementById("regForm").submit();
+                                                return false;
+                                            }
+                                            // Otherwise, display the correct tab:
+                                            showTab(currentTab);
+                                        }
+
+                                        function validateForm() {
+                                            // This function deals with validation of the form fields
+                                            var x, y, i, valid = true;
+                                            x = document.getElementsByClassName("tab");
+                                            y = x[currentTab].getElementsByTagName("input");
+                                            // A loop that checks every input field in the current tab:
+                                            for (i = 0; i < y.length; i++) {
+                                                // If a field is empty...
+                                                if (y[i].value == "") {
+                                                    // add an "invalid" class to the field:
+                                                    y[i].className += " invalid";
+                                                    // and set the current valid status to false
+                                                    valid = false;
+                                                }
+                                            }
+                                            // If the valid status is true, mark the step as finished and valid:
+                                            if (valid) {
+                                                document.getElementsByClassName("step")[currentTab].className += " finish";
+                                            }
+                                            return valid; // return the valid status
+                                        }
+
+                                        function fixStepIndicator(n) {
+                                            // This function removes the "active" class of all steps...
+                                            var i, x = document.getElementsByClassName("step");
+                                            for (i = 0; i < x.length; i++) {
+                                                x[i].className = x[i].className.replace(" active", "");
+                                            }
+                                            //... and adds the "active" class on the current step:
+                                            x[n].className += " active";
+                                        }
+                                    </script>
+                                </div><!--dff-tab end-->
+                                <div class="dff-tab" id="tab-4">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-lg-12 no-pdd">
+                                                <div class="sn-field">
+                                                    <input type="text" name="company-name" placeholder="Company Name">
+                                                    <i class="la la-building"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 no-pdd">
+                                                <div class="sn-field">
+                                                    <input type="text" name="country" placeholder="Country">
+                                                    <i class="la la-globe"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 no-pdd">
+                                                <div class="sn-field">
+                                                    <input type="password" name="password" placeholder="Password">
+                                                    <i class="la la-lock"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 no-pdd">
+                                                <div class="sn-field">
+                                                    <input type="password" name="repeat-password" placeholder="Repeat Password">
+                                                    <i class="la la-lock"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 no-pdd">
+                                                <div class="checky-sec st2">
+                                                    <div class="fgt-sec">
+                                                        <input type="checkbox" name="cc" id="c3">
+                                                        <label for="c3">
+                                                            <span></span>
+                                                        </label>
+                                                        <small>Yes, I understand and agree to the workwise Terms & Conditions.</small>
+                                                    </div><!--fgt-sec end-->
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 no-pdd">
+                                                <button type="submit" value="submit" >  <a href="{{ path('front') }}"> Get Started</a></button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div><!--dff-tab end-->
+                            </div>
+                        </div><!--login-sec end-->
+                    </div>
+                </div>
+            </div><!--signin-pop end-->
+        </div><!--signin-popup end-->
+
+    </div><!--sign-in-page end-->
+
+
+</div><!--theme-layout end-->
+
+
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/popper.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="lib/slick/slick.min.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+</body>
+</html>
