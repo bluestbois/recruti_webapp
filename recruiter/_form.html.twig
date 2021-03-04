@@ -1,0 +1,15 @@
+{{ form_start(form) }}
+    {{ form_row(form.name,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Name'}})}}
+{{ form_row(form.email,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'E-mail'}})}}
+{{ form_row(form.password,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Password'}})}}
+{{ form_row(form.address,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Adress'}})}}
+{{ form_row(form.description,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Description'}})}}
+{{ form_row(form.image,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Lien'}})}}
+{{ form_row(form.phoneNumber,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'phone'}})}}
+{{ form_row(form.field,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'field'}})}}
+
+
+
+
+    <button class="btn btn-primary mt-2 mb-2">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
