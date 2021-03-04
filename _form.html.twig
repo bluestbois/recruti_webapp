@@ -1,0 +1,5 @@
+{{ form_start(form) }}
+    {{form_row(form.name,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Title'}})}}
+    {{form_row(form.events,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Title'}})}}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
