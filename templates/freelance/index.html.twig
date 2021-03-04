@@ -2,7 +2,9 @@
 
 {% block title %}Freelance {% endblock %}
 
-{% block page_title %} Freelance job offers {% endblock %}
+{% block page_title %}
+    Freelances List
+{% endblock %}
 
 {% block main %}
 
@@ -23,9 +25,9 @@
                 <td>{{ freelance.title }}</td>
                 <td>{{ freelance.description }}</td>
                 <td>{{ freelance.salary }} per hour</td>
-                <td>
-                    <a href="{{ path('freelance_show', {'id': freelance.id}) }}">show</a>
-                    <a href="{{ path('freelance_edit', {'id': freelance.id}) }}">edit</a>
+                <td style="display: flex">
+                    <a href="{{ path('freelance_show', {'id': freelance.id}) }}"><button type="button" class="btn btn-sm shadow-sm btn-info mt-2 mb-2 ml-2"><i class="fas fa-search"></i></button></a>
+                    <a href="{{ path('freelance_edit', {'id': freelance.id}) }}"><button type="button" class="btn btn-sm shadow-sm mt-2 mb-2 ml-2"><i class="far fa-edit"></i></button></a>
                 </td>
             </tr>
         {% else %}
@@ -35,6 +37,8 @@
         {% endfor %}
         </tbody>
     </table>
+    <div style="width: 100%; display:flex; justify-content: flex-end">
+        <a href="{{ path('freelance_new') }}"><button type="button" class="btn btn-primary btn-sm shadow-sm mt-2 mb-2"><i class="far fa-plus-square"></i> Create New</button></a>
+    </div>
 
-    <a href="{{ path('freelance_new') }}">Create new</a>
 {% endblock %}

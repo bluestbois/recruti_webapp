@@ -2,8 +2,11 @@
 
 {% block title %}Candidate index{% endblock %}
 
+{% block page_title %}
+    Candidates List
+{% endblock %}
+
 {% block main %}
-    <h1>Candidate index</h1>
 
     <table class="table">
         <thead>
@@ -12,15 +15,9 @@
                 <th>FirstName</th>
                 <th>LastName</th>
                 <th>Email</th>
-                <th>Password</th>
-                <th>Birthday</th>
-                <th>Gender</th>
                 <th>Nationality</th>
                 <th>PhoneNumber</th>
                 <th>Address</th>
-                <th>Image</th>
-                <th>LOE</th>
-                <th>Experience</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -31,18 +28,12 @@
                 <td>{{ candidate.firstName }}</td>
                 <td>{{ candidate.lastName }}</td>
                 <td>{{ candidate.email }}</td>
-                <td>{{ candidate.password }}</td>
-                <td>{{ candidate.birthday ? candidate.birthday|date('Y-m-d') : '' }}</td>
-                <td>{{ candidate.gender }}</td>
                 <td>{{ candidate.nationality }}</td>
                 <td>{{ candidate.phoneNumber }}</td>
                 <td>{{ candidate.address }}</td>
-                <td>{{ candidate.image }}</td>
-                <td>{{ candidate.LOE }}</td>
-                <td>{{ candidate.experience }}</td>
-                <td>
-                    <a href="{{ path('candidate_show', {'id': candidate.id}) }}">show</a>
-                    <a href="{{ path('candidate_edit', {'id': candidate.id}) }}">edit</a>
+                <td style="display: flex">
+                    <a href="{{ path('candidate_show', {'id': candidate.id}) }}"><button type="button" class="btn btn-sm shadow-sm btn-info mt-2 mb-2 ml-2"><i class="fas fa-search"></i></button></a>
+                    <a href="{{ path('candidate_edit', {'id': candidate.id}) }}"><button type="button" class="btn btn-sm shadow-sm mt-2 mb-2 ml-2"><i class="far fa-edit"></i></button></a>
                 </td>
             </tr>
         {% else %}
@@ -53,5 +44,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('candidate_new') }}">Create new</a>
+    <div style="width: 100%; display:flex; justify-content: flex-end">
+        <a href="{{ path('recruiter_new') }}"><button type="button" class="btn btn-primary btn-sm shadow-sm mt-2 mb-2"><i class="far fa-plus-square"></i> Create New</button></a>
+    </div>
 {% endblock %}

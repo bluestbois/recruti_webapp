@@ -2,8 +2,11 @@
 
 {% block title %}Candidature index{% endblock %}
 
+{% block page_title %}
+    Candidature List
+{% endblock %}
+
 {% block main %}
-    <h1>Candidature index</h1>
 
     <table class="table">
         <thead>
@@ -20,9 +23,10 @@
                 <td>{{ candidature.id }}</td>
                 <td>{{ candidature.date ? candidature.date|date('Y-m-d') : '' }}</td>
                 <td>{{ candidature.score }}</td>
-                <td>
-                    <a href="{{ path('candidature_show', {'id': candidature.id}) }}">show</a>
-                    <a href="{{ path('candidature_edit', {'id': candidature.id}) }}">edit</a>
+
+                <td style="display: flex">
+                    <a href="{{ path('candidature_show', {'id': candidature.id}) }}"><button type="button" class="btn btn-sm shadow-sm btn-info mt-2 mb-2 ml-2"><i class="fas fa-search"></i></button></a>
+                    <a href="{{ path('candidature_edit', {'id': candidature.id}) }}"><button type="button" class="btn btn-sm shadow-sm mt-2 mb-2 ml-2"><i class="far fa-edit"></i></button></a>
                 </td>
             </tr>
         {% else %}
@@ -33,5 +37,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('candidature_new') }}">Create new</a>
+    <div style="width: 100%; display:flex; justify-content: flex-end">
+        <a href="{{ path('candidature_new') }}"><button type="button" class="btn btn-primary btn-sm shadow-sm mt-2 mb-2"><i class="far fa-plus-square"></i> Create New</button></a>
+    </div>
 {% endblock %}

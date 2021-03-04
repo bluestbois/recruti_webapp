@@ -1,11 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}New Forum{% endblock %}
-
+{% block page_title %}
+    Create a new Forum
+{% endblock %}
+{% block gobackbtn %}
+    <a href="{{ path("forum_index") }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <i class="fas fa-arrow-left fa-sm text-white-50"></i> Go back
+    </a>
+{% endblock %}
 {% block main %}
-    <h1>Create new Forum</h1>
+
 
     {{ include('forum/_form.html.twig') }}
 
-    <a href="{{ path('forum_index') }}">back to list</a>
+
 {% endblock %}

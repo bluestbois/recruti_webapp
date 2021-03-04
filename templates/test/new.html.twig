@@ -3,11 +3,16 @@
 {% block title %}New Test{% endblock %}
 
 {% block page_title %}
-    Create a new test
+    Create a new Test
 {% endblock %}
 
+{% block gobackbtn %}
+    <a href="{{ path("test_index") }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <i class="fas fa-arrow-left fa-sm text-white-50"></i> Go back
+    </a>
+{% endblock %}
 {% block main %}
     {{ include('test/_form.html.twig') }}
 
-    <a href="{{ path('test_index') }}">back to list</a>
+
 {% endblock %}

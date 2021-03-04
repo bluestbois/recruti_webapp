@@ -1,11 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}New Field{% endblock %}
-
+{% block page_title %}
+    Create a new Fields
+{% endblock %}
+{% block gobackbtn %}
+    <a href="{{ path("field_index") }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <i class="fas fa-arrow-left fa-sm text-white-50"></i> Go back
+    </a>
+{% endblock %}
 {% block main %}
-    <h1>Create new Field</h1>
 
     {{ include('field/_form.html.twig') }}
 
-    <a href="{{ path('field_index') }}"<button type="button" class="btn btn-primary mt-2 mb-2">Back to list</button></a>
 {% endblock %}

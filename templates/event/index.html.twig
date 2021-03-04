@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Event index{% endblock %}
-
+{% block page_title %}
+    Events List
+{% endblock %}
 {% block main %}
     <h1>Event index</h1>
 
@@ -28,9 +30,9 @@
                 <td>{{ event.endDate ? event.endDate|date('Y-m-d') : '' }}</td>
                 <td>{{ event.NOP }}</td>
                 <td>{{ event.location }}</td>
-                <td>
-                    <a href="{{ path('event_show', {'id': event.id}) }}">show</a>
-                    <a href="{{ path('event_edit', {'id': event.id}) }}">edit</a>
+                <td style="display: flex">
+                    <a href="{{ path('event_show', {'id': event.id}) }}"><button type="button" class="btn btn-sm shadow-sm btn-info mt-2 mb-2 ml-2"><i class="fas fa-search"></i></button></a>
+                    <a href="{{ path('event_edit', {'id': event.id}) }}"><button type="button" class="btn btn-sm shadow-sm mt-2 mb-2 ml-2"><i class="far fa-edit"></i></button></a>
                 </td>
             </tr>
         {% else %}
@@ -40,6 +42,8 @@
         {% endfor %}
         </tbody>
     </table>
+    <div style="width: 100%; display:flex; justify-content: flex-end">
+        <a href="{{ path('event_new') }}"><button type="button" class="btn btn-primary btn-sm shadow-sm mt-2 mb-2"><i class="far fa-plus-square"></i> Create New</button></a>
+    </div>
 
-    <a href="{{ path('event_new') }}">Create new</a>
 {% endblock %}

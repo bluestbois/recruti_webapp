@@ -2,8 +2,11 @@
 
 {% block title %}Recruiter index{% endblock %}
 
+{% block page_title %}
+    Recruiters List
+{% endblock %}
+
 {% block main %}
-    <h1>Recruiter List</h1>
 
     <table class="table">
         <thead>
@@ -30,9 +33,9 @@
                 <td>{{ recruiter.description }}</td>
                 <td>{{ recruiter.phoneNumber }}</td>
                 <td>{{ recruiter.image }}</td>
-                <td>
-                    <a href="{{ path('recruiter_show', {'id': recruiter.id}) }}"<button type="button" class="btn btn-primary mt-2 mb-2">show</button></a>
-                    <a href="{{ path('recruiter_edit', {'id': recruiter.id}) }}"><button type="button" class="btn btn-primary mt-2 mb-2">edit</button></a>
+                <td style="display: flex">
+                    <a href="{{ path('recruiter_show', {'id': recruiter.id}) }}"<button type="button" class="btn btn-sm shadow-sm btn-info mt-2 mb-2 ml-2"><i class="fas fa-search"></i></button></a>
+                    <a href="{{ path('recruiter_edit', {'id': recruiter.id}) }}"><button type="button" class="btn btn-sm shadow-sm mt-2 mb-2 ml-2"><i class="far fa-edit"></i></button></a>
                 </td>
             </tr>
         {% else %}
@@ -42,6 +45,7 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('recruiter_new') }}"><button type="button" class="btn btn-primary mt-2 mb-2">Create New</button></a>
+    <div style="width: 100%; display:flex; justify-content: flex-end">
+        <a href="{{ path('recruiter_new') }}"><button type="button" class="btn btn-primary btn-sm shadow-sm mt-2 mb-2"><i class="far fa-plus-square"></i> Create New</button></a>
+    </div>
 {% endblock %}

@@ -438,4 +438,9 @@ class Candidate
 
         return $this;
     }
+    public function __toString()
+    {
+        return $this->email . "__" . $this->id;
+    }
 }
+

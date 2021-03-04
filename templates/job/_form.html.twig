@@ -1,12 +1,18 @@
-{{ form_start(form) }}
-     {{ form_row(form.title,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Title'}})}}
+widget{{ form_start(form) }}
+     {{ form_widget(form.title,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Title'}})}}
     {{ form_label(form.date, "Date") }}
     <div class="row m-2">
         {{form_widget(form.date.day,{'attr': {'class': 'form-control w-25 m-2'}})}}
         {{form_widget(form.date.month,{'attr': {'class': 'form-control w-25 m-2'}})}}
         {{form_widget(form.date.year,{'attr': {'class': 'form-control w-25 m-2'}})}}
     </div>
-    {{ form_row(form.description,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Description'}})}}
+    {{ form_widget(form.description,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Description'}})}}
+
     {{ form_row(form.Recruiter,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Recruiter'}})}}
-    <button class="btn btn-primary mt-2 mb-2">{{ button_label|default('Save') }}</button>
+<div style="width: 100%; display:flex; justify-content: flex-end">
+    <button class="btn btn-primary btn-sm shadow-sm mt-2 mb-2">
+        <i class="fas fa-{{ icon|default('save') }}"></i>
+        {{ button_label|default('Save') }}
+    </button>
+</div>
 {{ form_end(form) }}

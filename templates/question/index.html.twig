@@ -2,7 +2,11 @@
 
 {% block title %}Question index{% endblock %}
 
-{% block page_title %} Questions {% endblock %}
+
+{% block page_title %}
+    Questions List
+{% endblock %}
+
 
 {% block main %}
     <table class="table">
@@ -22,9 +26,9 @@
                 <td>{{ question.statement }}</td>
                 <td>{{ question.points }}</td>
                 <th><a href="{{ path('test_show', {'id': question.test.id}) }}">{{ question.test.title }}</a></th>
-                <td>
-                    <a href="{{ path('question_show', {'id': question.id}) }}">show</a>
-                    <a href="{{ path('question_edit', {'id': question.id}) }}">edit</a>
+                <td style="display: flex">
+                    <a href="{{ path('question_show', {'id': question.id}) }}"><button type="button" class="btn btn-sm shadow-sm btn-info mt-2 mb-2 ml-2"><i class="fas fa-search"></i></button></a>
+                    <a href="{{ path('question_edit', {'id': question.id}) }}"><button type="button" class="btn btn-sm shadow-sm mt-2 mb-2 ml-2"><i class="far fa-edit"></i></button></a>
                 </td>
             </tr>
         {% else %}
@@ -36,6 +40,6 @@
     </table>
 
     <div style="width: 100%; display:flex; justify-content: flex-end">
-        <a class="btn btn-primary" href="{{ path('question_new') }}">Create new</a>
+        <a href="{{ path('question_new') }}"><button type="button" class="btn btn-primary btn-sm shadow-sm mt-2 mb-2"><i class="far fa-plus-square"></i> Create New</button></a>
     </div>
 {% endblock %}

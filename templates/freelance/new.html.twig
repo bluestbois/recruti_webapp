@@ -2,11 +2,20 @@
 
 {% block title %}New Freelance{% endblock %}
 
-{% block page_title %} Create a new freelance job offer {% endblock %}
+{% block page_title %}
+    Create a new freelance job
+{% endblock %}
+
+{% block gobackbtn %}
+    <a href="{{ path("freelance_index") }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <i class="fas fa-arrow-left fa-sm text-white-50"></i> Go back
+    </a>
+{% endblock %}
+
 
 {% block main %}
 
     {{ include('freelance/_form.html.twig') }}
 
-    <a href="{{ path('freelance_index') }}">back to list</a>
+
 {% endblock %}

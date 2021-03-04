@@ -2,8 +2,10 @@
 
 {% block title %}TestCategorie index{% endblock %}
 
-{% block page_title %} Test categories {% endblock %}
 
+{% block page_title %}
+    Test categories
+{% endblock %}
 {% block main %}
 
     <table class="table">
@@ -19,9 +21,9 @@
             <tr>
                 <td>{{ test_categorie.id }}</td>
                 <td>{{ test_categorie.name }}</td>
-                <td>
-                    <a href="{{ path('test_categorie_show', {'id': test_categorie.id}) }}">show</a>
-                    <a href="{{ path('test_categorie_edit', {'id': test_categorie.id}) }}">edit</a>
+                <td style="display: flex">
+                    <a href="{{ path('test_categorie_show', {'id': test_categorie.id}) }}"><button type="button" class="btn btn-sm shadow-sm btn-info mt-2 mb-2 ml-2"><i class="fas fa-search"></i></button></a>
+                    <a href="{{ path('test_categorie_edit', {'id': test_categorie.id}) }}"><button type="button" class="btn btn-sm shadow-sm mt-2 mb-2 ml-2"><i class="far fa-edit"></i></button></a>
                 </td>
             </tr>
         {% else %}
@@ -33,6 +35,6 @@
     </table>
 
     <div style="width: 100%; display:flex; justify-content: flex-end">
-        <a href="{{ path('test_categorie_new') }}">Create new</a>
+        <a href="{{ path('test_categorie_new') }}"><button type="button" class="btn btn-primary btn-sm shadow-sm mt-2 mb-2"><i class="far fa-plus-square"></i> Create New</button></a>
     </div>
 {% endblock %}

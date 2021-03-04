@@ -1,14 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit EventType{% endblock %}
+{% block title %}Edit Event{% endblock %}
 
-{% block page_title %} Edit an event type {% endblock %}
+{% block gobackbtn %}
+    {{ include('event_type/_delete_form.html.twig') }}
+
+    <a href="{{ path("event_type_index") }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <i class="fas fa-arrow-left fa-sm text-white-50"></i> Go back
+    </a>
+{% endblock %}
+
+{% block page_title %}
+    Edit a event
+{% endblock %}
 
 {% block main %}
 
-    {{ include('event_type/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('event_type/_form.html.twig', {'button_label': 'Update', 'icon': 'sync'}) }}
 
-    <a href="{{ path('event_type_index') }}">back to list</a>
-
-    {{ include('event_type/_delete_form.html.twig') }}
 {% endblock %}

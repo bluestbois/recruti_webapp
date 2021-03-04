@@ -1,11 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}New Event{% endblock %}
+{% block page_title %}
+    Create a new Event
+{% endblock %}
 
+{% block gobackbtn %}
+    <a href="{{ path("event_index") }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <i class="fas fa-arrow-left fa-sm text-white-50"></i> Go back
+    </a>
+{% endblock %}
 {% block main %}
-    <h1>Create new Event</h1>
+
 
     {{ include('event/_form.html.twig') }}
 
-    <a href="{{ path('event_index') }}">back to list</a>
 {% endblock %}

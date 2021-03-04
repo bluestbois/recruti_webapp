@@ -2,9 +2,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Projects {% endblock %}
-
+{% block page_title %}
+    Projects List
+{% endblock %}
 {% block main %}
-    <h1>Projects </h1>
+
 
     <table class="table">
         <thead>
@@ -23,9 +25,9 @@
                 <td>{{ project.title }}</td>
                 <td>{{ project.description }}</td>
                 <td>{{ project.date ? project.date|date('Y-m-d') : '' }}</td>
-                <td>
-                    <a href="{{ path('project_show', {'id': project.id}) }}">show</a>
-                    <a href="{{ path('project_edit', {'id': project.id}) }}">edit</a>
+                <td style="display: flex">
+                    <a href="{{ path('project_show', {'id': project.id}) }}"<button type="button" class="btn btn-sm shadow-sm btn-info mt-2 mb-2 ml-2"><i class="fas fa-search"></i></button></a>
+                    <a href="{{ path('project_edit', {'id': project.id}) }}"><button type="button" class="btn btn-sm shadow-sm mt-2 mb-2 ml-2"><i class="far fa-edit"></i></button></a>
                 </td>
             </tr>
         {% else %}
@@ -35,6 +37,7 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('project_new') }}">Create new</a>
+    <div style="width: 100%; display:flex; justify-content: flex-end">
+        <a href="{{ path('project_new') }}"><button type="button" class="btn btn-primary btn-sm shadow-sm mt-2 mb-2"><i class="far fa-plus-square"></i> Create New</button></a>
+    </div>
 {% endblock %}

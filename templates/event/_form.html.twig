@@ -1,6 +1,6 @@
 {{ form_start(form) }}
-{{form_row(form.title,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Title'}})}}
-    {{form_row(form.description,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
+{{form_widget(form.title,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Title'}})}}
+    {{form_widget(form.description,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Description'}})}}
     {{ form_label(form.startDate, "Start Date") }}
     <div class="row m-2">
         {{form_widget(form.startDate.day,{'attr': {'class': 'form-control w-25 m-2'}})}}
@@ -14,8 +14,13 @@
         {{form_widget(form.endDate.year,{'attr': {'class': 'form-control w-25 m-2'}})}}
     </div>
     {{form_row(form.Type,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
-    {{form_row(form.NOP,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
+    {{form_widget(form.NOP,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Numbre Of Participants'}})}}
     {{form_row(form.Candidate,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
-    {{form_row(form.location,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    {{form_widget(form.location,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Lacation'}})}}
+<div style="width: 100%; display:flex; justify-content: flex-end">
+    <button class="btn btn-primary btn-sm shadow-sm mt-2 mb-2">
+        <i class="fas fa-{{ icon|default('save') }}"></i>
+        {{ button_label|default('Save') }}
+    </button>
+</div>
 {{ form_end(form) }}

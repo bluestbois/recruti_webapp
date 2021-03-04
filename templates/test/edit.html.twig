@@ -2,16 +2,20 @@
 
 {% block title %}Edit Test{% endblock %}
 
+{% block gobackbtn %}
+    {{ include('test/_delete_form.html.twig') }}
+
+    <a href="{{ path("test_index") }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <i class="fas fa-arrow-left fa-sm text-white-50"></i> Go back
+    </a>
+{% endblock %}
+
 {% block page_title %}
-    Edit a Test
+    Edit a candidate
 {% endblock %}
 
 {% block main %}
 
-    {{ include('test/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('test/_form.html.twig', {'button_label': 'Update','icon': 'sync' }) }}
 
-    <div style="width: 100%; display:flex; justify-content: flex-end">
-        <a href="{{ path('test_index') }}">back to list</a>
-    </div>
-    {{ include('test/_delete_form.html.twig') }}
 {% endblock %}

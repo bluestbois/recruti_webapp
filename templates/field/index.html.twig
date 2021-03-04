@@ -2,8 +2,12 @@
 
 {% block title %}Field index{% endblock %}
 
+{% block page_title %}
+    Fields List
+{% endblock %}
+
 {% block main %}
-    <h1>Field list</h1>
+
 
     <table class="table">
         <thead>
@@ -18,9 +22,9 @@
             <tr>
                 <td>{{ field.id }}</td>
                 <td>{{ field.title }}</td>
-                <td>
-                    <a href="{{ path('field_show', {'id': field.id}) }}"<button type="button" class="btn btn-primary mt-2 mb-2">show</button></a>
-                    <a href="{{ path('field_edit', {'id': field.id}) }}"<button type="button" class="btn btn-primary mt-2 mb-2">edit</button></a>
+                <td style="display: flex">
+                    <a href="{{ path('field_show', {'id': field.id}) }}"<button type="button" class="btn btn-sm shadow-sm btn-info mt-2 mb-2 ml-2"><i class="fas fa-search"></i></button></a>
+                    <a href="{{ path('field_edit', {'id': field.id}) }}"><button type="button" class="btn btn-sm shadow-sm mt-2 mb-2 ml-2"><i class="far fa-edit"></i></button></a>
                 </td>
             </tr>
         {% else %}
@@ -31,5 +35,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('field_new') }}"<button type="button" class="btn btn-primary mt-2 mb-2">Create new</button></a>
+    <div style="width: 100%; display:flex; justify-content: flex-end">
+        <a href="{{ path('field_new') }}"><button type="button" class="btn btn-primary btn-sm shadow-sm mt-2 mb-2"><i class="far fa-plus-square"></i> Create New</button></a>
+    </div>
 {% endblock %}

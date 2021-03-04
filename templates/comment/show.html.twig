@@ -1,11 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Comment{% endblock %}
+{% block gobackbtn %}
+    <a href="{{ path("comment_index") }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <i class="fas fa-arrow-left fa-sm text-white-50"></i> Go back
+    </a>
+{% endblock %}
 
+{% block page_title %}
+    Comments
+{% endblock %}
 {% block main %}
-    <h1>Comment</h1>
-
-    <table class="table">
+       <table class="table">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -25,10 +31,8 @@
             </tr>
         </tbody>
     </table>
-
-    <a href="{{ path('comment_index') }}"class="btn btn-secondary"> < Back </a>
-
-    <a href="{{ path('comment_edit', {'id': comment.id}) }}" class="btn btn-danger">edit</a>
-
-    {{ include('comment/_delete_form.html.twig') }}
+    <div style="width: 100%; display:flex; justify-content: flex-end">
+        <a href="{{ path('comment_edit', {'id': comment.id}) }}"><button type="button" class="btn-sm shadow-sm btn btn-primary mt-2 mb-2 mr-2"><i class="far fa-edit"></i> Edit</button></a>
+        {{ include('comment/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

@@ -1,8 +1,8 @@
 {{ form_start(form) }}
-    {{form_row(form.firstName,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Title'}})}}
-    {{form_row(form.lastName,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
-    {{form_row(form.email,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
-    {{form_row(form.password,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
+    {{form_widget(form.firstName,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'First name'}})}}
+    {{form_widget(form.lastName,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Last name'}})}}
+    {{form_widget(form.email,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Email'}})}}
+    {{form_widget(form.password,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Password'}})}}
 
     {{ form_label(form.birthday, "Birthday") }}
     <div class="row m-2">
@@ -11,16 +11,25 @@
         {{form_widget(form.birthday.year,{'attr': {'class': 'form-control w-25 m-2'}})}}
     </div>
 
-    {{form_row(form.gender,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
-    {{form_row(form.nationality,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
-    {{form_row(form.phoneNumber,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
-    {{form_row(form.address,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
-    {{form_row(form.image,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
-    {{form_row(form.LOE,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
-    {{form_row(form.experience,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
-    {{form_row(form.nationalities,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
-    {{form_row(form.events,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
-    {{form_row(form.projects,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
+    {{form_widget(form.gender,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Gender'}})}}
+    {{form_widget(form.nationality,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Nationality'}})}}
+    {{form_widget(form.phoneNumber,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Phone number'}})}}
+    {{form_widget(form.address,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Address'}})}}
+    {{form_widget(form.image,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Image'}})}}
+    {{form_widget(form.LOE,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Level of education'}})}}
+    {{form_widget(form.experience,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Experience'}})}}
 
-<button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_label(form.nationalities, "Nationalities") }}
+    {{form_widget(form.nationalities,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
+    {{ form_label(form.events, "Events") }}
+    {{form_widget(form.events,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
+    {{ form_label(form.projects, "Projects") }}
+    {{form_widget(form.projects,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
+
+    <div style="width: 100%; display:flex; justify-content: flex-end">
+        <button class="btn btn-primary btn-sm shadow-sm mt-2 mb-2">
+            <i class="fas fa-{{ icon|default('save') }}"></i>
+            {{ button_label|default('Save') }}
+        </button>
+    </div>
 {{ form_end(form) }}

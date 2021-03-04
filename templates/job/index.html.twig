@@ -1,9 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Job index{% endblock %}
+{% block page_title %}
+    Jobs List
+{% endblock %}
 
 {% block main %}
-    <h1>Job list</h1>
+
 
     <table class="table">
         <thead>
@@ -22,9 +25,9 @@
                 <td>{{ job.title }}</td>
                 <td>{{ job.date ? job.date|date('Y-m-d') : '' }}</td>
                 <td>{{ job.description }}</td>
-                <td>
-                    <a href="{{ path('job_show', {'id': job.id}) }}"<button type="button" class="btn btn-primary mt-2 mb-2">show</button></a>
-                    <a href="{{ path('job_edit', {'id': job.id}) }}"<button type="button" class="btn btn-primary mt-2 mb-2">edit</button></a>
+                <td style="display: flex">
+                    <a href="{{ path('job_show', {'id': job.id}) }}"><button type="button" class="btn btn-sm shadow-sm btn-info mt-2 mb-2 ml-2"><i class="fas fa-search"></i></button></a>
+                    <a href="{{ path('job_edit', {'id': job.id}) }}"><button type="button" class="btn btn-sm shadow-sm mt-2 mb-2 ml-2"><i class="far fa-edit"></i></button></a>
                 </td>
             </tr>
         {% else %}
@@ -34,6 +37,8 @@
         {% endfor %}
         </tbody>
     </table>
+    <div style="width: 100%; display:flex; justify-content: flex-end">
+        <a href="{{ path('job_new') }}"><button type="button" class="btn btn-primary btn-sm shadow-sm mt-2 mb-2"><i class="far fa-plus-square"></i> Create New</button></a>
+    </div>
 
-    <a href="{{ path('job_new') }}"<button type="button" class="btn btn-primary mt-2 mb-2">create new</button></a>
 {% endblock %}

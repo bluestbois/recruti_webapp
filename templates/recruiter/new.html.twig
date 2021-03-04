@@ -2,10 +2,17 @@
 
 {% block title %}New Recruiter{% endblock %}
 
+{% block gobackbtn %}
+    <a href="{{ path("recruiter_index") }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <i class="fas fa-arrow-left fa-sm text-white-50"></i> Go back
+    </a>
+{% endblock %}
+
+{% block page_title %}
+    Create a new Recruiter
+{% endblock %}
+
 {% block main %}
-    <h1>Create new Recruiter</h1>
 
     {{ include('recruiter/_form.html.twig') }}
-
-    <a href="{{ path('recruiter_index') }}">back to list</a>
 {% endblock %}

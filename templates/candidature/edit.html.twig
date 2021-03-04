@@ -2,12 +2,17 @@
 
 {% block title %}Edit Candidature{% endblock %}
 
-{% block main %}
-    <h1>Edit Candidature</h1>
+{% block gobackbtn %}
+    {{ include('candidature/_delete_form.html.twig') }}
 
+    <a href="{{ path('candidature_index') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <i class="fas fa-arrow-left fa-sm text-white-50"></i> Go back
+    </a>
+{% endblock %}
+{% block page_title %}
+    Edit Candidature
+{% endblock %}
+{% block main %}
     {{ include('candidature/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('candidature_index') }}">back to list</a>
-
-    {{ include('candidature/_delete_form.html.twig') }}
 {% endblock %}

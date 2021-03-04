@@ -1,13 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}New Question{% endblock %}
+{% block page_title %}
+    Create a new Question
+{% endblock %}
+
+{% block gobackbtn %}
+    <a href="{{ path("question_index") }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <i class="fas fa-arrow-left fa-sm text-white-50"></i> Go back
+    </a>
+{% endblock %}
 
 {% block main %}
-    <h1>Create new Question</h1>
+
 
     {{ include('question/_form.html.twig') }}
 
-    <div style="width: 100%; display:flex; justify-content: flex-end">
-        <a class="btn btn-primary" href="{{ path('question_index') }}">Save</a>
-    </div>
+
 {% endblock %}

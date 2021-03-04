@@ -7,11 +7,14 @@
         'class': 'form-control w-100 mt-2 mb-2',
         'placeholder': 'Test description'
     } }) }}
-    {{ form_widget(form.categorie, { 'attr': {
+    {{ form_row(form.categorie, { 'attr': {
         'class': 'form-control w-100 mt-2 mb-2',
         'placeholder': 'Test description'
     } }) }}
-    <div style="width: 100%; display:flex; justify-content: flex-end">
-        <button class="btn btn-primary mt-2 mb-2">{{ button_label|default('Save') }}</button>
-    </div>
+<div style="width: 100%; display:flex; justify-content: flex-end">
+    <button class="btn btn-primary btn-sm shadow-sm mt-2 mb-2">
+        <i class="fas fa-{{ icon|default('save') }}"></i>
+        {{ button_label|default('Save') }}
+    </button>
+</div>
 {{ form_end(form) }}

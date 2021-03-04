@@ -2,7 +2,10 @@
 
 {% block title %}EventType index{% endblock %}
 
-{% block page_title %} Event types {% endblock %}
+{% block page_title %}
+    Event Type List
+{% endblock %}
+
 
 {% block main %}
 
@@ -19,9 +22,9 @@
             <tr>
                 <td>{{ event_type.id }}</td>
                 <td>{{ event_type.name }}</td>
-                <td>
-                    <a href="{{ path('event_type_show', {'id': event_type.id}) }}">show</a>
-                    <a href="{{ path('event_type_edit', {'id': event_type.id}) }}">edit</a>
+                <td style="display: flex">
+                    <a href="{{ path('event_type_show', {'id': event_type.id}) }}"><button type="button" class="btn btn-sm shadow-sm btn-info mt-2 mb-2 ml-2"><i class="fas fa-search"></i></button></a>
+                    <a href="{{ path('event_type_edit', {'id': event_type.id}) }}"><button type="button" class="btn btn-sm shadow-sm mt-2 mb-2 ml-2"><i class="far fa-edit"></i></button></a>
                 </td>
             </tr>
         {% else %}
@@ -32,5 +35,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('event_type_new') }}">Create new</a>
+    <div style="width: 100%; display:flex; justify-content: flex-end">
+        <a href="{{ path('event_type_new') }}"><button type="button" class="btn btn-primary btn-sm shadow-sm mt-2 mb-2"><i class="far fa-plus-square"></i> Create New</button></a>
+    </div>
 {% endblock %}

@@ -2,14 +2,20 @@
 
 {% block title %}Edit TestCategorie{% endblock %}
 
+{% block gobackbtn %}
+    {{ include('test_categorie/_delete_form.html.twig') }}
+
+    <a href="{{ path("test_categorie_index") }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <i class="fas fa-arrow-left fa-sm text-white-50"></i> Go back
+    </a>
+{% endblock %}
+
 {% block page_title %}
-    Edit a test categorie
+    Edit a TestCategorie
 {% endblock %}
 
 {% block main %}
 
-    {{ include('test_categorie/_form.html.twig', {'button_label': 'Update'}) }}
-    {{ include('test_categorie/_delete_form.html.twig') }}
+    {{ include('test_categorie/_form.html.twig', {'button_label': 'Update', 'icon': 'sync'}) }}
 
-    <a href="{{ path('test_categorie_index') }}">back to list</a>
 {% endblock %}

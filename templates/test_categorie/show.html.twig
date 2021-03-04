@@ -1,9 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Test Categorie{% endblock %}
+{% block gobackbtn %}
+    <a href="{{ path("test_categorie_index") }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <i class="fas fa-arrow-left fa-sm text-white-50"></i> Go back
+    </a>
+{% endblock %}
 
+{% block page_title %}
+    Test Categorie
+{% endblock %}
 {% block main %}
-    <h1>Test Categorie</h1>
+
 
     <table class="table">
         <tbody>
@@ -18,9 +26,8 @@
         </tbody>
     </table>
 
-    <a href="{{ path('test_categorie_index') }}">back to list</a>
-
-    <a href="{{ path('test_categorie_edit', {'id': test_categorie.id}) }}">edit</a>
-
-    {{ include('test_categorie/_delete_form.html.twig') }}
+    <div style="width: 100%; display:flex; justify-content: flex-end">
+        <a href="{{ path('test_categorie_edit', {'id': test_categorie.id}) }}"><button type="button" class="btn-sm shadow-sm btn btn-primary mt-2 mb-2 mr-2"><i class="far fa-edit"></i> Edit</button></a>
+        {{ include('test_categorie/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

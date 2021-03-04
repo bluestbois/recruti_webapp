@@ -2,18 +2,24 @@
 
 {% block title %}Edit Field{% endblock %}
 
+{% block gobackbtn %}
+    {{ include('field/_delete_form.html.twig') }}
+
+    <a href="{{ path("field_index") }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <i class="fas fa-arrow-left fa-sm text-white-50"></i> Go back
+    </a>
+{% endblock %}
+
 {% block page_title %}
-    <h1 class="h3 mb-0 text-gray-800">
-        Edit field
-    </h1>
+    Edit a Field
 {% endblock %}
 
 {% block main %}
-    <h1>Edit Field</h1>
 
-    {{ include('field/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('field_index') }}"<button type="button" class="btn btn-primary mt-2 mb-2">Back to list</button></a>
+    {{ include('field/_form.html.twig', {'button_label': 'Update', 'icon': 'sync'}) }}
 
-    {{ include('field/_delete_form.html.twig') }}
+
+
+
 {% endblock %}

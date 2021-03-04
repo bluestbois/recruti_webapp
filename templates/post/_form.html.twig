@@ -1,18 +1,23 @@
 {{ form_start(form) }}
-    {{ form_row(form.title,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Title'}})}}
-    {{ form_row(form.description,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Title'}})}}
+    {{ form_widget(form.title,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Title'}})}}
+    {{ form_widget(form.description,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Description'}})}}
     {{ form_label(form.date, "Date") }}
     <div class="row m-2">
         {{form_widget(form.date.day,{'attr': {'class': 'form-control w-25 m-2'}})}}
         {{form_widget(form.date.month,{'attr': {'class': 'form-control w-25 m-2'}})}}
         {{form_widget(form.date.year,{'attr': {'class': 'form-control w-25 m-2'}})}}
     </div>
-    {{ form_row(form.views,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
-    {{ form_row(form.likes,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
-    {{ form_row(form.NOC,{'attr': {'class': 'form-control w-100 mt-2 mb-2',}})}}
+    {{ form_widget(form.views,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Views'}})}}
+    {{ form_widget(form.likes,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Likes'}})}}
+    {{ form_widget(form.NOC,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Comments'}})}}
     {{ form_row(form.Recruiter,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
     {{ form_row(form.Candidate,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
     {{ form_row(form.Forum,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
     {{ form_row(form.tags,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+<div style="width: 100%; display:flex; justify-content: flex-end">
+    <button class="btn btn-primary btn-sm shadow-sm mt-2 mb-2">
+        <i class="fas fa-{{ icon|default('save') }}"></i>
+        {{ button_label|default('Save') }}
+    </button>
+</div>
 {{ form_end(form) }}

@@ -1,13 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Forum index{% endblock %}
-
+{% block page_title %}
+    Forums List
+{% endblock %}
 {% block main%}
-    <h1>Forum index</h1>
+
 
     <table class="table" >
         <thead>
-            <tr class="table-secondary">
+            <tr >
                 <th>Id</th>
                 <th>Title</th>
                 <th>Description</th>
@@ -20,9 +22,9 @@
                 <td>{{ forum.id }}</td>
                 <td>{{ forum.title }}</td>
                 <td>{{ forum.description }}</td>
-                <td>
-                    <a href="{{ path('forum_show', {'id': forum.id}) }}" class="btn btn-primary">show</a>
-                    <a href="{{ path('forum_edit', {'id': forum.id}) }}" class="btn btn-danger">edit</a>
+                <td style="display: flex">
+                    <a href="{{ path('forum_show', {'id': forum.id}) }}"><button type="button" class="btn btn-sm shadow-sm btn-info mt-2 mb-2 ml-2"><i class="fas fa-search"></i></button></a>
+                    <a href="{{ path('forum_edit', {'id': forum.id}) }}"><button type="button" class="btn btn-sm shadow-sm mt-2 mb-2 ml-2"><i class="far fa-edit"></i></button></a>
                 </td>
             </tr>
         {% else %}
@@ -32,6 +34,8 @@
         {% endfor %}
         </tbody>
     </table>
+    <div style="width: 100%; display:flex; justify-content: flex-end">
+        <a href="{{ path('forum_new') }}"><button type="button" class="btn btn-primary btn-sm shadow-sm mt-2 mb-2"><i class="far fa-plus-square"></i> Create New</button></a>
+    </div>
 
-    <a href="{{ path('forum_new') }}" class="btn btn-secondary">+</a>
 {% endblock %}

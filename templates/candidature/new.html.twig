@@ -2,10 +2,14 @@
 
 {% block title %}New Candidature{% endblock %}
 
+{% block page_title %}
+    Create a new Candidature
+{% endblock %}
+{% block gobackbtn %}
+    <a href="{{ path('candidature_index') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <i class="fas fa-arrow-left fa-sm text-white-50"></i> Go back
+    </a>
+{% endblock %}
 {% block main %}
-    <h1>Create new Candidature</h1>
-
     {{ include('candidature/_form.html.twig') }}
-
-    <a href="{{ path('candidature_index') }}">back to list</a>
 {% endblock %}

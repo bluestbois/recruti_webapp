@@ -2,7 +2,16 @@
 
 {% block title %}Freelance{% endblock %}
 
-{% block page_title %} Freelance job offer {% endblock %}
+{% block gobackbtn %}
+    <a href="{{ path("freelance_index") }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <i class="fas fa-arrow-left fa-sm text-white-50"></i> Go back
+    </a>
+{% endblock %}
+
+{% block page_title %}
+    Freelance Job
+{% endblock %}
+
 
 {% block main %}
 
@@ -26,14 +35,13 @@
             </tr>
             <tr>
                 <th>Project</th>
-                <td><a href="{{ path("freelance_show",{"id": freelance.project.id }) }}">{{ freelance.project }}</a></td>
+                <td><a href="{{ path("project_show",{"id": freelance.project.id }) }}">{{ freelance.project }}</a></td>
             </tr>
         </tbody>
     </table>
+    <div style="width: 100%; display:flex; justify-content: flex-end">
+        <a href="{{ path('freelance_edit', {'id': freelance.id}) }}"><button type="button" class="btn-sm shadow-sm btn btn-primary mt-2 mb-2 mr-2"><i class="far fa-edit"></i> Edit</button></a>
+        {{ include('freelance/_delete_form.html.twig') }}
+    </div>
 
-    <a href="{{ path('freelance_index') }}">back to list</a>
-
-    <a href="{{ path('freelance_edit', {'id': freelance.id}) }}">edit</a>
-
-    {{ include('freelance/_delete_form.html.twig') }}
 {% endblock %}
