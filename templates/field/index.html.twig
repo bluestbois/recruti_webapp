@@ -5,35 +5,68 @@
 {% block page_title %}
     Fields List
 {% endblock %}
+{% block custom_stylesheets %}
+    <!-- Custom styles for this page -->
+    <link href="{{ asset("vendor/datatables/dataTables.bootstrap4.min.css") }}" rel="stylesheet">
+{% endblock %}
+
+{% block custom_js %}
+    <script src="{{ asset("vendor/datatables/jquery.dataTables.min.js") }}"></script>
+    <script src="{{ asset("vendor/datatables/dataTables.bootstrap4.min.js") }}"></script>
+    <script>
+        let data = [
+            {% for field in fields %}
+            {
+                "ID" : "{{ field.id }}",
+                "Title" : "{{ field.title }}",
+                "Action":   document.createElement("div").innerHTML = `<div style="display: flex; justify-content: center">
+                                <a href="{{ path('field_show', {'id': field.id}) }}"><button type="button" class="btn btn-sm shadow-sm btn-info mt-2 mb-2 ml-2"><i class="fas fa-search"></i></button></a>
+                                <a href="{{ path('field_edit', {'id': field.id}) }}"><button type="button" class="btn btn-sm shadow-sm mt-2 mb-2 ml-2"><i class="far fa-edit"></i></button></a>
+                            </div>`
+            },
+            {% endfor %}
+        ]
+
+        let table = $('#dataTable').DataTable({
+            "columns": [
+                {
+                    "data": "ID"
+                },
+                {
+                    "data": "Title"
+                },
+                {
+                    "data": "Action"
+                }
+            ]
+        });
+        table.rows.add(data).draw()
+    </script>
+{% endblock %}
 
 {% block main %}
 
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for field in fields %}
-            <tr>
-                <td>{{ field.id }}</td>
-                <td>{{ field.title }}</td>
-                <td style="display: flex">
-                    <a href="{{ path('field_show', {'id': field.id}) }}"<button type="button" class="btn btn-sm shadow-sm btn-info mt-2 mb-2 ml-2"><i class="fas fa-search"></i></button></a>
-                    <a href="{{ path('field_edit', {'id': field.id}) }}"><button type="button" class="btn btn-sm shadow-sm mt-2 mb-2 ml-2"><i class="far fa-edit"></i></button></a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="card shadow-lg h-75 m-4 mt-8">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Fields list</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
     <div style="width: 100%; display:flex; justify-content: flex-end">
         <a href="{{ path('field_new') }}"><button type="button" class="btn btn-primary btn-sm shadow-sm mt-2 mb-2"><i class="far fa-plus-square"></i> Create New</button></a>

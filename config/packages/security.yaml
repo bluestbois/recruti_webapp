@@ -1,14 +1,43 @@
 security:
+    encoders:
+        App\Entity\Candidate:
+            algorithm: bcrypt
+
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         users_in_memory: { memory: null }
+        users:
+            chain:
+                providers: [user_cd, user_rt, adm ]
+        user_cd:
+            entity:
+                class: 'App\Entity\Candidate'
+                property: 'email'
+        user_rt:
+            entity:
+                class: 'App\Entity\Recruiter'
+                property: 'email'
+        adm:
+            entity:
+                class: 'App\Entity\Administrateur'
+
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             anonymous: lazy
-            provider: users_in_memory
+            provider: users
+            guard:
+                authenticators:
+                    - App\Security\SighinAuthenticator
+            form_login:
+                login_path: /login
+            logout:
+                path: app_logout
+                # where to redirect after logout
+                # target: app_any_route
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication

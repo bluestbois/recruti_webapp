@@ -6,6 +6,7 @@ use App\Repository\CandidatureRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CandidatureRepository::class)
@@ -21,6 +22,7 @@ class Candidature
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotBlank(message="This field must be filled")
      */
     private $date;
 
@@ -48,7 +50,7 @@ class Candidature
     private $Test;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
     private $score;
 
@@ -134,12 +136,12 @@ class Candidature
         return $this;
     }
 
-    public function getScore(): ?int
+    public function getScore(): ?float
     {
         return $this->score;
     }
 
-    public function setScore(int $score): self
+    public function setScore(float $score): self
     {
         $this->score = $score;
 

@@ -50,6 +50,8 @@ class JobController extends AbstractController
 
     /**
      * @Route("/{id}", name="job_show", methods={"GET"})
+     * @param Job $job
+     * @return Response
      */
     public function show(Job $job): Response
     {

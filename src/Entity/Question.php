@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\QuestionRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=QuestionRepository::class)
@@ -19,31 +20,38 @@ class Question
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="This field must be filled")
      */
     private $statement;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="This field must be filled")
      */
     private $answerA;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="This field must be filled")
      */
     private $answerB;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="This field must be filled")
      */
     private $answerC;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="This field must be filled")
      */
     private $rightAnswer;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Type(type={"integer"},message="This field must be filled with an integer")
+     * @Assert\NotBlank(message="This field must be filled with an integer")
      */
     private $points;
 

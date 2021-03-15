@@ -1,0 +1,10 @@
+#wrapper {
+    height: 100vh;
+    overflow: scroll;
+}
+
+.sidebar {
+    overflow: scroll;
+    height: 100vh;
+    width: 17rem !important;
+}

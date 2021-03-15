@@ -1,8 +1,11 @@
-{{ form_start(form) }}
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
     {{ form_widget(form.name, { 'attr': {
         'class': 'form-control w-100 mt-2 mb-2',
         'placeholder': 'Categorie name'
     } }) }}
+    <div class="alert alert-danger">
+        {{ form_errors(form.name) }}
+    </div>
 <div style="width: 100%; display:flex; justify-content: flex-end">
 <button class="btn btn-primary btn-sm shadow-sm mt-2 mb-2">
     <i class="fas fa-{{ icon|default('save') }}"></i>

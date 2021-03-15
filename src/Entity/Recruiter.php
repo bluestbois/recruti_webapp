@@ -6,11 +6,12 @@ use App\Repository\RecruiterRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=RecruiterRepository::class)
  */
-class Recruiter
+class Recruiter implements UserInterface
 {
     /**
      * @ORM\Id
@@ -348,4 +349,23 @@ class Recruiter
     public function __toString(){
         return $this->name;
     }
+    public function getUsername()
+    {
+        return $this->getEmail();
+        // TODO: Implement getUsername() method.
+    }
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+    public function getSalt()
+    {
+        return null;
+        // TODO: Implement getSalt() method.
+    }
+    public function getRoles()
+    {
+        return Array('ROLE_RECRUITER');
+    }
+
 }

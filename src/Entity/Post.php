@@ -6,6 +6,7 @@ use App\Repository\PostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
@@ -21,31 +22,42 @@ class Post
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="This field must be filled")
+     * @Assert\Type(type={"string","integer"},message="must be intager or string")
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="This field must be filled")
+     * @Assert\Type(type={"string","integer"},message="must be intager or string")
      */
     private $description;
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotBlank(message="This field must be filled")
      */
     private $date;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="This field must be filled")
+     * @Assert\Type(type={"integer"},message="must be intager ")
      */
     private $views;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="This field must be filled")
+     * @Assert\Type(type={"integer"},message="must be intager")
      */
     private $likes;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="This field must be filled")
+     * @Assert\Type(type={"integer"},message="must be intager")
      */
     private $NOC;
 

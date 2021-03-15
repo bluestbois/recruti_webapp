@@ -18,7 +18,9 @@
 
                 <!-- Custom styles for this template-->
                 <link href="{{ asset("css/sb-admin-2.min.css") }}" rel="stylesheet">
-                <link rel="stylesheet" href="{{ asset("css/style.css") }}">
+                <link rel="stylesheet" href="{{ asset("css/style_sidebar.css") }}">
+                {% block custom_stylesheets %}
+                {% endblock %}
             {% endblock %}
         {% endblock %}
     </head>
@@ -35,8 +37,8 @@
 
                     <!-- Sidebar - Brand -->
                     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ path("home") }}">
-                        <div class="sidebar-brand-icon rotate-n-15">
-                            <i class="fas fa-laugh-wink"></i>
+                        <div class="sidebar-brand-icon">
+                            <img style="width: 40px" src="{{ asset("images/small_logo.png") }}">
                         </div>
                         <div class="sidebar-brand-text mx-3">{% block dashboard_title %} Recrutini {% endblock %}</div>
                     </a>
@@ -653,6 +655,9 @@
             <!-- Page level custom scripts -->
             <script src="{{ asset("js/demo/chart-area-demo.js") }}"></script>
             <script src="{{ asset("js/demo/chart-pie-demo.js") }}"></script>
+
+                {% block custom_js %}
+                {% endblock %}
             {% endblock %}
         {% endblock %}
     </body>

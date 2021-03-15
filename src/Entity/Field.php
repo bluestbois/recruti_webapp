@@ -6,6 +6,7 @@ use App\Repository\FieldRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=FieldRepository::class)
@@ -21,6 +22,7 @@ class Field
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="This field must be filled")
      */
     private $title;
 

@@ -1,0 +1,26 @@
+{% extends 'frontoffice/base.html.twig' %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block custom_stylesheets %}
+    <style>
+        input[type="radio"]{
+            margin-left: 3px;
+        }
+    </style>
+{% endblock %}
+
+{% block main %}
+
+
+    <div class="container">
+    <h2 class="h2">{{ test.title }}</h2>
+    <p class="h6">{{ test.description }}</p>
+        {{ form(form) }}
+    </div>
+
+
+    {% if data is defined %}
+        {{ dump(data) }}
+    {% endif %}
+{% endblock %}

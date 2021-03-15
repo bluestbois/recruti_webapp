@@ -1,28 +1,49 @@
-{{ form_start(form) }}
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
     {{ form_widget(form.statement, { 'attr': {
         'class': 'form-control w-100 mt-2 mb-2',
         'placeholder': 'statement'
     } }) }}
+    <div class="alert alert-danger">
+        {{ form_errors(form.statement) }}
+    </div>
+
     {{ form_widget(form.answerA, { 'attr': {
         'class': 'form-control w-100 mt-2 mb-2',
         'placeholder': 'First answer'
     } }) }}
+    <div class="alert alert-danger">
+        {{ form_errors(form.answerA) }}
+    </div>
+
     {{ form_widget(form.answerB, { 'attr': {
         'class': 'form-control w-100 mt-2 mb-2',
         'placeholder': 'Second answer'
     } }) }}
+    <div class="alert alert-danger">
+        {{ form_errors(form.answerB) }}
+    </div>
+
     {{ form_widget(form.answerC, { 'attr': {
         'class': 'form-control w-100 mt-2 mb-2',
         'placeholder': 'Third answer'
     } }) }}
+    <div class="alert alert-danger">
+        {{ form_errors(form.answerC) }}
+    </div>
+
     {{ form_row(form.rightAnswer, { 'attr': {
         'class': 'form-control w-100 mt-2 mb-2',
         'placeholder': 'Right answer'
     } }) }}
+
     {{ form_widget(form.points, { 'attr': {
         'class': 'form-control w-100 mt-2 mb-2',
         'placeholder': 'Points'
     } }) }}
+    <div class="alert alert-danger">
+        {{ form_errors(form.points) }}
+    </div>
+
     {{ form_row(form.Test, { 'attr': {
         'class': 'form-control w-100 mt-2 mb-2'
     } }) }}

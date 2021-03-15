@@ -6,45 +6,91 @@
     Candidates List
 {% endblock %}
 
+{% block custom_stylesheets %}
+    <!-- Custom styles for this page -->
+    <link href="{{ asset("vendor/datatables/dataTables.bootstrap4.min.css") }}" rel="stylesheet">
+{% endblock %}
+
+{% block custom_js %}
+    <script src="{{ asset("vendor/datatables/jquery.dataTables.min.js") }}"></script>
+    <script src="{{ asset("vendor/datatables/dataTables.bootstrap4.min.js") }}"></script>
+    <script>
+        let data = [
+            {% for candidate in candidates %}
+            {
+                "ID" : "{{ candidate.id }}",
+                "FirstName" : "{{ candidate.firstName }}",
+                "LastName" : "{{ candidate.lastName }}",
+                "Email" : "{{ candidate.email }}",
+                "Nationality" : "{{ candidate.nationality }}",
+                "Phone" : "{{ candidate.phoneNumber }}",
+                "Action":   document.createElement("div").innerHTML = `<div style="display: flex; justify-content: center">
+                                <a href="{{ path('candidate_show', {'id': candidate.id}) }}"><button type="button" class="btn btn-sm shadow-sm btn-info mt-2 mb-2 ml-2"><i class="fas fa-search"></i></button></a>
+                                <a href="{{ path('candidate_edit', {'id': candidate.id}) }}"><button type="button" class="btn btn-sm shadow-sm mt-2 mb-2 ml-2"><i class="far fa-edit"></i></button></a>
+                            </div>`
+            },
+            {% endfor %}
+        ]
+
+        console.log(data)
+        let table = $('#dataTable').DataTable({
+            "columns": [
+                {
+                    "data": "ID"
+                },
+                {
+                    "data": "FirstName"
+                },
+                {
+                    "data": "LastName"
+                },
+                {
+                    "data": "Email"
+                },
+                {
+                    "data": "Nationality"
+                },
+                {
+                    "data": "Phone"
+                },
+                {
+                    "data": "Action"
+                }
+            ]
+        });
+        table.rows.add(data).draw()
+    </script>
+{% endblock %}
+
 {% block main %}
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>FirstName</th>
-                <th>LastName</th>
-                <th>Email</th>
-                <th>Nationality</th>
-                <th>PhoneNumber</th>
-                <th>Address</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for candidate in candidates %}
-            <tr>
-                <td>{{ candidate.id }}</td>
-                <td>{{ candidate.firstName }}</td>
-                <td>{{ candidate.lastName }}</td>
-                <td>{{ candidate.email }}</td>
-                <td>{{ candidate.nationality }}</td>
-                <td>{{ candidate.phoneNumber }}</td>
-                <td>{{ candidate.address }}</td>
-                <td style="display: flex">
-                    <a href="{{ path('candidate_show', {'id': candidate.id}) }}"><button type="button" class="btn btn-sm shadow-sm btn-info mt-2 mb-2 ml-2"><i class="fas fa-search"></i></button></a>
-                    <a href="{{ path('candidate_edit', {'id': candidate.id}) }}"><button type="button" class="btn btn-sm shadow-sm mt-2 mb-2 ml-2"><i class="far fa-edit"></i></button></a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="14">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="card shadow-lg h-75 m-4 mt-8">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Candidates List</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Firs tName</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Nationality</th>
+                        <th>PhoneNumber</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
     <div style="width: 100%; display:flex; justify-content: flex-end">
         <a href="{{ path('recruiter_new') }}"><button type="button" class="btn btn-primary btn-sm shadow-sm mt-2 mb-2"><i class="far fa-plus-square"></i> Create New</button></a>
     </div>
+
 {% endblock %}

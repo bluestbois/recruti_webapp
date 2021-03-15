@@ -6,11 +6,14 @@ use App\Repository\CandidateRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=CandidateRepository::class)
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
-class Candidate
+class Candidate implements UserInterface
 {
     /**
      * @ORM\Id
@@ -441,6 +444,24 @@ class Candidate
     public function __toString()
     {
         return $this->email . "__" . $this->id;
+    }
+    public function getUsername()
+    {
+        return $this->getEmail();
+        // TODO: Implement getUsername() method.
+    }
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+    public function getSalt()
+    {
+        return null;
+        // TODO: Implement getSalt() method.
+    }
+    public function getRoles()
+    {
+        return Array('ROLE_CANDIDATE');
     }
 }
 

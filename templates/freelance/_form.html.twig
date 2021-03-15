@@ -1,7 +1,16 @@
-{{ form_start(form) }}
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
     {{ form_widget(form.title,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Title'}})}}
+    <div class="alert alert-danger">
+        {{ form_errors(form.description) }}
+    </div>
     {{form_widget(form.description,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Description'}})}}
+    <div class="alert alert-danger">
+        {{ form_errors(form.description) }}
+    </div>
     {{form_widget(form.salary,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Salary'}})}}
+    <div class="alert alert-danger">
+        {{ form_errors(form.description) }}
+    </div>
     {{form_row(form.Tag,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
     {{form_row(form.Project,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
 <div style="width: 100%; display:flex; justify-content: flex-end">
