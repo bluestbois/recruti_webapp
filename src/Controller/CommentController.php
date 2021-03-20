@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Comment;
+use App\Entity\Post;
 use App\Form\CommentType;
 use App\Repository\CommentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -10,13 +11,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/comment")
- */
+
 class CommentController extends AbstractController
 {
     /**
-     * @Route("/", name="comment_index", methods={"GET"})
+     * @Route("/dashbord/comment", name="dashbord_comment_index", methods={"GET"})
      */
     public function index(CommentRepository $commentRepository): Response
     {
@@ -26,7 +25,17 @@ class CommentController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="comment_new", methods={"GET","POST"})
+     * @Route("/home/front/comment", name="front_comment_index", methods={"GET"})
+     */
+    public function indexComment(CommentRepository $commentRepository): Response
+    {
+        return $this->render('frontoffice/comment/index.html.twig', [
+            'comments' => $commentRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/dashbord/comment/new", name="dashbord_comment_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -39,7 +48,7 @@ class CommentController extends AbstractController
             $entityManager->persist($comment);
             $entityManager->flush();
 
-            return $this->redirectToRoute('comment_index');
+            return $this->redirectToRoute('dashbord_comment_index');
         }
 
         return $this->render('comment/new.html.twig', [
@@ -49,7 +58,50 @@ class CommentController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="comment_show", methods={"GET"})
+     * @Route("/home/comment/new", name="home_comment_new", methods={"GET","POST"})
+     */
+    public function newFront(Request $request): Response
+    {
+        echo($request->get('content'));
+
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $comment->setLikes(0);
+            $comment->setDate(new \DateTime('now'));
+
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $post = $entityManager->getRepository(Post::class)->find($request->get('post_id'));
+
+
+            $roles = $this->getUser()->getRoles();
+            if ($roles[0] == 'ROLE_CANDIDATE') {
+                $comment->setCandidate($this->getUser());
+            } else if ($roles[0] == 'ROLE_RECRUITER') {
+                $comment->setRecruiter($this->getUser());
+            }
+
+            $comment->setPost($post);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($comment);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('front_comment_index');
+        }
+
+        return $this->render('frontoffice/comment/new.html.twig', [
+            'comment' => $comment,
+            'post' => $post,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/dashbord/comment/{id}", name="dashbord_comment_show", methods={"GET"})
      */
     public function show(Comment $comment): Response
     {
@@ -59,7 +111,7 @@ class CommentController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="comment_edit", methods={"GET","POST"})
+     * @Route("/dashbord/comment/{id}/edit", name="dashbord_comment_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Comment $comment): Response
     {
@@ -69,7 +121,7 @@ class CommentController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('comment_index');
+            return $this->redirectToRoute('dashbord_comment_index');
         }
 
         return $this->render('comment/edit.html.twig', [
@@ -77,18 +129,54 @@ class CommentController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+    /**
+     * @Route("/home/comment/{id}/edit", name="home_comment_edit", methods={"GET","POST"})
+     */
+    public function editFront(Request $request, Comment $comment): Response
+    {
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('home_comment_index');
+        }
+
+        return $this->render('frontoffice/comment/edit.html.twig', [
+            'comment' => $comment,
+            'form' => $form->createView(),
+        ]);
+    }
 
     /**
-     * @Route("/{id}", name="comment_delete", methods={"DELETE"})
+     * @Route("/dashbord/comment/{id}", name="dashbord_comment_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Comment $comment): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $comment->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($comment);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('comment_index');
+        return $this->redirectToRoute('dashbord_comment_index');
+    }
+
+    /**
+     * @Route("/home/comment/{id}", name="home_comment_delete", methods={"DELETE"})
+     */
+    public function deleteFront(Request $request, Comment $comment): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $comment->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($comment);
+            $entityManager->flush();
+        }
+        $entityManager = $this->getDoctrine()->getManager();
+        $post = $entityManager->getRepository(Post::class)->find($request->get('post_id'));
+
+
+        return $this->redirectToRoute('front_post_show');
     }
 }
