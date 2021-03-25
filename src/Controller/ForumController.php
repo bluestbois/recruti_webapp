@@ -24,6 +24,15 @@ class ForumController extends AbstractController
             'forums' => $forumRepository->findAll(),
         ]);
     }
+    /**
+     * @Route("/indexfront", name="forumindexfront", methods={"GET"})
+     */
+    public function indexForumFront(ForumRepository $forumRepository): Response
+    {
+        return $this->render('frontoffice/forum/index.html.twig', [
+            'forums' => $forumRepository->findAll(),
+        ]);
+    }
 
     /**
      * @Route("/new", name="forum_new", methods={"GET","POST"})

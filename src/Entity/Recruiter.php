@@ -6,11 +6,15 @@ use App\Repository\RecruiterRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
+
 
 /**
  * @ORM\Entity(repositoryClass=RecruiterRepository::class)
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
-class Recruiter
+class Recruiter implements UserInterface
 {
     /**
      * @ORM\Id
@@ -85,6 +89,8 @@ class Recruiter
      */
     private $projects;
 
+    protected $captchaCode;
+
     public function __construct()
     {
         $this->jobs = new ArrayCollection();
@@ -93,7 +99,9 @@ class Recruiter
         $this->comments = new ArrayCollection();
         $this->projects = new ArrayCollection();
     }
-
+    public function __toString() {
+        return $this->email;
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -344,8 +352,37 @@ class Recruiter
 
         return $this;
     }
-
-    public function __toString(){
-        return $this->name;
+    public function getSalt()
+    {
+        // TODO: Implement getSalt() method.
     }
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+    public function getUsername()
+    {
+        return $this->getName();   // TODO: Implement getUsername() method.
+    }
+    /**
+     * Returns the roles granted to the user.
+     *
+     * @return Role[] The user roles
+     */
+    public function getRoles()
+    {
+        return array('ROLE_USER');
+    }
+    public function getCaptchaCode()
+    {
+        return $this->captchaCode;
+    }
+
+    public function setCaptchaCode($captchaCode)
+    {
+        $this->captchaCode = $captchaCode;
+    }
+
+
+
 }
