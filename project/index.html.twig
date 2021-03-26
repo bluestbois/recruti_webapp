@@ -1,40 +1,36 @@
-
-{% extends 'base.html.twig' %}
-
-{% block title %}Projects {% endblock %}
-
+{% extends 'frontoffice/base.html.twig' %}
 {% block main %}
-    <h1>Projects </h1>
+    <section class="companies-info">
+        <div class="container">
+            <button class="company-title" type="button">
+                <a href="{{ path("front_project_stats_index") }}">Statistiques</a>
+            </button>
+            <div class="companies-list">
+                <div class="row" >
+                    {% for project in projects %}
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="company_profile_info">
+                            <div class="company-up-info">
+                                <h3>{{ project.title }}</h3>
+                                <h4>{{ project.date ? project.date|date('Y-m-d') : '' }}</h4>
+                                <p>{{ project.description }} <a href="#" title="">view more</a></p>
+                                <ul>
+                                    <li><a href="{{  path("front_project_members_index", {'id': project.id}) }}" title="" class="follow">details</a></li>
+                                </ul>
+                            </div>
+                        </div><!--company_profile_info end-->
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Date</th>
-            <th>actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for project in projects %}
-            <tr>
-                <td>{{ project.id }}</td>
-                <td>{{ project.title }}</td>
-                <td>{{ project.description }}</td>
-                <td>{{ project.date ? project.date|date('Y-m-d') : '' }}</td>
-                <td>
-                    <a href="{{ path('project_show', {'id': project.id}) }}">show</a>
-                    <a href="{{ path('project_edit', {'id': project.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                    </div>
+                    {% endfor %}
+            </div><!--companies-list end-->
 
-    <a href="{{ path('project_new') }}">Create new</a>
+            <div class="process-comm">
+                <div class="spinner">
+                    <div class="bounce1"></div>
+                    <div class="bounce2"></div>
+                    <div class="bounce3"></div>
+                </div>
+            </div><!--process-comm end-->
+    </div><!--theme-layout end-->
+    </section><!--companies-info end-->
 {% endblock %}

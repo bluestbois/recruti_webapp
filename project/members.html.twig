@@ -1,0 +1,35 @@
+{% extends 'frontoffice/base.html.twig' %}
+{% block main %}
+
+    <section class="profile-account-setting">
+        <div class="container">
+            <div class="account-tabs-setting">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-acc" role="tabpanel" aria-labelledby="nav-acc-tab">
+                                <div class="acc-setting">
+                                    <h3>{{ project.Project.title }}</h3>
+                                    {% for member in members  %}
+                                    <form>
+                                        <div class="notbar">
+                                            <h4>{{ member.pseudo }}</h4>
+                                            <p>{{ member.localisation }}</p>
+                                                <div class="toggle-btn">
+                                                <a href="#" title=""><img src="images/up-btn.png" alt=""></a>
+                                            </div>
+                                                <br>
+                                        </div><!--notbar end-->
+                                        <form>
+                                            {% endfor %}
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div><!--account-tabs-setting end-->
+        </div>
+        </div>
+    </section>
+
+
+{% endblock %}

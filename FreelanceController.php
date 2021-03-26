@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Candidature;
 use App\Entity\Freelance;
 use App\Form\FreelanceType;
 use App\Repository\FreelanceRepository;
@@ -91,4 +92,5 @@ class FreelanceController extends AbstractController
 
         return $this->redirectToRoute('freelance_index');
     }
+
 }

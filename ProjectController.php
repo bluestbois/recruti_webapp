@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Member;
 use App\Entity\Project;
 use App\Form\ProjectType;
 use App\Repository\ProjectRepository;
+use App\Repository\MemberRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -91,4 +93,39 @@ class ProjectController extends AbstractController
 
         return $this->redirectToRoute('project_index');
     }
+    /**
+     * @Route ("stats", name="project_stats")
+     */
+    public function statistiques(ProjectRepository $projectRepository){
+        $projects = $projectRepository->findAll();
+
+        $projTitle = [];
+        $projColor = [];
+        $projCount = [];
+
+        // On "démonte" les données pour les séparer tel qu'attendu par ChartJS
+        foreach($projects as $project){
+            $projTitle[] = $project->getTitle();
+            $projColor[] = $project->getColor();
+            $projCount[] = count($project->getFreelances());
+        }
+        return $this->render('project/stats.html.twig',[
+            'projTitle' => json_encode($projTitle),
+            'projColor' => json_encode($projColor),
+            'projCount' => json_encode($projCount),
+        ]);
+    }
+    /**
+     * @Route("/home/projects/members/{id}", name="front_project_members_index")
+     * @param $id
+     * @return Response
+     */
+    public function members($id){
+        $member = $this->getDoctrine()->getRepository(Member::class)->findBy(['Project' => $id]);
+        $project= $this->getDoctrine()->getRepository(Member::class)->findOneBy(['Project' => $id]);
+        return $this->render('frontoffice/project/members.html.twig' , [
+            'members' => $member, 'project'=> $project
+        ]);
+    }
+
 }
