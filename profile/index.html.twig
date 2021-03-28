@@ -1,0 +1,422 @@
+{% extends 'frontoffice/base.html.twig' %}
+{% block body %}
+    <section class="cover-sec">
+        <img src="http://via.placeholder.com/1600x400" alt="">
+    </section>
+
+
+    <main>
+        {% if is_granted('ROLE_CANDIDATE') %}
+
+        <div class="main-section">
+            <div class="container">
+                <div class="main-section-data">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="main-left-sidebar">
+                                <div class="user_profile">
+                                    <div class="user-pro-img">
+                                        <img src="http://via.placeholder.com/170x170" alt="">
+                                    </div><!--user-pro-img end-->
+                                    <div class="user_pro_status">
+                                        <ul class="flw-hr">
+                                            <li><a href="#" title="" class="flww"><i class="la la-plus"></i> Follow</a></li>
+                                            <li><a href="#" title="" class="hre">Hire</a></li>
+                                        </ul>
+
+                                    </div><!--user_pro_status end-->
+                                    <ul class="social_links">
+                                        <li><a href="#" title=""><i class="la la-globe"></i> www.example.com</a></li>
+                                        <li><a href="#" title=""><i class="fa fa-facebook-square"></i> Http://www.facebook.com/john...</a></li>
+                                        <li><a href="#" title=""><i class="fa fa-twitter"></i> Http://www.Twitter.com/john...</a></li>
+                                        <li><a href="#" title=""><i class="fa fa-google-plus-square"></i> Http://www.googleplus.com/john...</a></li>
+                                        <li><a href="#" title=""><i class="fa fa-behance-square"></i> Http://www.behance.com/john...</a></li>
+                                        <li><a href="#" title=""><i class="fa fa-pinterest"></i> Http://www.pinterest.com/john...</a></li>
+                                        <li><a href="#" title=""><i class="fa fa-instagram"></i> Http://www.instagram.com/john...</a></li>
+                                        <li><a href="#" title=""><i class="fa fa-youtube"></i> Http://www.youtube.com/john...</a></li>
+                                    </ul>
+                                </div><!--user_profile end-->
+                                <div class="suggestions full-width">
+                                    <div class="sd-title">
+                                        <h3>Suggestions</h3>
+                                        <i class="la la-ellipsis-v"></i>
+                                    </div><!--sd-title end-->
+                                    <div class="suggestions-list">
+                                        {% for candidate in candidates %}
+                                        {% if candidate != app.user %}
+                                        <div class="suggestion-usd">
+                                            <img src="http://via.placeholder.com/35x35" alt="">
+                                            <div class="sgt-text">
+                                                <h4>{{  candidate.firstname }} {{ candidate.lastname }}</h4>
+                                                <span>{{ candidate.experience }} years of experience</span>
+                                            </div>
+
+                                            <span><i class="la la-plus"></i></span>
+                                        </div>
+                                        {% endif %}{% endfor %}
+                                        <div class="view-more">
+                                            <a href="#" title="">View More</a>
+                                        </div>
+                                    </div><!--suggestions-list end-->
+                                </div><!--suggestions end-->
+                            </div><!--main-left-sidebar end-->
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="main-ws-sec">
+                                <div class="user-tab-sec">
+                                        <h3>{{ app.user.firstName}}</h3>
+                                        <div class="star-descp">
+                                            <span>{{ app.user.email }}</span>
+                                            <ul>
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star-half-o"></i></li>
+                                            </ul>
+                                        </div><!--star-descp end-->
+
+
+                                    <div class="tab-feed">
+                                        <ul>
+
+                                            <li data-tab="info-dd">
+                                                <a href="#" title="">
+                                                    <img src="images/ic2.png" alt="">
+                                                    <span>Info</span>
+                                                </a>
+                                            </li>
+                                            <li data-tab="portfolio-dd">
+                                                <a href="#" title="">
+                                                    <img src="images/ic3.png" alt="">
+                                                    <span>My candidatures</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div><!-- tab-feed end-->
+                                </div><!--user-tab-sec end-->
+
+                                <div class="product-feed-tab" id="info-dd">
+                                    <div class="user-profile-ov">
+                                        <h3>Personal Informations</h3>
+                                        <table class="table table-striped">
+                                            <tr> <th>First name : </th><th>{{  app.user.firstname }}  </th></tr><br>
+                                            <tr><th>Last name : </th><th>{{ app.user.lastname }} </th></tr><br>
+                                            <tr><th>Email : </th><th>{{ app.user.email }}</th></tr><br>
+                                            <tr><th>Phone number : </th><th>{{ app.user.phonenumber }}</th></tr> <br>
+                                            <tr><th>Birthday : </th><th>{{ app.user.birthday ? app.user.birthday.date|date('Y-m-d') : '' }}</th></tr>
+                                           </table>
+                                    </div><!--user-profile-ov end-->
+                                    <div class="user-profile-ov st2">
+                                        <h3>Experience</h3>
+                                        <table class="table table-striped">
+                                            <tr> <th>Level of education : </th><th>{{ app.user.LOE }}</th></tr>
+                                        <br>
+                                            <tr> <th>Experience : </th><th>{{ app.user.experience }} years</th></tr>
+                                        </table>
+                                        </div><!--user-profile-ov end-->
+
+                                    <div class="user-profile-ov">
+                                        <h3>Location</h3>
+                                        <table class="table table-striped">
+                                            <tr> <th> Nationality : </th><th>{{ app.user.nationality }}</th></tr> <br>
+                                            <tr> <th> Address : </th><th>{{ app.user.address }}</th></tr>
+                                        </table>
+                                    </div><!--user-profile-ov end-->
+                                    <!--<div class="user-profile-ov">
+                                        <h3>Skills</h3>
+                                        <ul>
+                                            <li><a href="#" title="">HTML</a></li>
+                                            <li><a href="#" title="">PHP</a></li>
+                                            <li><a href="#" title="">CSS</a></li>
+                                            <li><a href="#" title="">Javascript</a></li>
+                                            <li><a href="#" title="">Wordpress</a></li>
+                                            <li><a href="#" title="">Photoshop</a></li>
+                                            <li><a href="#" title="">Illustrator</a></li>
+                                            <li><a href="#" title="">Corel Draw</a></li>
+                                        </ul>
+                                    </div>user-profile-ov end-->
+                                </div><!--product-feed-tab end-->
+                                <div class="product-feed-tab" id="portfolio-dd">
+                                    <div class="user-profile-ov st2">
+                                    {% block cd %}
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Score</th>
+                                                <th>project</th>
+                                                <th>actions</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for candidature in candidatures %}
+                                                {% if candidature.candidate == app.user %}
+                                                <tr>
+                                                    <td>{{ candidature.date ? candidature.date|date('Y-m-d') : '' }}</td>
+                                                    <td>{{ candidature.score }}</td>
+                                                    {% if candidature.job %}
+                                                    <td>{{ candidature.job.title }}</td>
+                                                        {% elseif candidature.freelance %}
+                                                            <td>{{ candidature.freelance.title }}</td>
+                                                    {% endif %}
+
+                                                            <td>
+
+                                                                {{ include('candidature/_delete_form.html.twig') }}
+                                                    </td>
+                                                </tr>
+                                                {% endif %}
+                                            {% else %}
+                                                <tr>
+                                                    <td colspan="4">no records found</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+
+                                    {% endblock %}
+                                    </div>
+
+                                </div><!--product-feed-tab end-->
+                            </div><!--main-ws-sec end-->
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="right-sidebar">
+                                <div class="message-btn">
+                                    <a href="#" title=""><i class="fa fa-envelope"></i> Message</a>
+                                </div>
+                                <div class="widget widget-portfolio">
+                                    <div class="wd-heady">
+                                        <h3>Portfolio</h3>
+                                        <img src="images/photo-icon.png" alt="">
+                                    </div>
+                                    <div class="pf-gallery">
+                                        <ul>
+                                            <li><a href="#" title=""><img src="http://via.placeholder.com/70x70" alt=""></a></li>
+                                            <li><a href="#" title=""><img src="http://via.placeholder.com/70x70" alt=""></a></li>
+                                            <li><a href="#" title=""><img src="http://via.placeholder.com/70x70" alt=""></a></li>
+                                            <li><a href="#" title=""><img src="http://via.placeholder.com/70x70" alt=""></a></li>
+                                            <li><a href="#" title=""><img src="http://via.placeholder.com/70x70" alt=""></a></li>
+                                            <li><a href="#" title=""><img src="http://via.placeholder.com/70x70" alt=""></a></li>
+                                            <li><a href="#" title=""><img src="http://via.placeholder.com/70x70" alt=""></a></li>
+                                            <li><a href="#" title=""><img src="http://via.placeholder.com/70x70" alt=""></a></li>
+                                            <li><a href="#" title=""><img src="http://via.placeholder.com/70x70" alt=""></a></li>
+                                            <li><a href="#" title=""><img src="http://via.placeholder.com/70x70" alt=""></a></li>
+                                            <li><a href="#" title=""><img src="http://via.placeholder.com/70x70" alt=""></a></li>
+                                            <li><a href="#" title=""><img src="http://via.placeholder.com/70x70" alt=""></a></li>
+                                        </ul>
+                                    </div><!--pf-gallery end-->
+                                </div><!--widget-portfolio end-->
+                            </div><!--right-sidebar end-->
+                        </div>
+                    </div>
+                </div><!-- main-section-data end-->
+            </div>
+        </div>
+        {% elseif is_granted('ROLE_RECRUITER') %}
+
+            <div class="main-section">
+                <div class="container">
+                    <div class="main-section-data">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="main-left-sidebar">
+                                    <div class="user_profile">
+                                        <div class="user-pro-img">
+                                            <img src="http://via.placeholder.com/170x170" alt="">
+                                        </div><!--user-pro-img end-->
+                                        <div class="user_pro_status">
+                                            <ul class="flw-hr">
+                                                <li><a href="#" title="" class="flww"><i class="la la-plus"></i> Follow</a></li>
+                                                <li><a href="#" title="" class="hre">Hire</a></li>
+                                            </ul>
+                                            <ul class="flw-status">
+                                                <li>
+                                                    <span>Following</span>
+                                                    <b>34</b>
+                                                </li>
+                                                <li>
+                                                    <span>Followers</span>
+                                                    <b>155</b>
+                                                </li>
+                                            </ul>
+                                        </div><!--user_pro_status end-->
+                                        <ul class="social_links">
+                                            <li><a href="#" title=""><i class="la la-globe"></i> www.example.com</a></li>
+                                            <li><a href="#" title=""><i class="fa fa-facebook-square"></i> Http://www.facebook.com/john...</a></li>
+                                            <li><a href="#" title=""><i class="fa fa-twitter"></i> Http://www.Twitter.com/john...</a></li>
+                                            <li><a href="#" title=""><i class="fa fa-google-plus-square"></i> Http://www.googleplus.com/john...</a></li>
+                                            <li><a href="#" title=""><i class="fa fa-behance-square"></i> Http://www.behance.com/john...</a></li>
+                                            <li><a href="#" title=""><i class="fa fa-pinterest"></i> Http://www.pinterest.com/john...</a></li>
+                                            <li><a href="#" title=""><i class="fa fa-instagram"></i> Http://www.instagram.com/john...</a></li>
+                                            <li><a href="#" title=""><i class="fa fa-youtube"></i> Http://www.youtube.com/john...</a></li>
+                                        </ul>
+                                    </div><!--user_profile end-->
+                                    <div class="suggestions full-width">
+                                        <div class="sd-title">
+                                            <h3>Suggestions</h3>
+                                            <i class="la la-ellipsis-v"></i>
+                                        </div><!--sd-title end-->
+                                        <div class="suggestions-list">
+                                            <div class="suggestion-usd">
+                                                <img src="http://via.placeholder.com/35x35" alt="">
+                                                <div class="sgt-text">
+                                                    <h4>Jessica William</h4>
+                                                    <span>Graphic Designer</span>
+                                                </div>
+                                                <span><i class="la la-plus"></i></span>
+                                            </div>
+                                            <div class="suggestion-usd">
+                                                <img src="http://via.placeholder.com/35x35" alt="">
+
+                                                <span><i class="la la-plus"></i></span>
+                                            </div>
+                                            <div class="suggestion-usd">
+                                                <img src="http://via.placeholder.com/35x35" alt="">
+                                                <div class="sgt-text">
+                                                    <h4>Poonam</h4>
+                                                    <span>Wordpress Developer</span>
+                                                </div>
+                                                <span><i class="la la-plus"></i></span>
+                                            </div>
+                                            <div class="suggestion-usd">
+                                                <img src="http://via.placeholder.com/35x35" alt="">
+                                                <div class="sgt-text">
+                                                    <h4>Bill Gates</h4>
+                                                    <span>C & C++ Developer</span>
+                                                </div>
+                                                <span><i class="la la-plus"></i></span>
+                                            </div>
+                                            <div class="suggestion-usd">
+                                                <img src="http://via.placeholder.com/35x35" alt="">
+                                                <div class="sgt-text">
+                                                    <h4>Jessica William</h4>
+                                                    <span>Graphic Designer</span>
+                                                </div>
+                                                <span><i class="la la-plus"></i></span>
+                                            </div>
+                                            <div class="suggestion-usd">
+                                                <img src="http://via.placeholder.com/35x35" alt="">
+                                                <div class="sgt-text">
+                                                    <h4></h4>
+                                                    <span>PHP Developer</span>
+                                                </div>
+                                                <span><i class="la la-plus"></i></span>
+                                            </div>
+                                            <div class="view-more">
+                                                <a href="#" title="">View More</a>
+                                            </div>
+                                        </div><!--suggestions-list end-->
+                                    </div><!--suggestions end-->
+                                </div><!--main-left-sidebar end-->
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="main-ws-sec">
+                                    <div class="user-tab-sec">
+                                        <h3>{{ app.user.Name}}</h3>
+                                        <div class="star-descp">
+                                            <span>Graphic Designer at Self Employed</span>
+                                            <ul>
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star-half-o"></i></li>
+                                            </ul>
+                                        </div><!--star-descp end-->
+
+
+                                        <div class="tab-feed">
+                                            <ul>
+
+                                                <li data-tab="info-dd">
+                                                    <a href="#" title="">
+                                                        <img src="images/ic2.png" alt="">
+                                                        <span>Info</span>
+                                                    </a>
+                                                </li>
+                                                <li data-tab="portfolio-dd">
+                                                    <a href="#" title="">
+                                                        <img src="images/ic3.png" alt="">
+                                                        <span>My candidatures</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div><!-- tab-feed end-->
+                                    </div><!--user-tab-sec end-->
+
+                                    <div class="product-feed-tab" id="info-dd">
+                                        <div class="user-profile-ov">
+                                            <h3>Company Informations</h3>
+                                            <p>Company Name : {{  app.user.name }} <br> Email : {{ app.user.email }}<br> Phone number : {{ app.user.phonenumber }} <br>Address : {{ app.user.address }}
+                                            </p>
+                                        </div><!--user-profile-ov end-->
+                                        <div class="user-profile-ov st2">
+                                            <h3>Description</h3>
+                                            <p>Field : {{ app.user.field}}
+                                                <br>
+                                                Description : {{ app.user.description }} years</p>
+                                        </div><!--user-profile-ov end-->
+
+
+                                        <!--<div class="user-profile-ov">
+                                            <h3>Skills</h3>
+                                            <ul>
+                                                <li><a href="#" title="">HTML</a></li>
+                                                <li><a href="#" title="">PHP</a></li>
+                                                <li><a href="#" title="">CSS</a></li>
+                                                <li><a href="#" title="">Javascript</a></li>
+                                                <li><a href="#" title="">Wordpress</a></li>
+                                                <li><a href="#" title="">Photoshop</a></li>
+                                                <li><a href="#" title="">Illustrator</a></li>
+                                                <li><a href="#" title="">Corel Draw</a></li>
+                                            </ul>
+                                        </div>user-profile-ov end-->
+                                    </div><!--product-feed-tab end-->
+                                    <div class="product-feed-tab" id="portfolio-dd">
+
+
+                                    </div><!--product-feed-tab end-->
+                                </div><!--main-ws-sec end-->
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="right-sidebar">
+                                    <div class="message-btn">
+                                        <a href="#" title=""><i class="fa fa-envelope"></i> Message</a>
+                                    </div>
+                                    <div class="widget widget-portfolio">
+                                        <div class="wd-heady">
+                                            <h3>Portfolio</h3>
+                                            <img src="images/photo-icon.png" alt="">
+                                        </div>
+                                        <div class="pf-gallery">
+                                            <ul>
+                                                <li><a href="#" title=""><img src="http://via.placeholder.com/70x70" alt=""></a></li>
+                                                <li><a href="#" title=""><img src="http://via.placeholder.com/70x70" alt=""></a></li>
+                                                <li><a href="#" title=""><img src="http://via.placeholder.com/70x70" alt=""></a></li>
+                                                <li><a href="#" title=""><img src="http://via.placeholder.com/70x70" alt=""></a></li>
+                                                <li><a href="#" title=""><img src="http://via.placeholder.com/70x70" alt=""></a></li>
+                                                <li><a href="#" title=""><img src="http://via.placeholder.com/70x70" alt=""></a></li>
+                                                <li><a href="#" title=""><img src="http://via.placeholder.com/70x70" alt=""></a></li>
+                                                <li><a href="#" title=""><img src="http://via.placeholder.com/70x70" alt=""></a></li>
+                                                <li><a href="#" title=""><img src="http://via.placeholder.com/70x70" alt=""></a></li>
+                                                <li><a href="#" title=""><img src="http://via.placeholder.com/70x70" alt=""></a></li>
+                                                <li><a href="#" title=""><img src="http://via.placeholder.com/70x70" alt=""></a></li>
+                                                <li><a href="#" title=""><img src="http://via.placeholder.com/70x70" alt=""></a></li>
+                                            </ul>
+                                        </div><!--pf-gallery end-->
+                                    </div><!--widget-portfolio end-->
+                                </div><!--right-sidebar end-->
+                            </div>
+                        </div>
+                    </div><!-- main-section-data end-->
+                </div>
+            </div>
+        {% endif %}    </main>
+{% endblock %}
+
+
+
+
+
