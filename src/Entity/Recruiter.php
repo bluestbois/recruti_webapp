@@ -91,6 +91,16 @@ class Recruiter implements UserInterface
 
     protected $captchaCode;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $likes;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $LastLike;
+
     public function __construct()
     {
         $this->jobs = new ArrayCollection();
@@ -371,7 +381,7 @@ class Recruiter implements UserInterface
      */
     public function getRoles()
     {
-        return array('ROLE_USER');
+        return array('ROLE_RECRUITER');
     }
     public function getCaptchaCode()
     {
@@ -381,6 +391,30 @@ class Recruiter implements UserInterface
     public function setCaptchaCode($captchaCode)
     {
         $this->captchaCode = $captchaCode;
+    }
+
+    public function getLikes(): ?int
+    {
+        return $this->likes;
+    }
+
+    public function setLikes(?int $likes): self
+    {
+        $this->likes = $likes;
+
+        return $this;
+    }
+
+    public function getLastLike(): ?int
+    {
+        return $this->LastLike;
+    }
+
+    public function setLastLike(?int $LastLike): self
+    {
+        $this->LastLike = $LastLike;
+
+        return $this;
     }
 
 

@@ -13,6 +13,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Captcha\Bundle\CaptchaBundle\Form\Type\CaptchaType;
 use Captcha\Bundle\CaptchaBundle\Validator\Constraints\ValidCaptcha;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -23,7 +24,16 @@ class RegistrationFormType extends AbstractType
             ->add('address')
             ->add('description')
             ->add('phoneNumber')
-            ->add('image')
+            ->add('image', FileType::class, [
+                'label' => 'Image (JPEG,PNG...)',
+
+                // unmapped means that this field is not associated to any entity property
+                'mapped' => false,
+
+                // make it optional so you don't have to re-upload the PDF file
+                // every time you edit the Product details
+                'required' => true,
+            ])
             ->add('field')
             ->add('email')
             ->add('agreeTerms', CheckboxType::class, [
@@ -49,6 +59,7 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
+
             ])
 
             ->add("captchaCode",CaptchaType::class, [
