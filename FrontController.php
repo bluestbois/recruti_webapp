@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Member;
 use App\Repository\ProjectRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\DataTransformer\DateIntervalToStringTransformer;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -64,6 +65,45 @@ class FrontController extends AbstractController
         return $this->render("frontoffice/freelance/index.html.twig",[
             'freelances' => $this->getDoctrine()->getRepository(Freelance::class)->findAll()
             ] );
+    }
+    /**
+     * @Route("/home/freelances/{id}", name="front_freelance_show", methods={"GET"})
+     * @param $id
+     * @return Response
+     */
+    public function comment($id)
+    {
+        $freelance = $this->getDoctrine()->getRepository(Freelance::class)->findOneBy(['Freelance' => $id]);
+        return $this->render('frontoffice/freelance/show.html.twig', [
+            'freelances' => $freelance,
+        ]);
+    }
+    /**
+     * @Route("/favorites/ajout/{id}", name="addFavorite")
+     */
+    public function ajoutFavoris(Freelance $freelance)
+    {
+
+        $freelance->addFavorite($this->getCandidate());
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($freelance);
+        $em->flush();
+        return $this->redirectToRoute('front_freelance_index');
+    }
+
+    /**
+     * @Route("/favorites/retrait/{id}", name="removeFavorite")
+     */
+    public function retraitFavoris(Freelance $freelance)
+    {
+
+        $freelance->removeFavorite($this->getCandidate());
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($freelance);
+        $em->flush();
+        return $this->redirectToRoute('front_freelance_index');
     }
     /**
      * @Route ("/home/projects/stats", name="front_project_stats_index")

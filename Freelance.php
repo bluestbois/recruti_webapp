@@ -50,10 +50,21 @@ class Freelance
      */
     private $candidatures;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Candidate::class, inversedBy="favorites")
+     */
+    private $favorites;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $date;
+
     public function __construct()
     {
         $this->Tag = new ArrayCollection();
         $this->candidatures = new ArrayCollection();
+        $this->favorites = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -132,6 +143,17 @@ class Freelance
 
         return $this;
     }
+    public function getCandidate(): ?Candidate
+    {
+        return $this->candidate;
+    }
+
+    public function setCandidate(?Candidate $candidate): self
+    {
+        $this->candidate = $candidate;
+
+        return $this;
+    }
 
     /**
      * @return Collection|Candidature[]
@@ -162,4 +184,44 @@ class Freelance
 
         return $this;
     }
+
+    public function __toString(){
+        return $this->title;
+    }
+
+    /**
+     * @return Collection|Candidate[]
+     */
+    public function getFavorites(): Collection
+    {
+        return $this->favorites;
+    }
+
+    public function addFavorite(Candidate $favorite): self
+    {
+        if (!$this->favorites->contains($favorite)) {
+            $this->favorites[] = $favorite;
+        }
+
+        return $this;
+    }
+
+    public function removeFavorite(Candidate $favorite): self
+    {
+        $this->favorites->removeElement($favorite);
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(?\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+        return $this;
+    }
+
 }

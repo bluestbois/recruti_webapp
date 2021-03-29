@@ -15,16 +15,10 @@
                                 <div class="filter-dd">
                                     <div class="filter-ttl">
                                         <h3>Search</h3>
+                                    <div class="input-group custom-search-form">
+                                        <input type="text" id="search" class="form-control" placeholder="Search here">
                                     </div>
-                                    <form action="#" method="get">
-                                        <div class="input-group">
-                                            <!-- USE TWITTER TYPEAHEAD JSON WITH API TO SEARCH -->
-                                            <input class="form-control" id="system-search" name="q" placeholder="Search for" required>
-                                            <span class="input-group-btn">
-                                          <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
-                                            </span>
-                                        </div>
-                                    </form>
+                                    </div>
                                 </div>
                                 <div class="filter-dd">
                                     <div class="filter-ttl">
@@ -124,9 +118,29 @@
                                     <div class="post_topbar">
                                         <div class="usy-dt">
                                             <div class="usy-name">
-                                                {{ freelance.project }}
+                                                <h4>Publié il y a : <span>{{ "now"|date("d") - freelance.date | date("d")}} jours {{ "now"|date("m") - freelance.date | date("m")}} mois {{ "now"|date("Y") - freelance.date | date("Y")}} Année</span></h4>
+                                                <a href="{{ path("front_project_members_index", {'id': freelance.project.id}) }}"> {{ freelance.project }} </a>
                                             </div>
                                         </div>
+                                        <ul class="bk-links">
+                                                {% if is_granted("ROLE_CANDIDATE") %}
+                                                    {% set isFavorite = false %}
+                                                    {% for favorites in freelance.favorites %}
+                                                        {% if favorites.id == app.user.id %}
+                                                            {% set isFavorite = true %}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                    {% if isFavorite %}
+                                                        <li><a href="{{ path('addFavorite', {id: freelance.id}) }}" title=""><i class="fas fa-bookmark"></i></a></li>
+                                                    {% else %}
+                                                        <li><a href="{{ path('removeFavorite', {id: freelance.id}) }}" title=""><i class="la la-bookmark"></i></a></li>
+                                                    {% endif %}
+
+                                                {% else %}
+                                                    <i class="fa fa-bookmark"></i>
+                                                {% endif %}
+
+                                        </ul>
                                         <!--<div class="ed-opts">
                                             <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
                                             <ul class="ed-options">
@@ -141,7 +155,7 @@
                                     <div class="sd-title">
                                         {{ freelance.title }}
                                         <ul class="job-dt">
-                                            <li><span>Salary {{ freelance.salary }} </span></li>
+                                            <li><span>${{ freelance.salary }} </span></li>
                                         </ul>
                                         <p>{{ freelance.description }} <a href="#" title="">view more</a></p>
                                         <ul class="skill-tags">
@@ -152,15 +166,15 @@
                                             <li><a href="#" title="">Wordpress</a></li>
                                         </ul>
                                     </div>
-                                    <div class="job-status-bar">
+                                    <!--<div class="job-status-bar">
                                         <ul class="like-com">
                                             <li>
                                                 <a href="#"><i class="la la-heart"></i> Like</a>
                                             </li>
                                         </ul>
-                                        <!--<a><i class="la la-eye"></i>Views 50</a>-->
+                                        <a><i class="la la-eye"></i>Views 50</a>
                                         <a href="#" title=""><i class="la la-bookmark"></i></a>
-                                    </div>
+                                    </div>-->
                                 </div>
                                 {% endfor %}<!--post-bar end-->
                                 <div class="process-comm">
