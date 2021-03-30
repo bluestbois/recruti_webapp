@@ -1,36 +1,83 @@
-{% extends 'frontoffice/base.html.twig' %}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Projects {% endblock %}
+{% block page_title %}
+    List of Projects
+{% endblock %}
+{% block custom_stylesheets %}
+    <!-- Custom styles for this page -->
+    <link href="{{ asset("vendor/datatables/dataTables.bootstrap4.min.css") }}" rel="stylesheet">
+{% endblock %}
+{% block custom_js %}
+    <script src="{{ asset("vendor/datatables/jquery.dataTables.min.js") }}"></script>
+    <script src="{{ asset("vendor/datatables/dataTables.bootstrap4.min.js") }}"></script>
+    <script>
+
+        let data = [
+            {% for project in projects %}
+            {
+                "ID" : "{{ project.id }}",
+                "Title" : "{{ project.title }}",
+                "Description": "{{ project.description }}",
+                "Date": "{{ project.date ? project.date|date('Y-m-d') : "" }}",
+                "Action":   document.createElement("div").innerHTML = `<div style="display: flex; justify-content: center">
+                                <a href="{{ path('project_show', {'id': project.id}) }}"><button type="button" class="btn btn-sm shadow-sm btn-info mt-2 mb-2 ml-2"><i class="fas fa-search"></i></button></a>
+                                <a href="{{ path('project_edit', {'id': project.id}) }}"><button type="button" class="btn btn-sm shadow-sm mt-2 mb-2 ml-2"><i class="far fa-edit"></i></button></a>
+                            </div>`
+            },
+            {% endfor %}
+        ]
+        let table = $('#dataTable').DataTable({
+            "columns": [
+                {
+                    "data": "ID"
+                },
+                {
+                    "data": "Title"
+                },
+                {
+                    "data": "Description"
+                },
+                {
+                    "data": "Date"
+                },
+                {
+                    "data": "Action"
+                }
+
+            ]
+        });
+        table.rows.add(data).draw()
+    </script>
+{% endblock %}
+
 {% block main %}
-    <section class="companies-info">
-        <div class="container">
-            <button class="company-title" type="button">
-                <a href="{{ path("front_project_stats_index") }}">Statistiques</a>
-            </button>
-            <div class="companies-list">
-                <div class="row" >
-                    {% for project in projects %}
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="company_profile_info">
-                            <div class="company-up-info">
-                                <h3>{{ project.title }}</h3>
-                                <h4>{{ project.date ? project.date|date('Y-m-d') : '' }}</h4>
-                                <p>{{ project.description }} <a href="#" title="">view more</a></p>
-                                <ul>
-                                    <li><a href="{{  path("front_project_members_index", {'id': project.id}) }}" title="" class="follow">details</a></li>
-                                </ul>
-                            </div>
-                        </div><!--company_profile_info end-->
 
-                    </div>
-                    {% endfor %}
-            </div><!--companies-list end-->
+    <div class="card shadow-lg h-75 m-4 mt-8">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">List of Projects </h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
-            <div class="process-comm">
-                <div class="spinner">
-                    <div class="bounce1"></div>
-                    <div class="bounce2"></div>
-                    <div class="bounce3"></div>
-                </div>
-            </div><!--process-comm end-->
-    </div><!--theme-layout end-->
-    </section><!--companies-info end-->
+    <div style="width: 100%; display:flex; justify-content: flex-end">
+        <a href="{{ path('project_new') }}"><button type="button" class="btn btn-primary btn-sm shadow-sm mt-2 mb-2"><i class="far fa-plus-square"></i> Create New</button></a>
+    </div>
 {% endblock %}
