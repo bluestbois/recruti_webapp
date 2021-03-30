@@ -22,15 +22,13 @@ class Forum
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="This field must be filled")
-     * @Assert\Type(type={"string"})
+     * @Assert\NotBlank(message="this field must be full")
      */
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="This field must be filled")
-     * @Assert\Type(type={"string","integer"})
+     * @ORM\Column(type="text", length=255)
+     * @Assert\NotBlank
      */
     private $description;
 
@@ -44,10 +42,25 @@ class Forum
      */
     private $posts;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Candidate::class, inversedBy="forums")
+     */
+    private $candidate;
+
+
+
+
+
+
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
+
+
     }
+
+
 
     public function getId(): ?int
     {
@@ -123,4 +136,17 @@ class Forum
     public function __toString(){
         return $this->title;
     }
+
+    public function getCandidate(): ?Candidate
+    {
+        return $this->candidate;
+    }
+
+    public function setCandidate(?Candidate $candidate): self
+    {
+        $this->candidate = $candidate;
+
+        return $this;
+    }
+
 }

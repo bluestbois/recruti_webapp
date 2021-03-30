@@ -6,6 +6,7 @@ use App\Repository\PostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -22,42 +23,24 @@ class Post
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="This field must be filled")
-     * @Assert\Type(type={"string","integer"},message="must be intager or string")
+     * @Assert\NotBlank
      */
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="This field must be filled")
-     * @Assert\Type(type={"string","integer"},message="must be intager or string")
+     * @ORM\Column(type="text", length=255)
+     * @Assert\NotBlank
      */
     private $description;
 
-    /**
-     * @ORM\Column(type="date")
-     * @Assert\NotBlank(message="This field must be filled")
-     */
-    private $date;
 
     /**
-     * @ORM\Column(type="integer")
-     * @Assert\NotBlank(message="This field must be filled")
-     * @Assert\Type(type={"integer"},message="must be intager ")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $views;
 
     /**
-     * @ORM\Column(type="integer")
-     * @Assert\NotBlank(message="This field must be filled")
-     * @Assert\Type(type={"integer"},message="must be intager")
-     */
-    private $likes;
-
-    /**
-     * @ORM\Column(type="integer")
-     * @Assert\NotBlank(message="This field must be filled")
-     * @Assert\Type(type={"integer"},message="must be intager")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $NOC;
 
@@ -86,6 +69,11 @@ class Post
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="Post", orphanRemoval=true)
      */
     private $comments;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $creatAt;
 
     public function __construct()
     {
@@ -122,17 +110,6 @@ class Post
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
-    {
-        return $this->date;
-    }
-
-    public function setDate(\DateTimeInterface $date): self
-    {
-        $this->date = $date;
-
-        return $this;
-    }
 
     public function getViews(): ?int
     {
@@ -146,17 +123,7 @@ class Post
         return $this;
     }
 
-    public function getLikes(): ?int
-    {
-        return $this->likes;
-    }
 
-    public function setLikes(int $likes): self
-    {
-        $this->likes = $likes;
-
-        return $this;
-    }
 
     public function getNOC(): ?int
     {
@@ -267,4 +234,64 @@ class Post
     {
         return $this->title . "__" . $this->id;
     }
+
+    public function getCreatAt(): ?\DateTimeInterface
+    {
+        return $this->creatAt;
+    }
+
+    public function setCreatAt(\DateTimeInterface $creatAt): self
+    {
+        $this->creatAt = $creatAt;
+
+        return $this;
+    }
+    public  function getAvgRating()
+    {
+        $sum = array_reduce($this->comments->toArray(), function($total, $comment) {
+            return $total + $comment->getRating();
+        },0);
+
+        if(count($this->comments)>0) return $sum / count($this->comments);
+
+        return 0;
+    }
+
+    //*  /**
+    //  * @return string|null
+    //  */
+    // public function getFilename(): ?string
+    // {
+    //      return $this->filename;
+    //  }
+
+    // /**
+    //  * @param string|null $filename
+    // * @return Post
+    // */
+    // public function setFilename(?string $filename): Post
+    // {
+    //     $this->filename = $filename;
+    //   return $this;
+    //  }
+
+    // /**
+    // * @return file|null
+    //  */
+    // public function getImageFile(): ?file
+    // {
+    //     return $this->imageFile;
+    //  }
+
+    //  /**
+    //   * @param file|null $imageFile
+    //  * @return Post
+    // */
+    // public function setImageFile(?file $imageFile): Post
+    // {
+    //    $this->imageFile = $imageFile;
+    //     return $this;
+    //  }
+
+
 }

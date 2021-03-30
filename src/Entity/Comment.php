@@ -19,24 +19,17 @@ class Comment
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="This field must be filled")
-     * @Assert\Type(type={"string","integer"},message="must be intager or string")
+     * @ORM\Column(type="text", length=255)
+     * @Assert\NotBlank(message="this field must be full")
      */
     private $content;
 
     /**
      * @ORM\Column(type="date")
-     * @Assert\NotBlank(message="This field must be filled")
      */
     private $date;
 
-    /**
-     * @ORM\Column(type="integer")
-     * @Assert\NotBlank(message="This field must be filled")
-     * @Assert\Type(type={"integer"},message="must be integer or string ")
-     */
-    private $likes;
+
 
     /**
      * @ORM\ManyToOne(targetEntity=Recruiter::class, inversedBy="comments")
@@ -49,11 +42,27 @@ class Comment
     private $Candidate;
 
     /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $rating;
+
+    /**
      * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
     private $Post;
 
+    public function getRating(): ?int
+    {
+        return $this->rating;
+    }
+
+    public function setRating(?int $rating): self
+    {
+        $this->rating = $rating;
+
+        return $this;
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -79,18 +88,6 @@ class Comment
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
-
-        return $this;
-    }
-
-    public function getLikes(): ?int
-    {
-        return $this->likes;
-    }
-
-    public function setLikes(int $likes): self
-    {
-        $this->likes = $likes;
 
         return $this;
     }
