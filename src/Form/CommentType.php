@@ -3,9 +3,13 @@
 namespace App\Form;
 
 use App\Entity\Comment;
+use FOS\CKEditorBundle\Config\CKEditorConfiguration;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class CommentType extends AbstractType
 {
@@ -13,11 +17,13 @@ class CommentType extends AbstractType
     {
         $builder
             ->add('content')
-            ->add('date')
-            ->add('likes')
-            ->add('Recruiter')
-            ->add('Candidate')
-            ->add('Post')
+            ->add('rating',IntegerType::class,[
+                'attr' => [
+                    'min' => 0,
+                    'max' => 5,
+                    'step' => 1
+                ]
+            ])
         ;
     }
 

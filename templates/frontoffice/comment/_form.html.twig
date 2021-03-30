@@ -1,0 +1,14 @@
+{{ form_start(form,{'attr':{'action': path('home_comment_new') ,'id':'comment_form','novalidate': 'novalidate'}}) }}
+    {{ form_widget(form.content,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Content'}})}}
+
+<div style="color :red;" >
+    {{form_errors(form.content)}}
+</div>
+{{ form_widget(form.rating,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder' : 'please indicate your score from 0 to 5'}}) }}
+<div style="width: 100%; display:flex; justify-content: flex-end">
+    <button class="btn btn-primary btn-sm shadow-sm mt-2 mb-2">
+        <i class="fas fa-{{ icon|default('save') }}"></i>
+        {{ button_label|default('Save') }}
+    </button>
+</div>
+{{ form_end(form) }}

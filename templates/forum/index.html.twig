@@ -1,80 +1,41 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Forum index{% endblock %}
-
 {% block page_title %}
     Forums List
 {% endblock %}
-
-{% block custom_stylesheets %}
-    <!-- Custom styles for this page -->
-    <link href="{{ asset("vendor/datatables/dataTables.bootstrap4.min.css") }}" rel="stylesheet">
-{% endblock %}
-
-{% block custom_js %}
-    <script src="{{ asset("vendor/datatables/jquery.dataTables.min.js") }}"></script>
-    <script src="{{ asset("vendor/datatables/dataTables.bootstrap4.min.js") }}"></script>
-    <script>
-        let data = [
-            {% for forum in forums %}
-            {
-                "ID" : "{{ forum.id }}",
-                "Title" : "{{ forum.title }}",
-                "Description" : "{{ forum.description }}",
-                "Action":   document.createElement("div").innerHTML = `<div style="display: flex; justify-content: center">
-                                <a href="{{ path('forum_show', {'id': forum.id}) }}"><button type="button" class="btn btn-sm shadow-sm btn-info mt-2 mb-2 ml-2"><i class="fas fa-search"></i></button></a>
-                                <a href="{{ path('forum_edit', {'id': forum.id}) }}"><button type="button" class="btn btn-sm shadow-sm mt-2 mb-2 ml-2"><i class="far fa-edit"></i></button></a>
-                            </div>`
-            },
-            {% endfor %}
-        ]
-
-        let table = $('#dataTable').DataTable({
-            "columns": [
-                {
-                    "data": "ID"
-                },
-                {
-                    "data": "Title"
-                },
-                {
-                    "data": "Description"
-                },
-                {
-                    "data": "Action"
-                }
-            ]
-        });
-        table.rows.add(data).draw()
-    </script>
-{% endblock %}
-
 {% block main%}
 
-    <div class="card shadow-lg h-75 m-4 mt-8">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Forums List</h6>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>actions</th>
-                    </tr>
-                    </thead>
-                    <tfoot>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
 
+    <table class="table" >
+        <thead>
+            <tr >
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for forum in forums %}
+            <tr>
+                <td>{{ forum.id }}</td>
+                <td>{{ forum.title }}</td>
+                <td>{{ forum.description }}</td>
+                <td style="display: flex">
+                    <a href="{{ path('dashbord_forum_show', {'id': forum.id}) }}"><button type="button" class="btn btn-sm shadow-sm btn-info mt-2 mb-2 ml-2"><i class="fas fa-search"></i></button></a>
+                    <a href="{{ path('dashbord_forum_edit', {'id': forum.id}) }}"><button type="button" class="btn btn-sm shadow-sm mt-2 mb-2 ml-2"><i class="far fa-edit"></i></button></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
     <div style="width: 100%; display:flex; justify-content: flex-end">
-        <a href="{{ path('forum_new') }}"><button type="button" class="btn btn-primary btn-sm shadow-sm mt-2 mb-2"><i class="far fa-plus-square"></i> Create New</button></a>
+        <a href="{{ path('dashbord_forum_new') }}"><button type="button" class="btn btn-primary btn-sm shadow-sm mt-2 mb-2"><i class="far fa-plus-square"></i> Create New</button></a>
     </div>
 
 {% endblock %}

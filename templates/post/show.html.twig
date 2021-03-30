@@ -2,7 +2,7 @@
 
 {% block title %}Post{% endblock %}
 {% block gobackbtn %}
-    <a href="{{ path("post_index") }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+    <a href="{{ path("dashbord_post_index") }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
         <i class="fas fa-arrow-left fa-sm text-white-50"></i> Go back
     </a>
 {% endblock %}
@@ -29,15 +29,11 @@
             </tr>
             <tr>
                 <th>Date</th>
-                <td>{{ post.date ? post.date|date('Y-m-d') : '' }}</td>
+                <td>{{ post.creatAt ? post.creatAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
                 <th>Views</th>
                 <td>{{ post.views }}</td>
-            </tr>
-            <tr>
-                <th>Likes</th>
-                <td>{{ post.likes }}</td>
             </tr>
             <tr>
                 <th>NOC</th>
@@ -46,7 +42,7 @@
         </tbody>
     </table>
     <div style="width: 100%; display:flex; justify-content: flex-end">
-        <a href="{{ path('post_edit', {'id': post.id}) }}"><button type="button" class="btn-sm shadow-sm btn btn-primary mt-2 mb-2 mr-2"><i class="far fa-edit"></i> Edit</button></a>
+        <!--<a href="{ path('dashbord_post_edit', {'id': post.id}) }}"><button type="button" class="btn-sm shadow-sm btn btn-primary mt-2 mb-2 mr-2"><i class="far fa-edit"></i> Edit</button></a>-->
         {{ include('post/_delete_form.html.twig') }}
     </div>
 

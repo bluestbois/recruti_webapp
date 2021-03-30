@@ -1,0 +1,15 @@
+
+{{ form_start(form,{'attr':{'action': path('home_forum_edit',{'id':forum.id}) }}) }}
+{{ form_widget(form.title,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Title'}})}}
+<div style="color :red;" >
+    {{form_errors(form.title)}}
+</div>
+{{form_widget(form.description,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Description'}})}}
+
+
+<div style="width: 100%; display:flex; justify-content: flex-end">
+    <button class="btn btn-primary btn-sm shadow-sm mt-2 mb-2">
+      Update
+    </button>
+</div>
+{{ form_end(form) }}

@@ -1,4 +1,4 @@
-<form style="display: inline-block" method="post" action="{{ path('dashbord_forum_delete', {'id': forum.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+<form style="display: inline-block" method="post" action="{{ path('home_forum_delete', {'id': forum.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ forum.id) }}">
     <button class="btn btn-danger d-none d-sm-inline-block btn-sm btn-primary shadow-sm mt-2 mb-2">

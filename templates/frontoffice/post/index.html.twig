@@ -1,0 +1,95 @@
+{% extends 'frontoffice/front/index.html.twig' %}
+
+{% block title %}Post index{% endblock %}
+
+{% block page_title %}
+    Posts List
+{% endblock %}
+
+{% block body %}
+    <section class="forum-sec">
+        <div class="container">
+            <div class="forum-links">
+                <ul>
+                    <li class="active"><a href="#" title="">Latest</a></li>
+                    <li><a href="#" title="">Unanswered</a></li>
+                    <li><a href="#" title="">Treading</a></li>
+                    <li><a href="#" title="">Popular This Week</a></li>
+                    <li><a href="#" title="">Popular of Month</a></li>
+                </ul>
+            </div><!--forum-links end-->
+            <div class="forum-links-btn">
+                <a href="#" title=""><i class="fa fa-bars"></i></a>
+            </div>
+        </div>
+    </section>
+    <section class="forum-page">
+        <div class="container">
+            <div class="forum-questions-sec">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="forum-questions">
+                            {% for post in posts %}
+                            <div class="usr-question">
+                                <div class="usr_img">
+                                    <img src="http://via.placeholder.com/50x50" alt="">
+                                </div>
+                                <div class="usr_quest">
+                                    <h3>{{ post.title}}</h3>
+                                    {{ post.description }}
+                                    <ul class="react-links">
+
+                                       <!-- <li><a href="{path('home_post_show') }}">" title=""><i class="fa fa-comment"></i> { post.NOC }}</a></li>-->
+                                        <li><a href="#" title=""><i class="fa fa-eye"></i>{{ post.views }}</a></li>
+                                    </ul>
+
+
+
+                                </div><!--usr_quest end-->
+                                <span class="quest-posted-time"><i class="fa fa-clock-o"></i>{{ post.date ? post.date|date('Y-m-d') : '' }}</span>
+                            </div><!--usr-question end-->
+                            {% else %}
+                                <tr>
+                                    <td colspan="8">no records found</td>
+                                </tr>
+                            {% endfor %}
+                        </div><!--forum-questions end-->
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="widget widget-user">
+                            <h3 class="title-wd">Top User of the Week</h3>
+                            <ul>
+                                <li>
+                                    <div class="usr-msg-details">
+                                        <div class="usr-ms-img">
+                                            <img src="http://via.placeholder.com/50x50" alt="">
+                                        </div>
+                                        <div class="usr-mg-info">
+                                            <h3>Jessica William</h3>
+                                            <p>Graphic Designer </p>
+                                        </div><!--usr-mg-info end-->
+                                    </div>
+
+                                </li>
+                            </ul>
+                        </div><!--widget-user end-->
+                    </div>
+                </div>
+            </div><!--forum-questions-sec end-->
+        </div>
+    </section><!--forum-page end-->
+
+
+
+
+
+              <!--  <td style="display: flex">
+                    <a href="{ path('post_show', {'id': post.id}) }}"><button type="button" class="btn btn-sm shadow-sm btn-info mt-2 mb-2 ml-2"><i class="fas fa-search"></i></button></a>
+                    <a href="{ path('post_edit', {'id': post.id}) }}"><button type="button" class="btn btn-sm shadow-sm mt-2 mb-2 ml-2"><i class="far fa-edit"></i></button></a>
+                </td>-->
+
+   <!-- <div style="width: 100%; display:flex; justify-content: flex-end">
+        <a href="{ path('post_new') }}"><button type="button" class="btn btn-primary btn-sm shadow-sm mt-2 mb-2"><i class="far fa-plus-square"></i> Create New</button></a>
+    </div>-->
+
+{% endblock %}

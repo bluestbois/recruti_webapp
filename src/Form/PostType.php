@@ -3,7 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Post;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use phpDocumentor\Reflection\Types\False_;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,16 +16,7 @@ class PostType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('description')
-            ->add('date')
-            ->add('views')
-            ->add('likes')
-            ->add('NOC')
-            ->add('Recruiter')
-            ->add('Candidate')
-            ->add('Forum')
-            ->add('tags')
-        ;
+            ->add('description',CKEditorType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

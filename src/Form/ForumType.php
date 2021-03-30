@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Forum;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,7 +15,6 @@ class ForumType extends AbstractType
         $builder
             ->add('title')
             ->add('description')
-            ->add('Recruiter')
         ;
     }
 
