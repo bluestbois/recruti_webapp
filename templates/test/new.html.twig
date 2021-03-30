@@ -7,12 +7,29 @@
 {% endblock %}
 
 {% block gobackbtn %}
+    <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#uploadModal">
+        <i class="fas fa-upload fa-sm text-white-50"></i> Upload a Test
+    </button>
     <a href="{{ path("test_index") }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
         <i class="fas fa-arrow-left fa-sm text-white-50"></i> Go back
     </a>
 {% endblock %}
+
 {% block main %}
     {{ include('test/_form.html.twig') }}
 
+    <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Upload a test</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {{ include('test/_upload_form.html.twig') }}
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

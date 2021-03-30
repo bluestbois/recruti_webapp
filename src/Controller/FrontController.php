@@ -34,13 +34,14 @@ class FrontController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function passTest($id, $Tid, Request $request){
+    public function passTest($id, $Tid, Request $request): Response
+    {
         $candidature = $this->getDoctrine()->getRepository(Candidature::class)->find($id);
         $tests = $candidature->getTest();
 
-        if($Tid < count($tests)) {
-            $test = $tests[$Tid];
-            $questions = $tests[$Tid]->getQuestions();
+        if($Tid <= count($tests)) {
+            $test = $tests[$Tid - 1];
+            $questions = $tests[$Tid - 1]->getQuestions();
             $form = $this->createFormBuilder();
 
             foreach ($questions as $question) {
@@ -99,7 +100,7 @@ class FrontController extends AbstractController
             ]);
         }
         else
-            if($Tid == count($tests)){
+            if($Tid == count($tests) + 1){
                 return $this->render("frontoffice/test/success.html.twig", [
                     'done' => True,
                     'score' => $this->getDoctrine()->getRepository(Candidature::class)->find($id)->getScore()
@@ -112,7 +113,8 @@ class FrontController extends AbstractController
     /**
      * @Route ("/home/projects", name="front_project_index")
      */
-    public function projects(){
+    public function projects(): Response
+    {
         return $this->render("frontoffice/project/index.html.twig",[
            'projects' => $this->getDoctrine()->getRepository(Project::class)->findAll()
         ]);
