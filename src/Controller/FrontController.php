@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Candidate;
 use App\Entity\Candidature;
 use App\Entity\Project;
 use mysql_xdevapi\Statement;
@@ -34,10 +35,18 @@ class FrontController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function passTest($id, $Tid, Request $request): Response
-    {
+    public function passTest($id, $Tid, Request $request): Response {
         $candidature = $this->getDoctrine()->getRepository(Candidature::class)->find($id);
         $tests = $candidature->getTest();
+
+        if($this->getUser() == null) {
+            return $this->render('403.html.twig');
+        }
+        if ($this->getUser() instanceof Candidate && $candidature->getCandidate()->getId() != $this->getUser()->getId()) {
+            return $this->render('403.html.twig');
+        }
+
+        dump($this->getUser() instanceof Candidate);
 
         if($Tid <= count($tests)) {
             $test = $tests[$Tid - 1];
@@ -72,8 +81,12 @@ class FrontController extends AbstractController
                         $sum += $question->getPoints();
                     }
 
+
                     $data["score"] = round($score / $sum, 2);
-                    $data["moy"] = round(((($moy * $Tid) + $data["score"]) / ($Tid + 1)), 2);
+                    $data["moy"] = round(((($moy * ($Tid - 1)) + $data["score"]) / $Tid), 2);
+
+                    dump($moy);
+                    dump($data);
 
                     $candidature->setScore($data["moy"]);
                     $manager = $this->getDoctrine()->getManager();
@@ -87,10 +100,10 @@ class FrontController extends AbstractController
                         'data' => $data
                     ]);*/
 
-                    return $this->redirectToRoute("pass_test", [
+                    /*return $this->redirectToRoute("pass_test", [
                         'id' => $id,
                         'Tid' => $Tid + 1
-                    ]);
+                    ]);*/
                 }
             }
 
@@ -116,7 +129,7 @@ class FrontController extends AbstractController
     public function projects(): Response
     {
         return $this->render("frontoffice/project/index.html.twig",[
-           'projects' => $this->getDoctrine()->getRepository(Project::class)->findAll()
+            'projects' => $this->getDoctrine()->getRepository(Project::class)->findAll()
         ]);
     }
 
