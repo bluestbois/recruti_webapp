@@ -73,7 +73,7 @@ class CommentController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            
+
             $comment->setDate(new \DateTime('now'));
 
             $post = $entityManager->getRepository(Post::class)->find($request->get('post_id'));
@@ -148,6 +148,7 @@ class CommentController extends AbstractController
     public function editFront(Request $request, Comment $comment,FlashyNotifier $flashy): Response
     {
         $post=$comment->getPost();
+
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 

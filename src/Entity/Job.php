@@ -5,8 +5,7 @@ namespace App\Entity;
 use App\Repository\JobRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;use Symfony\Component\Validator\Constraints as Assert;
-
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=JobRepository::class)
@@ -22,19 +21,16 @@ class Job
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="This field must be filled")
      */
     private $title;
 
     /**
      * @ORM\Column(type="date")
-     * @Assert\NotBlank(message="This field must be filled")
      */
     private $date;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="This field must be filled")
      */
     private $description;
 
@@ -49,9 +45,15 @@ class Job
      */
     private $candidatures;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Test::class)
+     */
+    private $tests;
+
     public function __construct()
     {
         $this->candidatures = new ArrayCollection();
+        $this->tests = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -138,5 +140,29 @@ class Job
     }
     public function __toString(){
         return $this->title;
+    }
+
+    /**
+     * @return Collection|Test[]
+     */
+    public function getTests(): Collection
+    {
+        return $this->tests;
+    }
+
+    public function addTest(Test $test): self
+    {
+        if (!$this->tests->contains($test)) {
+            $this->tests[] = $test;
+        }
+
+        return $this;
+    }
+
+    public function removeTest(Test $test): self
+    {
+        $this->tests->removeElement($test);
+
+        return $this;
     }
 }

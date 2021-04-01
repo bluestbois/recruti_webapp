@@ -9,6 +9,9 @@ widget{{ form_start(form) }}
     {{ form_widget(form.description,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Description'}})}}
 
     {{ form_row(form.Recruiter,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Recruiter'}})}}
+
+    {{ form_label(form.tests, "Tests") }}
+        {{form_widget(form.tests,{'attr': {'class': 'form-control w-100 mt-2 mb-2'}})}}
 <div style="width: 100%; display:flex; justify-content: flex-end">
     <button class="btn btn-primary btn-sm shadow-sm mt-2 mb-2">
         <i class="fas fa-{{ icon|default('save') }}"></i>

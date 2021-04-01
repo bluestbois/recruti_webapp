@@ -11,24 +11,24 @@
     Comments
 {% endblock %}
 {% block main %}
-       <table class="table">
+    <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ comment.id }}</td>
-            </tr>
-            <tr>
-                <th>Content</th>
-                <td>{{ comment.content }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{{ comment.date ? comment.date|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Likes</th>
-                <td>{{ comment.likes }}</td>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <td>{{ comment.id }}</td>
+        </tr>
+        <tr>
+            <th>Content</th>
+            <td>{{ comment.content }}</td>
+        </tr>
+        <tr>
+            <th>Date</th>
+            <td>{{ comment.date ? comment.date|date('Y-m-d') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Likes</th>
+            <td>{{ comment.likes }}</td>
+        </tr>
         </tbody>
     </table>
     <div style="width: 100%; display:flex; justify-content: flex-end">

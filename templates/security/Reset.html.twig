@@ -1,0 +1,14 @@
+{% extends 'frontoffice/login/index.html.twig' %}
+
+{% block body %}
+
+    <h3>Password</h3>
+    <form method="post">
+        <label for="pass">Password</label>
+        <input type="password" name="password" id="pass">
+        <input type="hidden" name="token" value="{{ token }}">
+        <button>Validate</button>
+    </form>
+
+
+{% endblock %}

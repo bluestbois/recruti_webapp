@@ -1,0 +1,133 @@
+{% extends 'frontoffice/base.html.twig' %}
+
+{% block main %}
+
+    <section class="cover-sec">
+        <img src="{{ asset('images/test.jpg') }}" alt="">
+    </section>
+
+    <main>
+
+            <div class="main-section">
+                <div class="container">
+                    <div class="main-section-data">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="main-left-sidebar">
+                                    <div class="user_profile">
+                                        <div class="user-pro-img">
+
+                                            <img height="160px",width="160px" src="{{ asset('uploads/images/' ~ recruiter.image ) }}" alt="">
+                                        </div><!--user-pro-img end-->
+                                        <div class="user_pro_status">
+
+                                            <ul class="flw-status">
+                                                <li>
+                                                    <a href="{{ path('rprofile_following', { 'id': recruiter.id }) }}"><span>Following</span></a>
+                                                    <b>{{ following }}</b>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ path('rprofile_followers', { 'id': recruiter.id }) }}"><span>Followers</span></a>
+                                                    <b>{{ follower }}</b>
+                                                </li>
+                                            </ul>
+                                        </div><!--user_pro_status end-->
+
+                                    </div><!--user_profile end-->
+
+
+                                </div><!--main-left-sidebar end-->
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="main-ws-sec">
+                                    <div class="user-tab-sec">
+                                        <h3>{{ recruiter.Name}}</h3>
+                                        <div class="star-descp">
+                                            <span>{{ recruiter.description }}</span>
+
+                                        </div><!--star-descp end-->
+
+                                        <div class="tab-feed">
+                                            <ul>
+
+                                                <li data-tab="info-dd" >
+                                                    <a href="#" title="">
+                                                        <img src="{{ asset('images/ic2.png') }}" alt="">
+                                                        <span>Info</span>
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+                                        </div><!-- tab-feed end-->
+                                    </div><!--user-tab-sec end-->
+
+                                    <div class="product-feed-tab"  id="info-dd" >
+
+
+
+                                        <!--<div class="user-profile-ov">
+                                            <h3>Skills</h3>
+                                            <ul>
+                                                <li><a href="#" title="">HTML</a></li>
+                                                <li><a href="#" title="">PHP</a></li>
+                                                <li><a href="#" title="">CSS</a></li>
+                                                <li><a href="#" title="">Javascript</a></li>
+                                                <li><a href="#" title="">Wordpress</a></li>
+                                                <li><a href="#" title="">Photoshop</a></li>
+                                                <li><a href="#" title="">Illustrator</a></li>
+                                                <li><a href="#" title="">Corel Draw</a></li>
+                                            </ul>
+                                        </div>user-profile-ov end-->
+                                    </div><!--product-feed-tab end-->
+                                    <div class="product-feed-tab" id="portfolio-dd">
+
+
+
+                                    </div><!--product-feed-tab end-->
+                                    <div class="user-profile-ov ">
+                                        <h3>Company Informations</h3>
+                                        <p>Company Name : {{  recruiter.name }} <br> Email : {{ recruiter.email }}<br> Phone number : {{ recruiter.phonenumber }} <br>Address : {{ recruiter.address }}
+                                        </p>
+                                    </div><!--user-profile-ov end-->
+                                    <div class="user-profile-ov st2">
+                                        <h3>Description</h3>
+                                        <p>Field : {{ recruiter.field}}
+                                            <br>
+                                            Description : {{ recruiter.description }} </p>
+                                    </div><!--user-profile-ov end-->
+
+                                </div><!--main-ws-sec end-->
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="right-sidebar">
+                                    <div class="message-btn">
+                                        <a href="#" title=""><i class="fa fa-envelope"></i> Message</a>
+                                    </div>
+                                    <div class="widget widget-portfolio">
+                                        <div class="wd-heady">
+
+                                            <img src="images/photo-icon.png" alt="">
+                                        </div>
+                                        <div class="pf-gallery">
+                                            <ul>
+                                                <li><a href="#" title=""><img src="{{ asset('images/company.png') }}" alt=""></a></li>
+                                                <li><a href="#" title=""><img src="{{ asset('images/client-company.png') }}" alt=""></a></li>
+                                                <li><a href="#" title=""><img src="{{ asset('images/can.png') }}" alt=""></a></li>
+                                            </ul>
+                                        </div><!--pf-gallery end-->
+                                    </div><!--widget-portfolio end-->
+                                </div><!--right-sidebar end-->
+                            </div>
+                        </div>
+                    </div><!-- main-section-data end-->
+                </div>
+            </div>
+
+    </main>
+
+{% endblock %}
+
+
+
+
+

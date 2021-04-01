@@ -1,18 +1,14 @@
-{% extends 'frontoffice/front/index.html.twig' %}
+{% extends 'frontoffice/base.html.twig' %}
 
 {% block title %}Forum index{% endblock %}
 {% block page_title %}
     Forums List
 {% endblock %}
-{% block body %}
-    <section class="forum-sec">
+{% block main %}
+    <section class="forum-sec" id="top">
         <div class="container">
             <div class="forum-links">
                 <ul>
-                    <li class="active"><a href="#" title="">Latest</a></li>
-                    <li><a href="#" title="">Unanswered</a></li>
-                    <li><a href="#" title="">Popular This Week</a></li>
-                    <li><a href="#" title="">Popular of Month</a></li>
                     <li><a href="#" title="" data-toggle="modal" data-target="#add-forum-modal">Add a Forum</a></li>
                 </ul>
             </div><!--forum-links end-->
@@ -66,7 +62,7 @@
                                                                     { 'id': forum.id }
                                                                 )) }}
 
-                                                               <!--{ include('frontoffice/forum/edit.html.twig', {'forum':forum}) }}-->
+                                                                <!--{ include('frontoffice/forum/edit.html.twig', {'forum':forum}) }}-->
                                                                 <button type="button" class="btn btn-secondary"
                                                                         data-dismiss="modal">Close
                                                                 </button>
@@ -90,7 +86,7 @@
                             {% endfor %}
                         </div><!--forum-questions end-->
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4" style="position: fixed; right: 50px; top: 197px">
                         <div class="widget widget-user">
                             <h3 class="title-wd" style="color: #eeeeee; font-size: 16px;background-color: #4e73df;">Top new 5 forum </h3>
                             <ul>
@@ -108,10 +104,12 @@
                                 {% endfor %}
                             </ul>
                         </div><!--widget-user end-->
-                        <button style=" width: 128px; font-family: Noto Sans,Arial,sans-serif; border-radius: 15px; text-align:center; margin-left: 35%; position: relative;"
-                                class="btn d-none d-sm-inline-block btn-sm btn-primary shadow-sm mt-2 mb-2"
-                                onclick="topFunction()" id="myBtn" title="Go to top">Back to Top
-                        </button>
+                        <a href="#top">
+                            <button style=" width: 128px; font-family: Noto Sans,Arial,sans-serif; border-radius: 15px; text-align:center; margin-left: 35%; position: relative;"
+                                    class="btn d-none d-sm-inline-block btn-sm btn-primary shadow-sm mt-2 mb-2"
+                                    id="">Back to Top
+                            </button>
+                        </a>
                     </div>
                 </div>
 
@@ -132,35 +130,35 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    {{ include('frontoffice/forum/new.html.twig') }}
+                    {{ include('frontoffice/forum/_form.html.twig') }}
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
-<script>
-    /*
-    ======================================
-    BACK TO TOP LINK
-    ======================================
-    */
+    <script>
+        /*
+        ======================================
+        BACK TO TOP LINK
+        ======================================
+        */
 
-    // When the user scrolls down 20px from the top of the document, show the button
+        // When the user scrolls down 20px from the top of the document, show the button
 
 
-    // When the user clicks on the button, scroll to the top of the document
-    function topFunction() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-    }
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
 
-    $(window).scroll(function () {
+        $(window).scroll(function () {
 
-    if ($(document).scrollTop() > 200) {
-    console.log("her scroll");
-    $(".d-none").css("display", "block !important");
-    $(".d-none").css("position", "fixed !important");
-    }
-    });
-</script>
+            if ($(document).scrollTop() > 200) {
+                console.log("her scroll");
+                $(".d-none").css("display", "block !important");
+                $(".d-none").css("position", "fixed !important");
+            }
+        });
+    </script>
 {% endblock %}

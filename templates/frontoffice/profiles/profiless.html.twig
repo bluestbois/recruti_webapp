@@ -1,0 +1,58 @@
+{% extends 'frontoffice/base.html.twig' %}
+{% block main %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success" style="text-align: center;">{{ message }}</div>
+    {% endfor %}
+    {% for message in app.flashes('warning') %}
+        <div class="alert alert-danger" style="text-align: center;">{{ message }}</div>
+    {% endfor %}
+    {% for message in app.flashes('danger') %}
+        <div class="alert alert-warning" style="text-align: center;">{{ message }}</div>
+    {% endfor %}
+    <section class="companies-info">
+        <div class="container">
+            <div class="company-title">
+                <h3>All Candidates</h3>
+            </div><!--company-title end-->
+            <div class="companies-list">
+                <div class="row">
+                    {% for candidate in candidates %}
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="company_profile_info">
+                                <div class="company-up-info">
+                                    <img src="{{ asset('uploads/images/' ~ candidate.image ) }}" alt="">
+                                    <h3>{{ candidate.firstname }}{{ candidate.lastname }}</h3>
+                                    <h5>{{ candidate.email }}</h5>
+                                    <h4>{{ candidate.experience }} years</h4>
+                                </div>
+                               <a href="{{ path('cdprofile', { 'id': candidate.id }) }}" title="" class="view-more-pro">View Profile</a>
+                            </div><!--company_profile_info end-->
+                        </div>
+                    {% endfor %}
+
+
+
+                </div>
+            </div><!--companies-list end-->
+
+        </div>
+    </section><!--companies-info end-->
+
+    </div><!--theme-layout end-->
+    <section class="companies-info">
+        <div class="container">
+            <div class="company-title">
+
+                <div class="pagination-sm">
+                    {{ knp_pagination_render(candidates) }}
+                </div>
+            </div></div></section>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/popper.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/flatpickr.min.js"></script>
+    <script type="text/javascript" src="lib/slick/slick.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+
+
+{% endblock %}

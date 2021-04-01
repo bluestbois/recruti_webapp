@@ -3,6 +3,23 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
+
+    <h3>Sign in</h3>
+    {% for message in app.flashes('message') %}
+        <div class="'alert alert-success" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('warning') %}
+        <div class="'alert alert-warning" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('danger') %}
+        <div class="'alert alert-danger" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
     <form method="post">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -37,6 +54,16 @@
        <center> <button class="btn btn-lg btn-primary" type="submit">
             Sign in
         </button> </center>
+        <br>
     </form>
+    <center>
+        <table>
+        <tr><th><a href="{{ path('app_register') }}"><button type="button" class="btn btn-info " href="{{ path('app_register') }}"> Sign up as a Candidate</button></a></th></tr>
+    <tr><th><a href="{{ path('app_registerr') }}"><button type="button" class="btn btn-info " href="{{ path('app_registerr') }}"> Sign up as a Recruiter</button></a></th></tr>
+    </table></center>
+   <center> <a href="{{ path('forgottenpass') }}"><button type="button" class="btn btn-link" href="{{ path('forgottenpass') }}"> Forgot password ?</button></a></center>
+
+    <br>
 {% endblock %}
+
 

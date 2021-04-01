@@ -1,6 +1,6 @@
 {{ form_start(form,{'attr':{'action': path('home_post_edit',{'id':post.id}) }}) }}
     {{ form_widget(form.title,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Title'}})}}
-    {{ form_widget(form.description,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Description'}})}}
+    {{ form_widget(form.description,{'attr': {'class': 'ckeditor','placeholder': 'Description'}})}}
 
 
 

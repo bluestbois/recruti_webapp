@@ -17,6 +17,7 @@ class FreelanceType extends AbstractType
             ->add('salary')
             ->add('Tag')
             ->add('Project')
+            ->add('tests')
         ;
     }
 

@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Project;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,6 +16,7 @@ class ProjectType extends AbstractType
             ->add('title')
             ->add('description')
             ->add('date')
+            ->add('color', ColorType::class)
             ->add('Recruiter')
         ;
     }

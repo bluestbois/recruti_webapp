@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Candidate;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -25,9 +26,6 @@ class CandidateType extends AbstractType
             ->add('image')
             ->add('LOE')
             ->add('experience')
-            ->add('nationalities')
-            ->add('events')
-            ->add('projects')
         ;
     }
 

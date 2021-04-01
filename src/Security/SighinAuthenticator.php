@@ -19,6 +19,7 @@ use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class SighinAuthenticator extends AbstractFormLoginAuthenticator
 {
@@ -30,11 +31,12 @@ class SighinAuthenticator extends AbstractFormLoginAuthenticator
     private $urlGenerator;
     private $csrfTokenManager;
 
-    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager)
+    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
+        $this->passwordEncoder = $passwordEncoder;
     }
 
     public function supports(Request $request)
@@ -71,19 +73,26 @@ class SighinAuthenticator extends AbstractFormLoginAuthenticator
 
         if ($user) {
             return $user;
+            $this->addFlash('success','Welcome');
+
         }
-        else if (!$user && $user1)
+        else if (!$user && $user1 && !$user2)
         {
             return $user1;
+            $this->addFlash('success','Welcome');
+
         }
         else if (!$user && !$user1 && $user2)
         {
             return $user2;
+            $this->addFlash('success','Welcome');
+
         }
         else
         {
             // fail authentication with a custom error
             throw new CustomUserMessageAuthenticationException('Email could not be found.');
+            $this->addFlash('danger','email could not be found');
         }
 
         //return $user;
@@ -93,8 +102,8 @@ class SighinAuthenticator extends AbstractFormLoginAuthenticator
     {
         // Check the user's password or other credentials and return true or false
         // If there are no credentials to check, you can just return true
-        // throw new \Exception('TODO: check the credentials inside '.__FILE__);
-        return true;
+
+        return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
@@ -103,8 +112,8 @@ class SighinAuthenticator extends AbstractFormLoginAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('forum_index'));
-        throw new \Exception('/frontoffice/forum/index.html.twig '.__FILE__);
+        return new RedirectResponse($this->urlGenerator->generate('home'));
+        throw new \Exception('/profile/index.html.twig '.__FILE__);
     }
 
     protected function getLoginUrl()

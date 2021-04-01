@@ -112,6 +112,16 @@ class Candidate implements UserInterface
      */
     private $candidatures;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $token;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $reset_token;
+
     public function __construct()
     {
         $this->nationalities = new ArrayCollection();
@@ -462,6 +472,30 @@ class Candidate implements UserInterface
     public function getRoles()
     {
         return Array('ROLE_CANDIDATE');
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(?string $token): self
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    public function getResetToken(): ?string
+    {
+        return $this->reset_token;
+    }
+
+    public function setResetToken(?string $reset_token): self
+    {
+        $this->reset_token = $reset_token;
+
+        return $this;
     }
 }
 

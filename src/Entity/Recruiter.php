@@ -6,10 +6,13 @@ use App\Repository\RecruiterRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+
 
 /**
  * @ORM\Entity(repositoryClass=RecruiterRepository::class)
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 class Recruiter implements UserInterface
 {
@@ -86,6 +89,18 @@ class Recruiter implements UserInterface
      */
     private $projects;
 
+    protected $captchaCode;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $likes;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $LastLike;
+
     public function __construct()
     {
         $this->jobs = new ArrayCollection();
@@ -94,7 +109,9 @@ class Recruiter implements UserInterface
         $this->comments = new ArrayCollection();
         $this->projects = new ArrayCollection();
     }
-
+    public function __toString() {
+        return $this->email;
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -345,27 +362,61 @@ class Recruiter implements UserInterface
 
         return $this;
     }
-
-    public function __toString(){
-        return $this->name;
-    }
-    public function getUsername()
+    public function getSalt()
     {
-        return $this->getEmail();
-        // TODO: Implement getUsername() method.
+        // TODO: Implement getSalt() method.
     }
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
     }
-    public function getSalt()
+    public function getUsername()
     {
-        return null;
-        // TODO: Implement getSalt() method.
+        return $this->getName();   // TODO: Implement getUsername() method.
     }
+    /**
+     * Returns the roles granted to the user.
+     *
+     * @return Role[] The user roles
+     */
     public function getRoles()
     {
-        return Array('ROLE_RECRUITER');
+        return array('ROLE_RECRUITER');
     }
+    public function getCaptchaCode()
+    {
+        return $this->captchaCode;
+    }
+
+    public function setCaptchaCode($captchaCode)
+    {
+        $this->captchaCode = $captchaCode;
+    }
+
+    public function getLikes(): ?int
+    {
+        return $this->likes;
+    }
+
+    public function setLikes(?int $likes): self
+    {
+        $this->likes = $likes;
+
+        return $this;
+    }
+
+    public function getLastLike(): ?int
+    {
+        return $this->LastLike;
+    }
+
+    public function setLastLike(?int $LastLike): self
+    {
+        $this->LastLike = $LastLike;
+
+        return $this;
+    }
+
+
 
 }

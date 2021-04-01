@@ -1,0 +1,43 @@
+{% extends 'frontoffice/login/index.html.twig' %}
+
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+
+    <h1 class="h3 mb-3 font-weight-normal">sign up</h1>
+
+
+
+    {{ form_start(registrationFormr) }}
+    {{ form_row(registrationFormr.name) }}
+    {{ form_row(registrationFormr.email) }}
+    {{ form_row(registrationFormr.address) }}
+    {{ form_row(registrationFormr.description) }}
+    {{ form_row(registrationFormr.phoneNumber) }}
+        {{ form_row(registrationFormr.image) }}
+    {{ form_row(registrationFormr.field) }}
+        {{ form_row(registrationFormr.plainPassword, {
+            label: 'Password'
+        }) }}
+        {{ form_row(registrationFormr.agreeTerms) }}
+
+    {{ form_row(registrationFormr.captchaCode) }}
+
+    {% set formErrors = registrationFormr.vars.errors.form.getErrors(true) %}
+
+    {% if formErrors|length %}
+    <div class="alert alert-danger">
+        <ul>
+            {% for error in formErrors %}
+            <li>{{ error.message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+        <button type="submit" class="btn">Register</button>
+    {{ form_end(registrationFormr) }}
+{% endblock %}

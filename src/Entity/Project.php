@@ -6,7 +6,6 @@ use App\Repository\ProjectRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ProjectRepository::class)
@@ -22,19 +21,16 @@ class Project
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="This field must be filled")
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="This field must be filled")
      */
     private $description;
 
     /**
      * @ORM\Column(type="date")
-     * @Assert\NotBlank(message="This field must be filled")
      */
     private $date;
 
@@ -54,10 +50,27 @@ class Project
      */
     private $freelances;
 
+    /**
+     * @ORM\Column(type="string", length=7)
+     */
+    private $color;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Member::class, mappedBy="Project")
+     */
+    private $members;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Calendar::class, mappedBy="Project")
+     */
+    private $calendars;
+
     public function __construct()
     {
         $this->Candidate = new ArrayCollection();
         $this->freelances = new ArrayCollection();
+        $this->members = new ArrayCollection();
+        $this->calendars = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -170,5 +183,77 @@ class Project
     public function __toString()
     {
         return $this->title;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(string $color): self
+    {
+        $this->color = $color;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Member[]
+     */
+    public function getMembers(): Collection
+    {
+        return $this->members;
+    }
+
+    public function addMember(Member $member): self
+    {
+        if (!$this->members->contains($member)) {
+            $this->members[] = $member;
+            $member->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMember(Member $member): self
+    {
+        if ($this->members->removeElement($member)) {
+            // set the owning side to null (unless already changed)
+            if ($member->getProject() === $this) {
+                $member->setProject(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Calendar[]
+     */
+    public function getCalendars(): Collection
+    {
+        return $this->calendars;
+    }
+
+    public function addCalendar(Calendar $calendar): self
+    {
+        if (!$this->calendars->contains($calendar)) {
+            $this->calendars[] = $calendar;
+            $calendar->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCalendar(Calendar $calendar): self
+    {
+        if ($this->calendars->removeElement($calendar)) {
+            // set the owning side to null (unless already changed)
+            if ($calendar->getProject() === $this) {
+                $calendar->setProject(null);
+            }
+        }
+
+        return $this;
     }
 }

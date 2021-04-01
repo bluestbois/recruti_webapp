@@ -9,7 +9,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @Route("/candidate")
@@ -29,15 +28,13 @@ class CandidateController extends AbstractController
     /**
      * @Route("/new", name="candidate_new", methods={"GET","POST"})
      */
-    public function new(Request $request, UserPasswordEncoderInterface $encoder): Response
+    public function new(Request $request): Response
     {
         $candidate = new Candidate();
         $form = $this->createForm(CandidateType::class, $candidate);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $hash = $encoder->encodePassword($candidate, $candidate->getPassword());
-            $candidate->setPassword($hash);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($candidate);
             $entityManager->flush();

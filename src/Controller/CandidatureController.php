@@ -2,7 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Candidate;
 use App\Entity\Candidature;
+use App\Entity\Freelance;
+use App\Entity\Job;
+use App\Entity\Recruiter;
 use App\Form\CandidatureType;
 use App\Repository\CandidatureRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -89,6 +93,55 @@ class CandidatureController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('candidature_index');
+        return $this->redirectToRoute('profile');
+    }
+    /**
+     * @Route("/new/{cand}/{id}", name="cand_new", methods={"GET","POST"})
+     */
+    public function cand(int $id,int $cand): Response
+    {
+        if($this->getUser() == null) {
+            return $this->render('403.html.twig');
+        }
+        if ($this->getUser() instanceof Recruiter) {
+            return $this->render('403.html.twig');
+        }
+
+        $candidature = new Candidature();
+        $entityManager = $this->getDoctrine()->getManager();
+        $value = $entityManager->getRepository(Candidate::class)->find($cand);
+        $candidature->setCandidate($value);
+        $value1 = $entityManager->getRepository(Job::class)->find($id);
+        $candidature->setJob($value1);
+        $candidature->setDate(new \DateTime());
+        $candidature->setScore(0);
+        $entityManager->persist($candidature);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('pass_test',[
+            'id' => $candidature->getId(),
+            'Tid' => 1
+        ]);
+    }
+    /**
+     * @Route("/new/{candi}/{id}", name="candi_new", methods={"GET","POST"})
+     */
+    public function candi(int $id,int $candi): Response
+    {
+        $candidature1 = new Candidature();
+        $entityManager = $this->getDoctrine()->getManager();
+        $value = $entityManager->getRepository(Candidate::class)->find($candi);
+        $candidature1->setCandidate($value);
+        $value1 = $entityManager->getRepository(Freelance::class)->find($id);
+        $candidature1->setFreelance($value1);
+        $candidature1->setDate(new \DateTime());
+
+        $entityManager->persist($candidature1);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('pass_test',[
+            'id' => $candidature1->getId(),
+            'Tid' => 1
+        ]);
     }
 }

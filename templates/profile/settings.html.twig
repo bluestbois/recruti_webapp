@@ -1,0 +1,74 @@
+{% extends 'frontoffice/base.html.twig' %}
+{% block main %}
+    <section class="profile-account-setting">
+        <div class="container">
+            <div class="account-tabs-setting">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="acc-leftbar">
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="nav-acc-tab" data-toggle="tab" href="#nav-acc" role="tab" aria-controls="nav-acc" aria-selected="true"><i class="la la-cogs"></i>Account Settings</a>
+                            </div>
+                        </div><!--acc-leftbar end-->
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-acc" role="tabpanel" aria-labelledby="nav-acc-tab">
+
+
+                                {% for message in app.flashes('message') %}
+                              <center><div class="alert alert-success">
+                                            <div class="p-3 my-2 rounded-2 success">{{ message }}
+                            </div></center>
+                            {% endfor %}
+
+
+                                <div class="acc-setting">
+                                    <h3>Profile Settings</h3>
+                                    <table class="table table-striped">
+
+
+                                    {{ form_start(form) }}
+                                        <tr> <th>First Name:  {{form_widget(form.firstName,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'First name'}})}}</th></tr>
+                                        <tr> <th>Last Name: {{form_widget(form.lastName,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Last name'}})}}</th></tr>
+
+
+                                        <tr> <th>{{form_label(form.birthday, "Birthday :") }}
+                                        <div class="row m-2">
+                                        {{form_widget(form.birthday.day,{'attr': {'class': 'form-control w-25 m-2'}})}}
+                                        {{form_widget(form.birthday.month,{'attr': {'class': 'form-control w-25 m-2'}})}}
+                                        {{form_widget(form.birthday.year,{'attr': {'class': 'form-control w-25 m-2'}})}}
+                                    </div></th></tr>
+
+                                        <tr> <th>Gender: {{form_widget(form.gender,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Gender'}})}}</th></tr>
+                                        <tr> <th>Nationality: {{form_widget(form.nationality,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Nationality'}})}}</th></tr>
+                                        <tr> <th>Number: {{form_widget(form.phoneNumber,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Phone number'}})}}</th></tr>
+                                        <tr> <th>Adress: {{form_widget(form.address,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Address'}})}}</th></tr>
+                                        <tr> <th>Image: {{form_widget(form.image,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Image'}})}}</th></tr>
+                                        <tr> <th>Level of education{{form_widget(form.LOE,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Level of education'}})}}</th></tr>
+                                        <tr> <th>Years of experinece{{form_widget(form.experience,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Experience'}})}}</th></tr>
+                                        {{ form_row(form._token) }}
+                                   <tr><th><center><button class="btn btn-primary btn-sm shadow-sm mt-2 mb-2">
+                                        <i class="fas fa-"{{  form_widget(form.Validate, { 'label': 'validate' }) }}</i>
+                                    </button></center></th></tr>
+                                      <tr><th><center><a href="{{ path('pass') }}"><button type="button" class="btn btn-primary btn-sm shadow-sm mt-2 mb-2 " href="{{ path('pass') }}">Change Password</button></a></center></th></tr>
+
+                                    </table>
+
+
+                                </div><!--acc-setting end-->
+                            </div>
+
+
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div><!--account-tabs-setting end-->
+        </div>
+    </section>
+{% endblock %}

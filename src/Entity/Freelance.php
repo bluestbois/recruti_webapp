@@ -6,7 +6,6 @@ use App\Repository\FreelanceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=FreelanceRepository::class)
@@ -22,20 +21,16 @@ class Freelance
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="This field must be filled")
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="This field must be filled")
      */
     private $description;
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\NotBlank(message="This field must be filled with an integer")
-     * @Assert\Type(type={"integer"},message="This field must be filled with an integer")
      */
     private $salary;
 
@@ -55,10 +50,39 @@ class Freelance
      */
     private $candidatures;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Candidate::class, inversedBy="favorites")
+     */
+    private $favorites;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $date;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Bid::class, mappedBy="Freelance")
+     */
+    private $bids;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Candidate::class, mappedBy="saves")
+     */
+    private $candidates;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Test::class)
+     */
+    private $tests;
+
     public function __construct()
     {
         $this->Tag = new ArrayCollection();
         $this->candidatures = new ArrayCollection();
+        $this->favorites = new ArrayCollection();
+        $this->bids = new ArrayCollection();
+        $this->candidates = new ArrayCollection();
+        $this->tests = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -137,6 +161,17 @@ class Freelance
 
         return $this;
     }
+    public function getCandidate(): ?Candidate
+    {
+        return $this->Candidate;
+    }
+
+    public function setCandidate(?Candidate $candidate): self
+    {
+        $this->Candidate = $candidate;
+
+        return $this;
+    }
 
     /**
      * @return Collection|Candidature[]
@@ -171,4 +206,99 @@ class Freelance
     public function __toString(){
         return $this->title;
     }
+
+
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(?\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+        return $this;
+    }
+
+    /**
+     * @return Collection|Bid[]
+     */
+    public function getBids(): Collection
+    {
+        return $this->bids;
+    }
+
+    public function addBid(Bid $bid): self
+    {
+        if (!$this->bids->contains($bid)) {
+            $this->bids[] = $bid;
+            $bid->setFreelance($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBid(Bid $bid): self
+    {
+        if ($this->bids->removeElement($bid)) {
+            // set the owning side to null (unless already changed)
+            if ($bid->getFreelance() === $this) {
+                $bid->setFreelance(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Candidate[]
+     */
+    public function getCandidates(): Collection
+    {
+        return $this->candidates;
+    }
+
+    public function addCandidate(Candidate $candidate): self
+    {
+        if (!$this->candidates->contains($candidate)) {
+            $this->candidates[] = $candidate;
+            $candidate->addSave($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCandidate(Candidate $candidate): self
+    {
+        if ($this->candidates->removeElement($candidate)) {
+            $candidate->removeSave($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Test[]
+     */
+    public function getTests(): Collection
+    {
+        return $this->tests;
+    }
+
+    public function addTest(Test $test): self
+    {
+        if (!$this->tests->contains($test)) {
+            $this->tests[] = $test;
+        }
+
+        return $this;
+    }
+
+    public function removeTest(Test $test): self
+    {
+        $this->tests->removeElement($test);
+
+        return $this;
+    }
+
 }

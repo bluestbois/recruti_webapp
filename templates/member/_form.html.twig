@@ -1,0 +1,18 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+{{form_widget(form.pseudo,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'pseudo'}})}}
+<div class="alert alert-danger">
+    {{ form_errors(form.pseudo) }}
+</div>
+{{form_widget(form.Localisation,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'job description'}})}}
+<div class="alert alert-danger">
+    {{ form_errors(form.Localisation) }}
+</div>
+
+<div style="width: 100%; display:flex; justify-content: flex-end">
+    <button class="btn btn-primary ">
+        <i class="fas fa-{{ icon|default('save') }}"></i>
+        {{ button_label|default('Recruter') }}
+    </button>
+</div>
+{{ form_end(form) }}

@@ -1,0 +1,51 @@
+{% extends 'frontoffice/base.html.twig' %}
+{% block main %}
+    <section class="profile-account-setting">
+        <div class="container">
+            <div class="account-tabs-setting">
+                <div class="row">
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="company_profile_info">
+                            <div class="company-up-info">
+                                <h3>{{ project.Project.title }}</h3>
+                                <h4>{{ project.Project.date ? project.Project.date|date('Y-m-d') : '' }}</h4>
+                                <h1>Description</h1>
+                                <p>{{ project.Project.description }}</p>
+                                <ul>
+                                </ul>
+
+                            </div>
+                        </div><!--company_profile_info end-->
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="tab-content" id="nav-tabContent">
+                               <div class="acc-setting">
+                                    <h3>Equipe</h3>
+                                    <div class="notifications-list">
+                                        <div class="notfication-details">
+
+                                            <div class="acc-setting">
+                                                {% for member in members  %}
+                                                <form>
+                                                    <div class="notbar">
+                                                        <h4>{{ member.pseudo }}</h4>
+                                                        <p>{{ member.localisation }}</p>
+                                                        <div class="toggle-btn">
+                                                            <a href="#" title=""><img src="images/up-btn.png" alt=""></a>
+                                                        </div>
+                                                        <br>
+                                                    </div><!--notbar end-->
+                                                    <form>
+                                                        {% endfor %}
+                                            </div>
+                                        </div>
+                            </div>
+                    </div>
+                </div>
+            </div><!--account-tabs-setting end-->
+        </div>
+    </section>
+
+
+
+{% endblock %}

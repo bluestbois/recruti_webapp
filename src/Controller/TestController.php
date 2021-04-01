@@ -77,7 +77,7 @@ class TestController extends AbstractController
             $EM = $this->getDoctrine()->getManager();
 
             $test->setTitle($sheet->getCell('A1')->getValue());
-            $test->setDescription($sheet->getCell('A2')->getValue());
+            $test->setDescription($sheet->getCell('B1')->getValue());
             $test->addCategorie(
                 $this
                     ->getDoctrine()

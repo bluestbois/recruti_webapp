@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Candidate;
+use App\Entity\Candidature;
 use App\Entity\Job;
 use App\Form\JobType;
 use App\Repository\JobRepository;
@@ -71,7 +73,7 @@ class JobController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('job_index');
+            return $this->redirectToRoute('profiles');
         }
 
         return $this->render('job/edit.html.twig', [
@@ -93,4 +95,6 @@ class JobController extends AbstractController
 
         return $this->redirectToRoute('job_index');
     }
+
+
 }

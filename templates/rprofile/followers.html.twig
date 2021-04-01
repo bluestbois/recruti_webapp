@@ -1,0 +1,45 @@
+{% extends 'frontoffice/base.html.twig' %}
+{% block main %}
+
+    <section class="companies-info">
+        <div class="container">
+            <div class="company-title">
+                <h3>Followers</h3>
+            </div><!--company-title end-->
+            <div class="companies-list">
+                <div class="row">
+                    {% for follower in followers %}
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="company_profile_info">
+                                <div class="company-up-info">
+                                    <img src="{{ asset('uploads/images/' ~ follower.image ) }}" alt="">
+                                    <h3>{{ follower.name }}</h3>
+                                    <h5>{{ follower.field }}</h5>
+                                    <h4>{{ follower.address }}</h4>
+                                </div>
+                                <a href="{{ path('rprofile', { 'id': follower.id }) }}" title="" class="view-more-pro">View Profile</a>
+                            </div><!--company_profile_info end-->
+                        </div>
+                    {% endfor %}
+
+
+                </div>
+            </div><!--companies-list end-->
+
+        </div>
+    </section><!--companies-info end-->
+
+
+    </div><!--theme-layout end-->
+
+
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/popper.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/flatpickr.min.js"></script>
+    <script type="text/javascript" src="lib/slick/slick.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    </body>
+    </html>
+{% endblock %}

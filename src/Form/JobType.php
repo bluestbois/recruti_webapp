@@ -16,6 +16,7 @@ class JobType extends AbstractType
             ->add('date')
             ->add('description')
             ->add('Recruiter')
+            ->add('tests')
         ;
     }
 

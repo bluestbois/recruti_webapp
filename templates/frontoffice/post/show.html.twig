@@ -1,23 +1,13 @@
-{% extends 'frontoffice/front/index.html.twig' %}
-
+{% extends 'frontoffice/base.html.twig' %}
 {% block title %}Post{% endblock %}
 
 {% block page_title %}
     Post
 {% endblock %}
 
-{% block body %}
+{% block main %}
     <section class="forum-sec">
         <div class="container">
-            <div class="forum-links">
-                <ul>
-                    <li class="active"><a href="#" title="">Latest</a></li>
-                    <li><a href="#" title="">Unanswered</a></li>
-                    <li><a href="#" title="">Treading</a></li>
-                    <li><a href="#" title="">Popular This Week</a></li>
-                    <li><a href="#" title="">Popular of Month</a></li>
-                </ul>
-            </div><!--forum-links end-->
             <div class="forum-links-btn">
                 <a href="#" title=""><i class="fa fa-bars"></i></a>
             </div>
@@ -36,7 +26,7 @@
                                 </div>
                                 <div class="usr_quest">
                                     <h3>{{ post.title }}</h3>
-                                     {{ post.description |raw }}
+                                    {{ post.description |raw }}
 
                                     <ul class="react-links">
                                         <li><a href="#" title=""><i class="fa fa-comment"></i> {{ post.NOC }} </a></li>
@@ -107,6 +97,7 @@
                                                                                         </button>
                                                                                     </div>
                                                                                     <div class="modal-body">
+                                                                                        <!--{ include('frontoffice/comment/edit.html.twig',{'id':comment.id})  }}-->
                                                                                         {{ render(controller(
                                                                                             'App\\Controller\\CommentController::editFront',
                                                                                             { 'id': comment.id }
@@ -153,19 +144,43 @@
                                     </ul>
                                 </div>
                                 <div class="post_comment_sec">
-                                    {{ render(controller(
-                                        'App\\Controller\\CommentController::newFront'
-                                    )) }}
-                                </div><!--post_comment_sec end-->
+                                    {{ include('frontoffice/comment/_form.html.twig') }}
+                                </div>
                             </div><!--user-poster end-->
                         </div><!--post-comment-box end-->
                     </div>
                     <div class="col-lg-4"style="border-radius: 5px; position: sticky; right: 0;">
+                        <div class="widget widget-feat">
+                            <div class="widget widget-user"style="  border-radius: 5px;">
+                                <h3 class="title-wd"style="color: #eeeeee; font-size: 16px;background-color: #4e73df;">
+                                    {{ post.title}}  </h3>
+                            </div>
+                            <ul>
+                                <li>
+                                    <i class="fa fa-star"></i>
+                                    <span></span>
+                                </li>
+                                <li>
+                                    <i class="fa fa-comment"></i>
+                                    <span>{{ post.NOC }}</span>
+                                </li>
+                                <li>
+                                    <i class="fa fa-clock-o"></i>
+                                    <span> {% include'DateTimeForma.html.twig' with{'value' : post.creatAt} %}</span>
+                                </li>
+                                <li>
+                                    <i class="fa fa-eye"></i>
+                                    <span>{{ post.views }}</span>
+                                </li>
+                            </ul>
+
+
+                        </div><!--widget-user end-->
                         <div class="widget widget-user"style="  border-radius: 5px;">
                             <h3 class="title-wd"style="color: #eeeeee; font-size: 16px;background-color: #4e73df;">
-                                Top new 5 post </h3>
+                                Top 5 post  NOC   </h3>
                             <ul>
-                                {% for post in posts |sort|reverse|slice(0,5) %}
+                                {% for post in posts |sort((a, b) => a.NOC <=> b.NOC)|reverse|slice(0,5)  %}
                                     <li>
                                         <div class="usr-msg-details">
                                             <div class="usr-mg-info">
@@ -188,23 +203,6 @@
         </div>
     </section><!--forum-page end-->
     <script>
-        $("#comment_form").submit(function (e) {
-            console.log("her");
-            e.preventDefault(); // avoid to execute the actual submit of the form.
-            var form = $(this);
-            var url = form.attr('action');
-            $.ajax({
-                type: "POST",
-                url: url + "?post_id=" + {{ post.id }},
-                data: form.serialize(),
-                success: function (data) {
-
-                    window.location.reload();
-
-
-                }
-            });
-        });
         /*
          ======================================
                    BACK TO TOP LINK
@@ -231,53 +229,8 @@
         }
 
 
-        var string ="{{ strTagsR }}" +  "{{ strTagsC }}";
-        var stringR = "{{ strTagsR }}";
-        var stringC = "{{ strTagsC }}";
 
-        var availableTags = string.split('/');
-        //var availableTagsC = stringC.split('/');
-
-        console.log(availableTags);
-        //console.log(availableTagsC);
-        var array =[];
-
-        for (var i = 0; i < availableTags.length; i++) {
-
-            if(availableTags[i] != "" )
-            {
-                array.push({ id:i, name:availableTags[i]});
-            }
-
-        }
-
-        console.log(array);
-
-        function split(val) {
-            return val.split(/@\s*/);
-        }
-
-        function extractLast(term) {
-            return split(term).pop();
-        }
-
-
-
-        $('#comment_content').mentiony({
-            onDataRequest: function (mode, keyword, onDataRequestCompleteCallback) {
-
-                var data =  array ;
-
-                data = jQuery.grep(data, function( item ) {
-                    return item.name.toLowerCase().indexOf(keyword.toLowerCase()) > -1;
-                });
-
-                // Call this to populate mention.
-                onDataRequestCompleteCallback.call(this, data);
-            },
-            timeOut: 0,
-            debug: 1,
-        });
 
     </script>
 {% endblock %}
+

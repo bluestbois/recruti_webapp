@@ -13,8 +13,16 @@ class LoginController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('frontoffice/login/index.html.twig', [
+        return $this->redirectToRoute('app_login');
+    }
+    /**
+     * @Route("/active", name="active")
+     */
+    public function indexx(): Response
+    {
+        return $this->render('frontoffice/login/active.html.twig', [
             'controller_name' => 'LoginController',
         ]);
     }
+
 }

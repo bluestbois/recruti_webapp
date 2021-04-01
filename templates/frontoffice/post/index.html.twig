@@ -30,24 +30,24 @@
                     <div class="col-lg-8">
                         <div class="forum-questions">
                             {% for post in posts %}
-                            <div class="usr-question">
-                                <div class="usr_img">
-                                    <img src="http://via.placeholder.com/50x50" alt="">
-                                </div>
-                                <div class="usr_quest">
-                                    <h3>{{ post.title}}</h3>
-                                    {{ post.description }}
-                                    <ul class="react-links">
+                                <div class="usr-question">
+                                    <div class="usr_img">
+                                        <img src="http://via.placeholder.com/50x50" alt="">
+                                    </div>
+                                    <div class="usr_quest">
+                                        <h3>{{ post.title}}</h3>
+                                        {{ post.description }}
+                                        <ul class="react-links">
 
-                                       <!-- <li><a href="{path('home_post_show') }}">" title=""><i class="fa fa-comment"></i> { post.NOC }}</a></li>-->
-                                        <li><a href="#" title=""><i class="fa fa-eye"></i>{{ post.views }}</a></li>
-                                    </ul>
+                                            <!-- <li><a href="{path('home_post_show') }}">" title=""><i class="fa fa-comment"></i> { post.NOC }}</a></li>-->
+                                            <li><a href="#" title=""><i class="fa fa-eye"></i>{{ post.views }}</a></li>
+                                        </ul>
 
 
 
-                                </div><!--usr_quest end-->
-                                <span class="quest-posted-time"><i class="fa fa-clock-o"></i>{{ post.date ? post.date|date('Y-m-d') : '' }}</span>
-                            </div><!--usr-question end-->
+                                    </div><!--usr_quest end-->
+                                    <span class="quest-posted-time"><i class="fa fa-clock-o"></i>{{ post.date ? post.date|date('Y-m-d') : '' }}</span>
+                                </div><!--usr-question end-->
                             {% else %}
                                 <tr>
                                     <td colspan="8">no records found</td>
@@ -83,13 +83,13 @@
 
 
 
-              <!--  <td style="display: flex">
-                    <a href="{ path('post_show', {'id': post.id}) }}"><button type="button" class="btn btn-sm shadow-sm btn-info mt-2 mb-2 ml-2"><i class="fas fa-search"></i></button></a>
-                    <a href="{ path('post_edit', {'id': post.id}) }}"><button type="button" class="btn btn-sm shadow-sm mt-2 mb-2 ml-2"><i class="far fa-edit"></i></button></a>
-                </td>-->
+    <!--  <td style="display: flex">
+          <a href="{ path('post_show', {'id': post.id}) }}"><button type="button" class="btn btn-sm shadow-sm btn-info mt-2 mb-2 ml-2"><i class="fas fa-search"></i></button></a>
+          <a href="{ path('post_edit', {'id': post.id}) }}"><button type="button" class="btn btn-sm shadow-sm mt-2 mb-2 ml-2"><i class="far fa-edit"></i></button></a>
+      </td>-->
 
-   <!-- <div style="width: 100%; display:flex; justify-content: flex-end">
-        <a href="{ path('post_new') }}"><button type="button" class="btn btn-primary btn-sm shadow-sm mt-2 mb-2"><i class="far fa-plus-square"></i> Create New</button></a>
-    </div>-->
+    <!-- <div style="width: 100%; display:flex; justify-content: flex-end">
+         <a href="{ path('post_new') }}"><button type="button" class="btn btn-primary btn-sm shadow-sm mt-2 mb-2"><i class="far fa-plus-square"></i> Create New</button></a>
+     </div>-->
 
 {% endblock %}

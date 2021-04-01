@@ -5,7 +5,7 @@
 {% block page_title %}
     Comments List
 {% endblock %}
-{% block body %}
+{% block main%}
     <section class="forum-page">
         <div class="container">
             <div class="forum-questions-sec">
@@ -149,13 +149,13 @@
     </section><!--forum-page end-->
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Content</th>
-                <th>Date</th>
-                <th>Likes</th>
+        <tr>
+            <th>Id</th>
+            <th>Content</th>
+            <th>Date</th>
+            <th>Likes</th>
 
-            </tr>
+        </tr>
         </thead>
         <tbody>
         {% for comment in comments %}
@@ -164,10 +164,10 @@
                 <td>{{ comment.content }}</td>
                 <td>{{ comment.date ? comment.date|date('Y-m-d') : '' }}</td>
 
-            <!--    <td style="display: flex">
-                    <a href="{ path('comment_show', {'id': comment.id}) }}"><button type="button" class="btn btn-sm shadow-sm btn-info mt-2 mb-2 ml-2"><i class="fas fa-search"></i></button></a>
-                    <a href="{ path('comment_edit', {'id': comment.id}) }}"><button type="button" class="btn btn-sm shadow-sm mt-2 mb-2 ml-2"><i class="far fa-edit"></i></button></a>
-                </td>-->
+                <!--    <td style="display: flex">
+                        <a href="{ path('comment_show', {'id': comment.id}) }}"><button type="button" class="btn btn-sm shadow-sm btn-info mt-2 mb-2 ml-2"><i class="fas fa-search"></i></button></a>
+                        <a href="{ path('comment_edit', {'id': comment.id}) }}"><button type="button" class="btn btn-sm shadow-sm mt-2 mb-2 ml-2"><i class="far fa-edit"></i></button></a>
+                    </td>-->
             </tr>
         {% else %}
             <tr>
@@ -176,8 +176,8 @@
         {% endfor %}
         </tbody>
     </table>
-   <!-- <div style="width: 100%; display:flex; justify-content: flex-end">
-        <a href="{ path('comment_new') }}"><button type="button" class="btn btn-primary btn-sm shadow-sm mt-2 mb-2"><i class="far fa-plus-square"></i> Create New</button></a>
-    </div>-->
+    <!-- <div style="width: 100%; display:flex; justify-content: flex-end">
+         <a href="{ path('comment_new') }}"><button type="button" class="btn btn-primary btn-sm shadow-sm mt-2 mb-2"><i class="far fa-plus-square"></i> Create New</button></a>
+     </div>-->
 
 {% endblock %}

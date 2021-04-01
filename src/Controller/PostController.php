@@ -32,11 +32,11 @@ class PostController extends AbstractController
 
         $donnee = $this->getDoctrine()->getRepository(Post::class)->findAll();
 
-       $post= $paginator->paginate(
-         $donnee,
-          $request->query->getInt('page', 1),
-          5
-      );
+        $post= $paginator->paginate(
+            $donnee,
+            $request->query->getInt('page', 1),
+            5
+        );
 
 
         return $this->render('post/index.html.twig', [
@@ -138,43 +138,42 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/home/post/{id}", name="home_post_show", methods={"GET"})
+     * @Route("/home/post/{id}", name="home_post_show", methods={"GET","POST"})
      */
-    public function showFront(Post $post, PostRepository $postRepository, CandidateRepository $candidateRepository, RecruiterRepository $recruiterRepository, CommentRepository $commentRepository): Response
+    public function showFront(Request $request,FlashyNotifier  $flashy,Post $post, PostRepository $postRepository, CandidateRepository $candidateRepository, RecruiterRepository $recruiterRepository, CommentRepository $commentRepository): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
-
-
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
 
         $post->setViews($post->getViews()+1);
 
+        if ($form->isSubmitted() && $form->isValid() ) {
+
+
+            $comment->setDate(new \DateTime('now'));
+
+            $post = $entityManager->getRepository(Post::class)->find($request->get('id'));
+
+
+            $roles = $this->getUser()->getRoles();
+            if ($roles[0] == 'ROLE_CANDIDATE') {
+                $comment->setCandidate($this->getUser());
+            } else if ($roles[0] == 'ROLE_RECRUITER') {
+                $comment->setRecruiter($this->getUser());
+            }
+
+            $comment->setPost($post);
+
+            $post->setNoc($post->getNOC()+1);
+            $flashy->success('Comment Created  !!!');
+
+            $entityManager->persist($comment);
+            $entityManager->flush();
+            return $this->redirectToRoute('home_post_show',array('id'=>$post->getId()));
+        }
         $entityManager->flush();
-
-        $arrayRecruters = $entityManager->getRepository(Recruiter::class)->findAll();
-
-
-        foreach ($arrayRecruters as $item) {
-            $arrayTagsR[] = $item->getUserName();
-        }
-
-        $strR = "";
-        foreach ($arrayTagsR as $tag){
-            $strR .= $tag . '/';
-        }
-
-       $arrayCandidates = $entityManager->getRepository(Candidate::class)->findAll();
-
-
-        foreach ($arrayCandidates as $item) {
-            $arrayTagsC[] = $item->getUserName();
-        }
-
-        $strC = "";
-        foreach ($arrayTagsC as $tag){
-            $strC .= $tag . '/';
-        }
         return $this->render('frontoffice/post/show.html.twig', [
             'post' => $post,
             'posts' => $postRepository->findAll(),
@@ -182,11 +181,6 @@ class PostController extends AbstractController
             'Candidates' => $candidateRepository->findAll(),
             'Recruiters' => $recruiterRepository->findAll(),
             'form' => $form->createView(),
-            'strTagsR' => $strR,
-            'strTagsC' => $strC,
-
-
-            //'arrayTags'=>json_encode($arrayTags),
         ]);
     }
 

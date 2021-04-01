@@ -2,13 +2,17 @@
 
 namespace App\Controller;
 
+use App\Entity\Member;
 use App\Entity\Project;
+use App\Entity\Freelance;
 use App\Form\ProjectType;
 use App\Repository\ProjectRepository;
+use App\Repository\MemberRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 /**
  * @Route("/project")
@@ -27,8 +31,11 @@ class ProjectController extends AbstractController
 
     /**
      * @Route("/new", name="project_new", methods={"GET","POST"})
+     * @param Request $request
+     * @param \Swift_Mailer $mailer
+     * @return Response
      */
-    public function new(Request $request): Response
+    public function new(Request $request, \Swift_Mailer $mailer): Response
     {
         $project = new Project();
         $form = $this->createForm(ProjectType::class, $project);
@@ -38,6 +45,19 @@ class ProjectController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($project);
             $entityManager->flush();
+
+            $user = $this->getUser();
+            $message = (new \Swift_Message('New Project'))
+                ->setFrom('recruritini@gmail.com')
+                ->setTo($user->getEmail())
+                ->setBody(
+                    $this->renderView(
+                        'emails/newproject.html.twig', [
+                            'title' => $project->getTitle()
+                    ]),
+                    'text/html'
+                );
+            $mailer->send($message);
 
             return $this->redirectToRoute('project_index');
         }
@@ -90,5 +110,18 @@ class ProjectController extends AbstractController
         }
 
         return $this->redirectToRoute('project_index');
+    }
+    /**
+     * @Route("/home/projects/members/{id}", name="front_project_members_index")
+     * @param $id
+     * @return Response
+     */
+    public function members($id)
+    {
+        $member = $this->getDoctrine()->getRepository(Member::class)->findBy(['Project' => $id]);
+        $project = $this->getDoctrine()->getRepository(Member::class)->findOneBy(['Project' => $id]);
+        return $this->render('frontoffice/project/members.html.twig', [
+            'members' => $member, 'project' => $project,
+        ]);
     }
 }

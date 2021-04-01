@@ -6,7 +6,6 @@ use App\Repository\CandidatureRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CandidatureRepository::class)
@@ -22,7 +21,6 @@ class Candidature
 
     /**
      * @ORM\Column(type="date")
-     * @Assert\NotBlank(message="This field must be filled")
      */
     private $date;
 
@@ -34,13 +32,13 @@ class Candidature
 
     /**
      * @ORM\ManyToOne(targetEntity=Job::class, inversedBy="candidatures")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $Job;
 
     /**
      * @ORM\ManyToOne(targetEntity=Freelance::class, inversedBy="candidatures")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $Freelance;
 

@@ -1,9 +1,20 @@
-{{ form_start(form,{'attr':{'action': path('home_comment_edit',{'id':comment.id}) }}) }}
+{{ form_start(form,{'attr':{'action': path('home_comment_edit',{'id':comment.id}) },'novalidate': 'novalidate'}) }}
+
     {{ form_widget(form.content,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder': 'Content'}}) }}
+
 {{ form_widget(form.rating,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder' : 'please indicate your score from 0 to 5'}}) }}
+<div style="color :red;" >
+    {{form_errors(form.content)}}
+</div>
+
+{{ form_widget(form.rating,{'attr': {'class': 'form-control w-100 mt-2 mb-2','placeholder' : 'how was the quality of the post 0 to 5 '}}) }}
+<div style="color :red;" >
+    {{form_errors(form.rating)}}
+</div>
 <div style="width: 100%; display:flex; justify-content: flex-end">
     <button class="btn btn-primary btn-sm shadow-sm mt-2 mb-2">
         Update
     </button>
 </div>
 {{ form_end(form) }}
+

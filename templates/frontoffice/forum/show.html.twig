@@ -1,4 +1,4 @@
-{% extends 'frontoffice/front/index.html.twig' %}
+{% extends 'frontoffice/base.html.twig' %}
 
 {% block title %}Forum{% endblock %}
 
@@ -6,18 +6,9 @@
     Forum
 {% endblock %}
 
-{% block body %}
+{% block main %}
     <section class="forum-sec">
         <div class="container">
-            <div class="forum-links">
-                <ul>
-                    <li class="active"><a href="#" title="">Latest</a></li>
-                    <li><a href="#" title="">Unanswered</a></li>
-                    <li><a href="#" title="">Treading</a></li>
-                    <li><a href="#" title="">Popular This Week</a></li>
-                    <li><a href="#" title="">Popular of Month</a></li>
-                </ul>
-            </div><!--forum-links end-->
             <div class="forum-links-btn">
                 <a href="#" title=""><i class="fa fa-bars"></i></a>
             </div>
@@ -42,141 +33,123 @@
                                     </ul>
                                 </div>
                                 <div class="post_comment_sec">
-                                    {{ include('frontoffice/post/new.html.twig') }}
+                                    {{ include('frontoffice/post/_form.html.twig') }}
                                 </div>
                             </div>
                             <div class="forum-questions">
 
                                 {% for post in posts |sort|reverse%}
-                                {% if post.Forum.id == forum.id %}
-                                <div class="usr-question">
-                                    <div class="usr_img">
-                                        <img src="http://via.placeholder.com/50x50" alt="">
-                                        <h3>
-                                            {% if  post.Recruiter %}
-                                                {{ post.Recruiter }}
-                                            {% elseif post.Candidate %}
-                                                <div style="text-align: center;">
-                                                    {{ post.Candidate.firstName }}
-                                                    {{ post.Candidate.lastName }}
-                                                </div>
-                                            {% endif %}
-                                        </h3>
-                                    </div>
-                                    <div class="usr_quest">
-                                        <div style="display: flex">
-                                                <h3><a href="{{ path('home_post_show', {'id': post.id}) }}">
-                                                        {{ post.title }}</a></h3><span style="font-size: 12px; ">
+                                    {% if post.Forum.id == forum.id %}
+                                        <div class="usr-question">
+                                            <div class="usr_img">
+                                                <img src="http://via.placeholder.com/50x50" alt="">
+                                                <h3>
+                                                    {% if  post.Recruiter %}
+                                                        {{ post.Recruiter }}
+                                                    {% elseif post.Candidate %}
+                                                        <div style="text-align: center;">
+                                                            {{ post.Candidate.firstName }}
+                                                            {{ post.Candidate.lastName }}
+                                                        </div>
+                                                    {% endif %}
+                                                </h3>
+                                            </div>
+                                            <div class="usr_quest">
+                                                <div style="display: flex">
+                                                    <h3><a href="{{ path('home_post_show', {'id': post.id}) }}">
+                                                            {{ post.title }}</a></h3><span style="font-size: 12px; ">
                                                 <i class="fa fa-clock-o" style=""></i>
                                                 {% include'DateTimeForma.html.twig' with{'value' : post.creatAt} %}
                                              <!--   { post.creatAt ? post.creatAt|date('Y-m-d H:i:s') : '' }}--></span>
-                                        </div>
-                                            {{ post.description |raw }}
-                                            <ul class="react-links">
-                                                <li><i class="fa fa-comment"></i> {{ post.NOC }}</li>
-                                                <li><i class="fa fa-eye"></i>{{ post.views }} </li>
-                                            </ul>
-                                        </div><!--usr_quest end-->
-                                        <div>
-                                            {% if is_granted('ROLE_CANDIDATE') and (app.user == post.Candidate) or is_granted('ROLE_RECRUITER') and (app.user == post.Recruiter) %}
-                                            <div style="width: 100%; display:flex; justify-content: flex-end">
+                                                </div>
+                                                {{ post.description |raw }}
+                                                <ul class="react-links">
+                                                    <li><i class="fa fa-comment"></i> {{ post.NOC }}</li>
+                                                    <li><i class="fa fa-eye"></i>{{ post.views }} </li>
+                                                </ul>
+                                            </div><!--usr_quest end-->
+                                            <div>
+                                                {% if is_granted('ROLE_CANDIDATE') and (app.user == post.Candidate) or is_granted('ROLE_RECRUITER') and (app.user == post.Recruiter) %}
+                                                    <div style="width: 100%; display:flex; justify-content: flex-end">
 
-                                                <a href="#" data-toggle="modal"
-                                                   data-target="#edit-post-modal-{{ post.id }}">
-                                                    <button type="button"
-                                                            class="btn-sm shadow-sm btn btn-primary mt-2 mb-2 mr-2">
-                                                        Edit
-                                                    </button>
-                                                </a>
-                                                <!-- Modal edit post -->
-                                                <div class="modal fade" id="edit-post-modal-{{ post.id }}"
-                                                     tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                                                     aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title">
-                                                                    Edit post</h5>
-                                                                <button type="button" class="close" data-dismiss="modal"
-                                                                        aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                {{ render(controller(
-                                                                    'App\\Controller\\PostController::editFront',
-                                                                    { 'id': post.id }
-                                                                )) }}
+                                                        <a href="#" data-toggle="modal"
+                                                           data-target="#edit-post-modal-{{ post.id }}">
+                                                            <button type="button"
+                                                                    class="btn-sm shadow-sm btn btn-primary mt-2 mb-2 mr-2">
+                                                                Edit
+                                                            </button>
+                                                        </a>
+                                                        <!-- Modal edit post -->
+                                                        <div class="modal fade" id="edit-post-modal-{{ post.id }}"
+                                                             tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                                             aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title">
+                                                                            Edit post</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal"
+                                                                                aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        {{ render(controller(
+                                                                            'App\\Controller\\PostController::editFront',
+                                                                            { 'id': post.id }
+                                                                        )) }}
 
-                                                                <!--{ include('frontoffice/forum/edit.html.twig', {'forum':forum}) }}-->
-                                                                <button type="button" class="btn btn-secondary"
-                                                                        data-dismiss="modal">Close
-                                                                </button>
+                                                                        <!--{ include('frontoffice/forum/edit.html.twig', {'forum':forum}) }}-->
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                                data-dismiss="modal">Close
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
+                                                        {{ include('frontoffice/post/_delete_form.html.twig') }}
                                                     </div>
-                                                </div>
-                                                {{ include('frontoffice/post/_delete_form.html.twig') }}
+                                                {% endif %}
                                             </div>
-                                            {% endif %}
-                                        </div>
-                                    </div><!--usr-question end-->
+                                        </div><!--usr-question end-->
                                     {% endif %}
-                                    {% else %}
-                                        <tr>
-                                            <td colspan="8">no records found</td>
-                                        </tr>
-                                    {% endfor %}
-                                </div><!--forum-questions end-->
-                            </div>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="8">no records found</td>
+                                    </tr>
+                                {% endfor %}
+                            </div><!--forum-questions end-->
                         </div>
-                        <div class="col-lg-4" style="border-radius: 5px; position: sticky; right: 0;">
-                            <div class="widget widget-user" style="  border-radius: 5px;">
-                                <h3 class="title-wd" style="color: #eeeeee; font-size: 16px;background-color: #4e73df;">
-                                    Top
-                                    new 5 post </h3>
-                                <ul>
-                                    {% for post in posts |sort|reverse|slice(0,5) %}
-                                        <li>
-                                            <div class="usr-msg-details">
-                                                <div class="usr-mg-info">
-                                                    <h3 style="color: #6a737c; font-size: 14px;">{{ post.title }}</h3>
-                                                </div>
-                                                <!--usr-mg-info end-->
+                    </div>
+                    <div class="col-lg-4" style="border-radius: 5px; position: sticky; right: 0;">
+                        <div class="widget widget-user" style="  border-radius: 5px;">
+                            <h3 class="title-wd" style="color: #eeeeee; font-size: 16px;background-color: #4e73df;">
+                                Top
+                                new 5 post </h3>
+                            <ul>
+                                {% for post in posts |sort|reverse|slice(0,5) %}
+                                    <li>
+                                        <div class="usr-msg-details">
+                                            <div class="usr-mg-info">
+                                                <h3 style="color: #6a737c; font-size: 14px;">{{ post.title }}</h3>
                                             </div>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                            <button style=" width: 128px; font-family: Noto Sans,Arial,sans-serif; border-radius: 15px; text-align:center; margin-left: 35%; position: relative;"
-                                    class="btn d-none d-sm-inline-block btn-sm btn-primary shadow-sm mt-2 mb-2"
-                                    onclick="topFunction()" id="myBtn" title="Go to top">Back to Top
-                            </button>
+                                            <!--usr-mg-info end-->
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
                         </div>
-                    </div><!--forum-questions-sec end-->
-                </div>
+                        <button style=" width: 128px; font-family: Noto Sans,Arial,sans-serif; border-radius: 15px; text-align:center; margin-left: 35%; position: relative;"
+                                class="btn d-none d-sm-inline-block btn-sm btn-primary shadow-sm mt-2 mb-2"
+                                onclick="topFunction()" id="myBtn" title="Go to top">Back to Top
+                        </button>
+                    </div>
+                </div><!--forum-questions-sec end-->
             </div>
+        </div>
     </section><!--forum-page end-->
 
     <script>
-        $("#post_form").submit(function (e) {
-            console.log("her");
-            e.preventDefault(); // avoid to execute the actual submit of the form.
-            var form = $(this);
-            var url = form.attr('action');
-            $.ajax({
-                type: "POST",
-                url: url + "?forum_id=" + {{ forum.id }},
-                data: form.serialize(),
-                success: function (data) {
-                    $(".post-popup").hide();
-                    $(".wrapper").removeClass("overlay");
-                    window.location.reload();
-                }
-            });
-        });
-
-
         /*
          ======================================
                    BACK TO TOP LINK
@@ -201,5 +174,13 @@
             }
         });
 
+        $( '#post_description' ).ckeditor();
     </script>
+{% endblock %}
+{% block custom_javascripts %}
+    <!-- Flashy depends on jQuery sindaaaaaa-->
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- Load Flashy default JavaScript -->
+    <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+    <!-- ****  -->
 {% endblock %}

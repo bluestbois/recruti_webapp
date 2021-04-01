@@ -8,7 +8,6 @@
 {% endblock %}
 {% block main %}
     <h1>Project</h1>
-
     <table class="table">
         <tbody>
             <tr>
@@ -34,5 +33,28 @@
         <a href="{{ path('project_edit', {'id': project.id}) }}"><button type="button" class="btn-sm shadow-sm btn btn-primary mt-2 mb-2 mr-2"><i class="far fa-edit"></i> Edit</button></a>
         {{ include('project/_delete_form.html.twig') }}
     </div>
+    <div style="width: 100%; display:flex; justify-content: flex-end"><a href="{{ path('calendar_new',{'id': project.id}) }}"><button type="button" class="btn btn-dark">Create Deadline</button></a></div>
+    <div style="width: 100%; display:flex; justify-content: flex-end"><a href="{{ path('calendar_show',{'id': project.id}) }}"><button type="button" class="btn btn-secondary">Show Calendar</button></a></div> 
+
+
+    <h4>Liste Equipe</h4>
+        <table class="table">
+
+            <tr>
+                <th>id </th>
+                <th>pseudo</th>
+                <th>description</th>
+                <th></th>
+
+            </tr>
+            {% for members in project.members %}
+            <tr>
+                <th>{{ members.id }}</th>
+                <th>{{ members.pseudo }}</th>
+                <th>{{ members.Localisation }}</th>
+                <th><a href="{{ path('member_delete', {'id': members.id}) }}"  ></a>{{ include('member/_delete_form.html.twig') }}</th>
+            </tr>
+            {% endfor %}
+        </table>
 
 {% endblock %}

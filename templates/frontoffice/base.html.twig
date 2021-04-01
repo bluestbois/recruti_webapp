@@ -1,33 +1,40 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="" />
-        <meta name="keywords" content="" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
+<html style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-                <link rel="stylesheet" type="text/css" href="{{ asset ('css/animate.css') }}">
-                <link rel="stylesheet" type="text/css" href="{{ asset ('css/bootstrap.min.css') }}">
-                <link rel="stylesheet" type="text/css" href="{{ asset ('css/line-awesome.css') }}">
-                <link rel="stylesheet" type="text/css" href="{{ asset ('css/line-awesome-font-awesome.min.css') }}">
-                <link rel="stylesheet" type="text/css" href="{{ asset ('css/font-awesome.min.css') }}">
-                <link rel="stylesheet" type="text/css" href="{{ asset ('css/jquery.mCustomScrollbar.min.css') }}">
-                <link rel="stylesheet" type="text/css" href="{{ asset ('lib/slick/slick.css') }}">
-                <link rel="stylesheet" type="text/css" href="{{ asset ('lib/slick/slick-theme.css') }}">
-                <link rel="stylesheet" type="text/css" href="{{ asset ('css/style.css') }}">
-                <link rel="stylesheet" type="text/css" href="{{ asset ('css/responsive.css') }}">
-                {% block custom_stylesheets %}
-                {% endblock %}
-        {% endblock %}
-    </head>
+    {% block stylesheets %}
+        <link rel="stylesheet" type="text/css" href="{{ asset ('css/animate.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset ('css/bootstrap.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset ('css/line-awesome.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset ('css/line-awesome-font-awesome.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset ('css/font-awesome.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset ('css/jquery.mCustomScrollbar.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset ('lib/slick/slick.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset ('lib/slick/slick-theme.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset ('css/style.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset ('css/responsive.css') }}">
+        <!-- Load Flashy default CSS -->
+        <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+        <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet'>
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+              integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 
-    <body>
-    {% block body %}
-        {% block navbar %}
-            <header style="z-index: 1000; margin-bottom: 30px;">
+        {% block custom_stylesheets %}
+        {% endblock %}
+    {% endblock %}
+</head>
+
+<body>
+{% block body %}
+    {% block navbar %}
+        <header style="z-index: 1000; margin-bottom: 30px;">
             <div class="container">
                 <div class="header-data">
                     <div class="logo">
@@ -42,12 +49,6 @@
                     <nav>
                         <ul>
                             <li>
-                                <a href="#" title="">
-                                    <span><i class="la la-home"></i></span>
-                                    Home
-                                </a>
-                            </li>
-                            <li>
                                 <a href="{{ path("front_project_index") }}" title="">
                                     <span><i class="la la-puzzle-piece"></i></span>
                                     Projects
@@ -60,7 +61,19 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#" title="">
+                                <a href="{{ path('profiless') }}" title="">
+                                    <span><i class="la la-user"></i></span>
+                                    Candidates
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('profiles') }}" title="">
+                                    <span><i class="la la-building"></i></span>
+                                    Companies
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('front_job_index') }}" title="">
                                     <span><i class="la la-briefcase"></i></span>
                                     Jobs
                                 </a>
@@ -76,156 +89,80 @@
                                     <span><i class="la la-envelope"></i></span>
                                     Forum
                                 </a>
-                                <div class="notification-box msg">
-                                    <div class="nt-title">
-                                        <h4>Setting</h4>
-                                        <a href="#" title="">Clear all</a>
-                                    </div>
-                                    <div class="nott-list">
-                                        <div class="notfication-details">
-                                            <div class="noty-user-img">
-                                                <img src="{{ asset ('images/resources/ny-img1.png') }}" alt="">
-                                            </div>
-                                            <div class="notification-info">
-                                                <h3><a href="#" title="">Jassica William</a> </h3>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do.</p>
-                                                <span>2 min ago</span>
-                                            </div><!--notification-info -->
-                                        </div>
-                                        <div class="notfication-details">
-                                            <div class="noty-user-img">
-                                                <img src="{{ asset('images/resources/ny-img2.png') }}" alt="">
-                                            </div>
-                                            <div class="notification-info">
-                                                <h3><a href="#" title="">Jassica William</a></h3>
-                                                <p>Lorem ipsum dolor sit amet.</p>
-                                                <span>2 min ago</span>
-                                            </div><!--notification-info -->
-                                        </div>
-                                        <div class="notfication-details">
-                                            <div class="noty-user-img">
-                                                <img src="{{ asset('images/resources/ny-img3.png') }}" alt="">
-                                            </div>
-                                            <div class="notification-info">
-                                                <h3><a href="#" title="">Jassica William</a></h3>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempo incididunt ut labore et dolore magna aliqua.</p>
-                                                <span>2 min ago</span>
-                                            </div><!--notification-info -->
-                                        </div>
-                                        <div class="view-all-nots">
-                                            <a href="#" title="">View All Messsages</a>
-                                        </div>
-                                    </div><!--nott-list end-->
-                                </div><!--notification-box end-->
-                            </li>
-                            <li>
-                                <a href="#" title="" class="not-box-open">
-                                    <span><i class="la la-bolt"></i></span>
-                                    Notification
-                                </a>
-                                <div class="notification-box">
-                                    <div class="nt-title">
-                                        <h4>Setting</h4>
-                                        <a href="#" title="">Clear all</a>
-                                    </div>
-                                    <div class="nott-list">
-                                        <div class="notfication-details">
-                                            <div class="noty-user-img">
-                                                <img src="{{ asset ('images/resources/ny-img1.png') }}" alt="">
-                                            </div>
-                                            <div class="notification-info">
-                                                <h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
-                                                <span>2 min ago</span>
-                                            </div><!--notification-info -->
-                                        </div>
-                                        <div class="notfication-details">
-                                            <div class="noty-user-img">
-                                                <img src="{{ asset('images/resources/ny-img2.png') }}" alt="">
-                                            </div>
-                                            <div class="notification-info">
-                                                <h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
-                                                <span>2 min ago</span>
-                                            </div><!--notification-info -->
-                                        </div>
-                                        <div class="notfication-details">
-                                            <div class="noty-user-img">
-                                                <img src="{{ asset('images/resources/ny-img3.png') }}" alt="">
-                                            </div>
-                                            <div class="notification-info">
-                                                <h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
-                                                <span>2 min ago</span>
-                                            </div><!--notification-info -->
-                                        </div>
-                                        <div class="notfication-details">
-                                            <div class="noty-user-img">
-                                                <img src="{{ asset('images/resources/ny-img2.png') }}" alt="">
-                                            </div>
-                                            <div class="notification-info">
-                                                <h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
-                                                <span>2 min ago</span>
-                                            </div><!--notification-info -->
-                                        </div>
-                                        <div class="view-all-nots">
-                                            <a href="#" title="">View All Notification</a>
-                                        </div>
-                                    </div><!--nott-list end-->
-                                </div><!--notification-box end-->
                             </li>
                         </ul>
                     </nav><!--nav end-->
                     <div class="menu-btn">
                         <a href="#" title=""><i class="fa fa-bars"></i></a>
                     </div><!--menu-btn end-->
-                    <div class="user-account">
+                    <div style="display: flex;" class="user-account">
                         <div class="user-info">
-                            <img src="http://via.placeholder.com/30x30" alt="">
-                            <a href="#" title="">John</a>
-                            <i class="la la-sort-down"></i>
+                            <a href="#" title="">
+                                {% if is_granted('ROLE_RECRUITER') %}
+
+                                <img height="25px",width="25px" src="{{ asset('uploads/images/' ~ app.user.image|default('undefined') ) }}" alt="">
+                                {{ app.user.name|split(' ')[0] }}
+                                <i class="la la-sort-down"></i>
+                                {% elseif is_granted('ROLE_CANDIDATE') %}
+
+                                    <img height="25px",width="25px" src="{{ asset('uploads/images/' ~ app.user.image|default('undefined') ) }}" alt="">
+                                    {{ app.user.firstname|split(' ')[0] }}
+                                    <i class="la la-sort-down"></i>
+                                {% endif %}
+                            </a>
                         </div>
 
                         {% block user_settings %}
-                        <div class="user-account-settingss">
-                            <h3><a href="{{ path("test_index") }}">Go to dashboard</a></h3>
 
-                            <h3>Custom Status</h3>
-                            <div class="search_form">
-                                <form>
-                                    <input type="text" name="search">
-                                    <button type="submit">Ok</button>
-                                </form>
-                            </div><!--search_form end-->
-                            <h3>Setting</h3>
-                            <ul class="us-links">
-                                <li><a href="profile-account-setting.html" title="">Account Setting</a></li>
-                                <li><a href="#" title="">Privacy</a></li>
-                                <li><a href="#" title="">Faqs</a></li>
-                                <li><a href="#" title="">Terms & Conditions</a></li>
-                            </ul>
-                            <h3 class="tc"><a href="sign-in.html" title="">Logout</a></h3>
-                        </div><!--user-account-settingss end-->
+                            <div class="user-account-settingss">
+
+                                {% if is_granted('ROLE_RECRUITER') %}
+                                <h3><a href="{{ path("job_index") }}">Go to dashboard</a></h3>
+                                {% endif %}
+
+                                {% if is_granted('ROLE_CANDIDATE') %}
+                                    <ul class="us-links">
+                                        <li><a href="{{ path("profile") }}" title="">My profile</a></li>
+                                        <li><a href="{{ path("settings") }}" title="">Account Settings</a></li>
+                                    </ul>
+                                {% elseif is_granted('ROLE_RECRUITER') %}
+                                    <ul class="us-links">
+                                        <li><a href="{{ path("rprofile", { 'id': app.user.id|default('undefined') }) }}" title="">My profile</a></li>
+                                        <li><a href="{{ path("Rsettings") }}" title="">Account Settings</a></li>
+                                    </ul>
+                                {% endif %}
+
+
+
+                                <h3 class="tc"><a href="{{ path('app_logout') }}" title="">Logout</a></h3>
+                            </div><!--user-account-settingss end-->
                         {% endblock %}
 
                     </div>
                 </div><!--header-data end-->
             </div>
         </header><!--header end-->
-        {% endblock %}
-
-
-        {% block main %}
-        {% endblock %}
-
-    {% endblock %}
-    </body>
-
-    {% block javascripts %}
-        <script type="text/javascript" src="{{ asset ('js/jquery.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset ('js/popper.js') }}"></script>
-        <script type="text/javascript" src="{{ asset ('js/bootstrap.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset ('js/jquery.mCustomScrollbar.js') }}"></script>
-        <script type="text/javascript" src="{{ asset ('lib/slick/slick.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset ('js/scrollbar.js') }}"></script>
-        <script type="text/javascript" src="{{ asset ('js/script.js') }}"></script>
     {% endblock %}
 
+
+    {% block main %}
+    {% endblock %}
+
+{% endblock %}
+</body>
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset ('js/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset ('js/popper.js') }}"></script>
+    <script type="text/javascript" src="{{ asset ('js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset ('js/jquery.mCustomScrollbar.js') }}"></script>
+    <script type="text/javascript" src="{{ asset ('lib/slick/slick.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset ('js/scrollbar.js') }}"></script>
+    <script type="text/javascript" src="{{ asset ('js/script.js') }}"></script>
+    <!-- Flashy depends on jQuery -->
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- Load Flashy default JavaScript -->
+    <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+{% endblock %}
+{{ include('@MercurySeriesFlashy/flashy.html.twig') }}
 </html>

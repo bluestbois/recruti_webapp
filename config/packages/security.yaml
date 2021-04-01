@@ -2,6 +2,8 @@ security:
     encoders:
         App\Entity\Candidate:
             algorithm: bcrypt
+        App\Entity\Recruiter:
+            algorithm: bcrypt
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:

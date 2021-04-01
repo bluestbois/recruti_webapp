@@ -17,7 +17,6 @@ class CandidatureType extends AbstractType
             ->add('Candidate')
             ->add('Job')
             ->add('Freelance')
-            ->add('Test')
         ;
     }
 
